@@ -78,13 +78,15 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     // 閉じるタブがアクティブファイルの場合、別のタブをアクティブにする
     if (fileName === activeFile && newTabs.length > 0) {
       onActiveFileChange?.(newTabs[newTabs.length - 1]);
+    } else if (fileName === activeFile && newTabs.length === 0) {
+      // 全てのタブが閉じられた場合、activeFileをクリア
+      onActiveFileChange?.('');
     }
   };
 
   const handleTabClick = (fileName: string) => {
     onActiveFileChange?.(fileName);
   };
-
 
   const handleEditorDidMount = (
     editor: import('monaco-editor').editor.IStandaloneCodeEditor,
@@ -215,33 +217,41 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 
         {/* Monaco Editor */}
         <div className="flex-1 relative">
-          <div
-            className="h-full"
-            style={{
-              backgroundColor: 'var(--editor-bg)',
-              border: '1px solid var(--editor-border)',
-            }}
-          >
-            <Editor
-              height="100%"
-              language={currentLanguage}
-              value={files[activeFile] || ''}
-              onChange={handleEditorChange}
-              onMount={handleEditorDidMount}
-              theme="custom-dark"
-              options={editorOptions}
-              loading={
-                <div className="flex h-full items-center justify-center text-white">
-                  <div className="text-center">
-                    <div className="mb-2">Loading Monaco Editor...</div>
-                    <div className="h-1 w-48 overflow-hidden rounded-full bg-gray-700">
-                      <div className="h-full w-1/3 animate-pulse bg-blue-500"></div>
+          {openTabs.length > 0 && activeFile ? (
+            <div
+              className="h-full"
+              style={{
+                backgroundColor: 'var(--editor-bg)',
+                border: '1px solid var(--editor-border)',
+              }}
+            >
+              <Editor
+                height="100%"
+                language={currentLanguage}
+                value={files[activeFile] || ''}
+                onChange={handleEditorChange}
+                onMount={handleEditorDidMount}
+                theme="custom-dark"
+                options={editorOptions}
+                loading={
+                  <div className="flex h-full items-center justify-center text-white">
+                    <div className="text-center">
+                      <div className="mb-2">Loading Monaco Editor...</div>
+                      <div className="h-1 w-48 overflow-hidden rounded-full bg-gray-700">
+                        <div className="h-full w-1/3 animate-pulse bg-blue-500"></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              }
-            />
-          </div>
+                }
+              />
+            </div>
+          ) : (
+            <div className="flex h-full items-center justify-center bg-gray-900 text-gray-400">
+              <div className="text-center">
+                <div className="text-sm">ファイルを選択してください</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
