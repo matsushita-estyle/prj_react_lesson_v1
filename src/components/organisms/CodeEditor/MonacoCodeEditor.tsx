@@ -29,9 +29,6 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 }) => {
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
   const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false);
-  const [editorInstance, setEditorInstance] = useState<
-    import('monaco-editor').editor.IStandaloneCodeEditor | null
-  >(null);
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {
@@ -88,17 +85,11 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     onActiveFileChange?.(fileName);
   };
 
-  const handleFormatCode = () => {
-    if (editorInstance) {
-      editorInstance.getAction('editor.action.formatDocument')?.run();
-    }
-  };
 
   const handleEditorDidMount = (
     editor: import('monaco-editor').editor.IStandaloneCodeEditor,
     monaco: typeof import('monaco-editor')
   ) => {
-    setEditorInstance(editor);
     // カスタムダークテーマの設定
     monaco.editor.defineTheme('custom-dark', {
       base: 'vs-dark',
@@ -164,7 +155,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     <div className={`flex h-full ${className}`}>
       {/* ファイルツリー */}
       {isFileTreeOpen && (
-        <div className="min-w-[200px] border-r border-gray-600 relative">
+        <div className="min-w-[200px] border-r border-gray-600">
           <FileTree
             files={files}
             activeFile={activeFile}
@@ -174,14 +165,6 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
             onRename={onRename}
             onDelete={onDelete}
           />
-          {/* Format Button - positioned at bottom right of file tree */}
-          <button
-            onClick={handleFormatCode}
-            className="absolute bottom-4 right-4 z-10 px-3 py-1 bg-white cursor-pointer text-black text-xs rounded hover:bg-gray-100 transition-colors shadow-md"
-            title="コードを整形 (Alt+Shift+F)"
-          >
-            Format
-          </button>
         </div>
       )}
 

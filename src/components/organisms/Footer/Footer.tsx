@@ -6,6 +6,7 @@ interface FooterProps {
   prevLessonId?: string;
   isNextLessonAvailable?: boolean;
   onReset?: () => void;
+  onFormat?: () => void;
   className?: string;
 }
 
@@ -15,6 +16,7 @@ const Footer: React.FC<FooterProps> = ({
   prevLessonId,
   isNextLessonAvailable = true,
   onReset,
+  onFormat,
   className = '',
 }) => {
   return (
@@ -74,8 +76,16 @@ const Footer: React.FC<FooterProps> = ({
       )}
       </div>
       
-      {/* 右側のリセットボタン */}
-      <div className="w-32 flex justify-end">
+      {/* 右側のボタン */}
+      <div className="w-32 flex justify-end gap-6">
+        {onFormat && (
+          <button
+            onClick={onFormat}
+            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-blue-400 bg-black hover:bg-blue-400 text-blue-400 hover:text-black focus:ring-blue-400 px-4 py-1.5 text-base cursor-pointer"
+          >
+            Format
+          </button>
+        )}
         {onReset && (
           <button
             onClick={onReset}

@@ -204,6 +204,18 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         prevLessonId={lesson?.previousLessonId}
         isNextLessonAvailable={lesson?.nextLessonId ? availableIds.has(lesson.nextLessonId) : true}
         onReset={handleResetRequest}
+        onFormat={() => {
+          // 現在のアクティブファイルに対してフォーマットを実行
+          const currentCode = files[activeFile];
+          if (currentCode) {
+            // 簡単なJavaScript/JSXフォーマット処理
+            const formatted = currentCode
+              .replace(/;\s*\n/g, ';\n')
+              .replace(/{\s*\n/g, '{\n  ')
+              .replace(/\n\s*}/g, '\n}');
+            handleFileChange(activeFile, formatted);
+          }
+        }}
       />
 
       {/* サイドメニュー */}
