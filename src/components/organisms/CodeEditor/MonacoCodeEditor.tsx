@@ -88,6 +88,15 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     onActiveFileChange?.(fileName);
   };
 
+  const handleFileDelete = (path: string) => {
+    // ファイルが削除されたら対応するタブも閉じる
+    if (openTabs.includes(path)) {
+      handleTabClose(path);
+    }
+    // 親コンポーネントのonDelete関数を呼び出す
+    onDelete?.(path);
+  };
+
   const handleEditorDidMount = (
     editor: import('monaco-editor').editor.IStandaloneCodeEditor,
     monaco: typeof import('monaco-editor')
@@ -165,7 +174,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
             onDirectoryAdd={onDirectoryAdd}
             onFileAdd={onFileAdd}
             onRename={onRename}
-            onDelete={onDelete}
+            onDelete={handleFileDelete}
           />
         </div>
       )}
