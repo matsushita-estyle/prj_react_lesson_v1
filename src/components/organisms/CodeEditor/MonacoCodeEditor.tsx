@@ -167,7 +167,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     <div className={`flex h-full ${className}`}>
       {/* ファイルツリー */}
       {isFileTreeOpen && (
-        <div className="min-w-[200px] border-r border-gray-600">
+        <div className="min-w-[200px] border-r border-gray-600 relative">
           <FileTree
             files={files}
             activeFile={activeFile}
@@ -177,6 +177,14 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
             onRename={onRename}
             onDelete={onDelete}
           />
+          {/* Format Button - positioned at bottom right of file tree */}
+          <button
+            onClick={handleFormatCode}
+            className="absolute bottom-4 right-4 z-10 px-3 py-1 bg-white cursor-pointer text-black text-xs rounded hover:bg-gray-100 transition-colors shadow-md"
+            title="コードを整形 (Alt+Shift+F)"
+          >
+            Format
+          </button>
         </div>
       )}
 
@@ -227,14 +235,6 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 
         {/* Monaco Editor */}
         <div className="flex-1 relative">
-          {/* Format Button - absolute positioned */}
-          <button
-            onClick={handleFormatCode}
-            className="absolute top-4 right-4 z-10 px-5 py-1 bg-white cursor-pointer text-black text-sm rounded hover:bg-gray-100 transition-colors shadow-md"
-            title="コードを整形 (Alt+Shift+F)"
-          >
-            Format
-          </button>
           {/* Reset Button - absolute positioned */}
           {onReset && (
             <button
