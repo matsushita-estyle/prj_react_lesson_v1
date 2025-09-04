@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'React研修プラットフォーム',
   description: 'React学習のためのインタラクティブプラットフォーム',
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
