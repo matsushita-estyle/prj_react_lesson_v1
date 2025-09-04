@@ -1,98 +1,71 @@
 import Link from 'next/link';
-import { getAvailableLessons, getUpcomingLessons } from '@/data/lessons';
+import { BookOpen, Edit, RefreshCw } from 'lucide-react';
 
 export default function Home() {
-  const availableLessons = getAvailableLessons();
-  const upcomingLessons = getUpcomingLessons();
-
-  const getDifficultyColor = (difficulty?: string) => {
-    switch (difficulty) {
-      case '初級':
-        return 'bg-green-100 text-green-800';
-      case '中級':
-        return 'bg-yellow-100 text-yellow-800';
-      case '上級':
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
   return (
     <div className="min-h-screen bg-black py-8">
       <div className="mx-auto max-w-4xl px-4">
-        <header className="mb-12 flex flex-col items-center justify-center min-h-[40vh]">
+        <header className="mb-12 flex flex-col items-center justify-center min-h-[60vh]">
           <div className="flex flex-col items-start">
             <div className="flex items-center gap-4 mb-4">
-              <img src="/favicon.svg" alt="ReacTouch Logo" className="w-12 h-12" />
+              <img
+                src="/favicon.svg"
+                alt="ReacTouch Logo"
+                className="w-12 h-12"
+              />
               <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient bg-[length:200%_200%]">
                 ReacTouch
               </h1>
             </div>
-            <p className="text-xl text-gray-300 ml-2">
+            <p className="text-xl text-gray-300 ml-2 mb-8">
               Interactive React Learning Platform
             </p>
+            <div className="w-full flex justify-center">
+              <Link
+                href="/chapters"
+                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-2 text-lg font-semibold text-white transition-transform hover:scale-105"
+              >
+                START →
+              </Link>
+            </div>
           </div>
         </header>
 
-        <section className="mb-12">
-          <h2 className="mb-6 text-2xl font-semibold text-white">
-            React基礎コース
-          </h2>
-
-          <div className="grid gap-4">
-            {/* 利用可能なレッスン */}
-            {availableLessons.map((lesson) => (
-              <Link
-                key={lesson.id}
-                href={`/lessons/${lesson.id}`}
-                className="block rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="mb-2 text-lg font-medium text-white">
-                      レッスン {lesson.lessonNumber}: {lesson.title}
-                    </h3>
-                    <p className="mb-3 text-gray-300">
-                      {lesson.description || 'レッスンの説明がありません'}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-gray-400">
-                      <span
-                        className={`rounded px-2 py-1 ${getDifficultyColor(lesson.difficulty)}`}
-                      >
-                        {lesson.difficulty || '難易度未設定'}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-blue-400">→</div>
-                </div>
-              </Link>
-            ))}
-
-            {/* 準備中のレッスン */}
-            {upcomingLessons.map((lesson) => (
-              <div
-                key={lesson.id}
-                className="rounded-lg border border-gray-600 bg-gray-800 p-6 opacity-60"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="mb-2 text-lg font-medium text-gray-500">
-                      レッスン {lesson.lessonNumber}: {lesson.title}
-                    </h3>
-                    <p className="mb-3 text-gray-400">
-                      {lesson.description || 'レッスンの説明がありません'}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-gray-400">
-                      <span className="rounded bg-gray-200 px-2 py-1 text-gray-600">
-                        {lesson.difficulty || '難易度未設定'}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-gray-400">準備中</div>
-                </div>
+        <section className="text-center mb-12">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="mb-4 flex justify-center">
+                <BookOpen size={48} className="text-cyan-400" />
               </div>
-            ))}
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Step-by-Step Learning
+              </h3>
+              <p className="text-gray-400">
+                From basics to advanced, learn progressively
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="mb-4 flex justify-center">
+                <Edit size={48} className="text-purple-500" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Hands-On Experience
+              </h3>
+              <p className="text-gray-400">
+                Learn by actually coding in the editor
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="mb-4 flex justify-center">
+                <RefreshCw size={48} className="text-pink-500" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Real-Time Preview
+              </h3>
+              <p className="text-gray-400">
+                See your code results instantly
+              </p>
+            </div>
           </div>
         </section>
 
