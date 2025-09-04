@@ -31,21 +31,21 @@ const Footer: React.FC<FooterProps> = ({
       {prevLessonId ? (
         <a
           href={`/lessons/${prevLessonId}`}
-          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-green-500 bg-black hover:bg-green-500 text-green-500 hover:text-black focus:ring-green-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-emerald-200 bg-black hover:bg-emerald-200 text-emerald-200 hover:text-black focus:ring-emerald-200 px-4 py-1.5 text-base text-center cursor-pointer w-32"
         >
           Previous
         </a>
       ) : (
         <a
           href={`/`}
-          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-green-500 bg-black hover:bg-green-500 text-green-500 hover:text-black focus:ring-green-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-emerald-200 bg-black hover:bg-emerald-200 text-emerald-200 hover:text-black focus:ring-emerald-200 px-4 py-1.5 text-base text-center cursor-pointer w-32"
         >
           Back Home
         </a>
       )}
       <button
         onClick={onCheckMaterials}
-        className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-white bg-transparent hover:bg-white hover:text-black text-white focus:ring-white px-4 py-1.5 text-base cursor-pointer w-32"
+        className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-gray-300 bg-transparent hover:bg-gray-300 hover:text-black text-gray-300 focus:ring-gray-300 px-4 py-1.5 text-base cursor-pointer w-32"
       >
         Text Book
       </button>
@@ -53,7 +53,7 @@ const Footer: React.FC<FooterProps> = ({
         isNextLessonAvailable ? (
           <a
             href={`/lessons/${nextLessonId}`}
-            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-blue-300 bg-black hover:bg-blue-300 text-blue-300 hover:text-black focus:ring-blue-300 px-4 py-1.5 text-base text-center cursor-pointer w-32"
           >
             Next
           </a>
@@ -69,7 +69,7 @@ const Footer: React.FC<FooterProps> = ({
       ) : (
         <a
           href={`/`}
-          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-teal-300 bg-black hover:bg-teal-300 text-teal-300 hover:text-black focus:ring-teal-300 px-4 py-1.5 text-base text-center cursor-pointer w-32"
         >
           Back Home
         </a>
@@ -81,7 +81,7 @@ const Footer: React.FC<FooterProps> = ({
         {onFormat && (
           <button
             onClick={onFormat}
-            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-blue-400 bg-black hover:bg-blue-400 text-blue-400 hover:text-black focus:ring-blue-400 px-4 py-1.5 text-base cursor-pointer"
+            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-indigo-300 bg-black hover:bg-indigo-300 text-indigo-300 hover:text-black focus:ring-indigo-300 px-4 py-1.5 text-base cursor-pointer"
           >
             Format
           </button>
@@ -89,7 +89,7 @@ const Footer: React.FC<FooterProps> = ({
         {onReset && (
           <button
             onClick={onReset}
-            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-gray-400 bg-black hover:bg-gray-400 text-gray-400 hover:text-black focus:ring-gray-400 px-4 py-1.5 text-base cursor-pointer"
+            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-stone-400 bg-black hover:bg-stone-400 text-stone-400 hover:text-black focus:ring-stone-400 px-4 py-1.5 text-base cursor-pointer"
           >
             Reset
           </button>

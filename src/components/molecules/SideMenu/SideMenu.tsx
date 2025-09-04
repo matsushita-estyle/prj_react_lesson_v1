@@ -22,14 +22,14 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
 
   // 現在のレッスンがあるチャプターを見つけて自動で開く
   useEffect(() => {
-    const currentChapterIndex = lessons.findIndex(chapter => 
-      chapter.chapterLessons.some(lesson => lesson.href === pathname)
+    const currentChapterIndex = lessons.findIndex((chapter) =>
+      chapter.chapterLessons.some((lesson) => lesson.href === pathname)
     )
-    
+
     if (currentChapterIndex !== -1) {
-      setExpandedChapters(prev => ({
+      setExpandedChapters((prev) => ({
         ...prev,
-        [currentChapterIndex]: true
+        [currentChapterIndex]: true,
       }))
     }
   }, [lessons, pathname])
@@ -40,9 +40,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
   }
 
   const toggleChapter = (chapterIndex: number) => {
-    setExpandedChapters(prev => ({
+    setExpandedChapters((prev) => ({
       ...prev,
-      [chapterIndex]: !prev[chapterIndex]
+      [chapterIndex]: !prev[chapterIndex],
     }))
   }
 
@@ -60,7 +60,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
       {/* サイドメニュー */}
       <div className="animate-slideInLeft fixed top-0 left-0 z-50 h-full w-80 bg-gray-900 shadow-lg">
         <div className="flex items-center justify-between border-b border-gray-700 p-4">
-          <h2 className="text-lg font-semibold text-white">レッスン一覧</h2>
+          <h2 className="text-lg font-semibold text-white">Chapters</h2>
           <button onClick={onClose} className="text-gray-400 transition-colors hover:text-white">
             <X size={24} />
           </button>
@@ -81,7 +81,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
                 )}
               </button>
               {expandedChapters[chapterIndex] && (
-                <div className="space-y-1 ml-4">
+                <div className="ml-4 space-y-1">
                   {chapter.chapterLessons.map((lesson) => {
                     const isCurrentLesson = lesson.href === pathname
                     const isAvailable = lesson.isAvailable !== false
@@ -92,10 +92,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
                         disabled={!isAvailable}
                         className={`w-full rounded-md p-3 text-left text-sm transition-colors ${
                           !isAvailable
-                            ? 'bg-gray-800/50 text-gray-500 cursor-not-allowed'
+                            ? 'cursor-not-allowed bg-gray-800/50 text-gray-500'
                             : isCurrentLesson
-                            ? 'bg-blue-600 text-white font-semibold'
-                            : 'bg-gray-800 text-white hover:bg-gray-700'
+                              ? 'bg-blue-600 font-semibold text-white'
+                              : 'bg-gray-800 text-white hover:bg-gray-700'
                         }`}
                       >
                         <div className="flex items-center justify-between">
