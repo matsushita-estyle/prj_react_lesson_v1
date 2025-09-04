@@ -74,9 +74,6 @@ export default function Home() {
                       <span className="rounded bg-gray-200 px-2 py-1 text-gray-600">
                         {lesson.difficulty || '難易度未設定'}
                       </span>
-                      {lesson.estimatedMinutes && (
-                        <span>約{lesson.estimatedMinutes}分</span>
-                      )}
                     </div>
                   </div>
                   <div className="text-gray-400">準備中</div>

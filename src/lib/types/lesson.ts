@@ -28,7 +28,6 @@ export interface Lesson {
   lessonNumber: number
   description?: string  // レッスンの簡潔な説明
   difficulty?: string  // 難易度（初級、中級、上級）
-  estimatedMinutes?: number  // 推定学習時間（分）
   
   // Content
   taskDescription?: string  // 全体の説明（optional）

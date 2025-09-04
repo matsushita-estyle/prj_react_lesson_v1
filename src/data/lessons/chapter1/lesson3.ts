@@ -6,7 +6,6 @@ export const chapter1Lesson3: Lesson = {
   lessonNumber: 3,
   description: 'JSXの中でJavaScriptの式や変数を使う方法を学び、動的なコンテンツの表示を習得します',
   difficulty: '初級',
-  estimatedMinutes: 30,
 
   material: `# JSXの中にJavaScriptを埋め込む
 

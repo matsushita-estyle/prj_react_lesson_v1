@@ -6,7 +6,6 @@ export const chapter1Lesson2: Lesson = {
   lessonNumber: 2,
   description: 'CSSを使ってReactコンポーネントにスタイルを適用する方法を学びます',
   difficulty: '初級',
-  estimatedMinutes: 30,
 
   material: `# CSSでスタイルを適用してみよう
 
