@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from 'react';
 import { Editor } from '@monaco-editor/react';
+import { PanelLeftOpen, PanelLeftClose } from 'lucide-react';
 import FileTree from '../../molecules/FileTree/FileTree';
 
 interface MonacoCodeEditorProps {
@@ -210,14 +211,14 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
             {/* ファイルツリートグルボタン */}
             <button
               onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
-              className="flex items-center border-r border-gray-600 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-gray-100"
+              className="flex items-center border-r border-gray-600 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-gray-100"
               title={
                 isFileTreeOpen
                   ? 'ファイルツリーを閉じる'
                   : 'ファイルツリーを開く'
               }
             >
-              {isFileTreeOpen ? '<' : '>'}
+              {isFileTreeOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
             </button>
             {openTabs.map((fileName) => (
               <div
