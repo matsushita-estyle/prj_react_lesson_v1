@@ -17,7 +17,7 @@ export default function Home() {
                 ReacTouch
               </h1>
             </div>
-            <p className="text-2xl text-gray-300 mb-8">
+            <p className="text-2xl text-gray-300 mb-16">
               Interactive React Learning Platform
             </p>
             <div className="w-full flex justify-center">

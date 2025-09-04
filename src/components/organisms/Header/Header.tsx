@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import SideMenu from '@/components/molecules/SideMenu/SideMenu';
 
 interface HeaderProps {
@@ -23,6 +24,7 @@ const Header: React.FC<HeaderProps> = ({
   lessons = [],
 }) => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const router = useRouter();
   return (
     <header
       className={`border-b border-gray-700 bg-black px-6 py-4 ${className}`}
@@ -47,7 +49,12 @@ const Header: React.FC<HeaderProps> = ({
             </h1>
           </div>
         </div>
-        <div className="text-s bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">ReacTouch</div>
+        <div 
+          className="text-s bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => router.push('/')}
+        >
+          ReacTouch
+        </div>
       </div>
 
       <SideMenu
