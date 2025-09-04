@@ -10,6 +10,7 @@ import LessonMaterialModal from '@/components/organisms/LessonMaterialModal'
 import LessonContent from '@/components/organisms/LessonContent'
 import ResizablePanel from '@/components/molecules/ResizablePanel'
 import SideMenu from '@/components/molecules/SideMenu'
+import ConfirmModal from '@/components/molecules/ConfirmModal'
 import { useSideMenu } from '@/hooks/useSideMenu'
 import { Lesson } from '@/lib/types/lesson'
 import { allLessons, getAvailableLessons } from '@/data/lessons'
@@ -35,6 +36,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   )
   const [originalFiles] = useState(initialFiles)
   const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)
+  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false)
   const { isOpen: isSideMenuOpen, closeSideMenu } = useSideMenu()
 
   const handleFileChange = (fileName: string, content: string) => {
@@ -136,6 +138,10 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     )
   }
 
+  const handleResetRequest = () => {
+    setIsResetConfirmOpen(true)
+  }
+
 
   const lessonContent = lesson ? (
     <LessonContent
@@ -197,7 +203,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         nextLessonId={lesson?.nextLessonId}
         prevLessonId={lesson?.previousLessonId}
         isNextLessonAvailable={lesson?.nextLessonId ? availableIds.has(lesson.nextLessonId) : true}
-        onReset={handleReset}
+        onReset={handleResetRequest}
       />
 
       {/* サイドメニュー */}
@@ -208,6 +214,18 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         isOpen={isMaterialModalOpen}
         onClose={() => setIsMaterialModalOpen(false)}
         lesson={lesson || null}
+      />
+
+      {/* リセット確認モーダル */}
+      <ConfirmModal
+        isOpen={isResetConfirmOpen}
+        onClose={() => setIsResetConfirmOpen(false)}
+        onConfirm={handleReset}
+        title="コードをリセット"
+        message={`編集したコードを初期状態に戻します。
+この操作は元に戻すことができません。`}
+        confirmText="リセット"
+        cancelText="キャンセル"
       />
     </div>
   )
