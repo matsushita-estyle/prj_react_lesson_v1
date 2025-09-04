@@ -2,7 +2,6 @@
 
 import React, { useMemo, useState } from 'react';
 import { Editor } from '@monaco-editor/react';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import FileTree from '../../molecules/FileTree/FileTree';
 
 interface MonacoCodeEditorProps {
@@ -14,7 +13,6 @@ interface MonacoCodeEditorProps {
   onFileAdd?: (parentPath: string, fileName: string) => void;
   onRename?: (oldPath: string, newPath: string) => void;
   onDelete?: (path: string) => void;
-  onReset?: () => void;
   className?: string;
 }
 
@@ -27,7 +25,6 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   onFileAdd,
   onRename,
   onDelete,
-  onReset,
   className = '',
 }) => {
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
@@ -235,16 +232,6 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 
         {/* Monaco Editor */}
         <div className="flex-1 relative">
-          {/* Reset Button - absolute positioned */}
-          {onReset && (
-            <button
-              onClick={onReset}
-              className="absolute bottom-4 right-4 z-10 p-2 bg-white cursor-pointer text-black rounded-full hover:bg-gray-100 transition-colors shadow-md"
-              title="コードを初期状態にリセット"
-            >
-              <RefreshIcon fontSize="medium" />
-            </button>
-          )}
           <div
             className="h-full"
             style={{

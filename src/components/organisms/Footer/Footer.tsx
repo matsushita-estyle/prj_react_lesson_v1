@@ -5,6 +5,7 @@ interface FooterProps {
   nextLessonId?: string;
   prevLessonId?: string;
   isNextLessonAvailable?: boolean;
+  onReset?: () => void;
   className?: string;
 }
 
@@ -13,12 +14,18 @@ const Footer: React.FC<FooterProps> = ({
   nextLessonId,
   prevLessonId,
   isNextLessonAvailable = true,
+  onReset,
   className = '',
 }) => {
   return (
     <footer
-      className={`flex justify-center gap-12 border-t border-gray-700 bg-black p-4 ${className}`}
+      className={`flex justify-between items-center border-t border-gray-700 bg-black p-4 ${className}`}
     >
+      {/* 左側のスペース */}
+      <div className="w-32"></div>
+      
+      {/* 中央のナビゲーションボタン */}
+      <div className="flex justify-center gap-12">
       {prevLessonId ? (
         <a
           href={`/lessons/${prevLessonId}`}
@@ -65,6 +72,19 @@ const Footer: React.FC<FooterProps> = ({
           Back Home
         </a>
       )}
+      </div>
+      
+      {/* 右側のリセットボタン */}
+      <div className="w-32 flex justify-end">
+        {onReset && (
+          <button
+            onClick={onReset}
+            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-gray-400 bg-black hover:bg-gray-400 text-gray-400 hover:text-black focus:ring-gray-400 px-4 py-1.5 text-base cursor-pointer"
+          >
+            Reset
+          </button>
+        )}
+      </div>
     </footer>
   );
 };

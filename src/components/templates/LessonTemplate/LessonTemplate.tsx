@@ -183,7 +183,6 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
             onFileAdd={handleFileAdd}
             onRename={handleRename}
             onDelete={handleDelete}
-            onReset={handleReset}
             className="h-full"
           />
         }
@@ -198,6 +197,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         nextLessonId={lesson?.nextLessonId}
         prevLessonId={lesson?.previousLessonId}
         isNextLessonAvailable={lesson?.nextLessonId ? availableIds.has(lesson.nextLessonId) : true}
+        onReset={handleReset}
       />
 
       {/* サイドメニュー */}
