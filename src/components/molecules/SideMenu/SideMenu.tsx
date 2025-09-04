@@ -81,7 +81,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
                 )}
               </button>
               {expandedChapters[chapterIndex] && (
-                <div className="space-y-1">
+                <div className="space-y-1 ml-4">
                   {chapter.chapterLessons.map((lesson) => {
                     const isCurrentLesson = lesson.href === pathname
                     const isAvailable = lesson.isAvailable !== false
