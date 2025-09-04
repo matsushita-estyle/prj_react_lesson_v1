@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'React研修プラットフォーム',
-  description: 'React学習のためのインタラクティブプラットフォーム',
+  title: 'ReacTouch',
+  description: '触って学ぶReactプラットフォーム',
   icons: {
     icon: '/favicon.svg',
   },

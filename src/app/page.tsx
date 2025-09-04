@@ -22,8 +22,8 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="mx-auto max-w-4xl px-4">
         <header className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-gray-900">React研修プラットフォーム</h1>
-          <p className="text-xl text-gray-600">Reactの基礎から応用まで、段階的に学習しましょう</p>
+          <h1 className="mb-4 text-4xl font-bold text-gray-900">ReacTouch</h1>
+          <p className="text-xl text-gray-600">触って学ぶReactプラットフォーム - 段階的に学習しましょう</p>
         </header>
 
         <section className="mb-12">
@@ -84,7 +84,7 @@ export default function Home() {
         </section>
 
         <footer className="text-center text-gray-500">
-          <p>© 2024 React研修プラットフォーム</p>
+          <p>© 2024 ReacTouch</p>
         </footer>
       </div>
     </div>

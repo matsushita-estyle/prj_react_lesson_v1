@@ -41,11 +41,11 @@ const Header: React.FC<HeaderProps> = ({
               <p className="text-sm text-gray-300">{courseTitle}</p>
             )}
             <h1 className="text-xl font-semibold text-white">
-              {lessonTitle || 'React研修プラットフォーム'}
+              {lessonTitle || 'ReacTouch'}
             </h1>
           </div>
         </div>
-        <div className="text-s text-gray-400">React Training Platform</div>
+        <div className="text-s text-gray-400">ReacTouch</div>
       </div>
 
       <SideMenu
