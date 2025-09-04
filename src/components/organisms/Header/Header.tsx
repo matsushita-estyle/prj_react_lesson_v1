@@ -40,12 +40,14 @@ const Header: React.FC<HeaderProps> = ({
             {courseTitle && (
               <p className="text-sm text-gray-300">{courseTitle}</p>
             )}
-            <h1 className="text-xl font-semibold text-white">
-              {lessonTitle || 'ReacTouch'}
+            <h1 className="text-xl font-semibold">
+              <span className={lessonTitle ? "text-white" : "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient bg-[length:200%_200%]"}>
+                {lessonTitle || 'ReacTouch'}
+              </span>
             </h1>
           </div>
         </div>
-        <div className="text-s text-gray-400">ReacTouch</div>
+        <div className="text-s bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">ReacTouch</div>
       </div>
 
       <SideMenu

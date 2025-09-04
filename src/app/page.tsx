@@ -1,33 +1,44 @@
-import Link from 'next/link'
-import { getAvailableLessons, getUpcomingLessons } from '@/data/lessons'
+import Link from 'next/link';
+import { getAvailableLessons, getUpcomingLessons } from '@/data/lessons';
 
 export default function Home() {
-  const availableLessons = getAvailableLessons()
-  const upcomingLessons = getUpcomingLessons()
+  const availableLessons = getAvailableLessons();
+  const upcomingLessons = getUpcomingLessons();
 
   const getDifficultyColor = (difficulty?: string) => {
     switch (difficulty) {
       case '初級':
-        return 'bg-green-100 text-green-800'
+        return 'bg-green-100 text-green-800';
       case '中級':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'bg-yellow-100 text-yellow-800';
       case '上級':
-        return 'bg-red-100 text-red-800'
+        return 'bg-red-100 text-red-800';
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-gray-100 text-gray-800';
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-black py-8">
       <div className="mx-auto max-w-4xl px-4">
-        <header className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-gray-900">ReacTouch</h1>
-          <p className="text-xl text-gray-600">触って学ぶReactプラットフォーム - 段階的に学習しましょう</p>
+        <header className="mb-12 flex flex-col items-center justify-center min-h-[40vh]">
+          <div className="flex flex-col items-start">
+            <div className="flex items-center gap-4 mb-4">
+              <img src="/favicon.svg" alt="ReacTouch Logo" className="w-12 h-12" />
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient bg-[length:200%_200%]">
+                ReacTouch
+              </h1>
+            </div>
+            <p className="text-xl text-gray-300 ml-2">
+              Interactive React Learning Platform
+            </p>
+          </div>
         </header>
 
         <section className="mb-12">
-          <h2 className="mb-6 text-2xl font-semibold text-gray-900">React基礎コース</h2>
+          <h2 className="mb-6 text-2xl font-semibold text-white">
+            React基礎コース
+          </h2>
 
           <div className="grid gap-4">
             {/* 利用可能なレッスン */}
@@ -35,23 +46,25 @@ export default function Home() {
               <Link
                 key={lesson.id}
                 href={`/lessons/${lesson.id}`}
-                className="block rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+                className="block rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm transition-shadow hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="mb-2 text-lg font-medium text-gray-900">
+                    <h3 className="mb-2 text-lg font-medium text-white">
                       レッスン {lesson.lessonNumber}: {lesson.title}
                     </h3>
-                    <p className="mb-3 text-gray-600">
+                    <p className="mb-3 text-gray-300">
                       {lesson.description || 'レッスンの説明がありません'}
                     </p>
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
-                      <span className={`rounded px-2 py-1 ${getDifficultyColor(lesson.difficulty)}`}>
+                    <div className="flex items-center gap-4 text-sm text-gray-400">
+                      <span
+                        className={`rounded px-2 py-1 ${getDifficultyColor(lesson.difficulty)}`}
+                      >
                         {lesson.difficulty || '難易度未設定'}
                       </span>
                     </div>
                   </div>
-                  <div className="text-blue-600">→</div>
+                  <div className="text-blue-400">→</div>
                 </div>
               </Link>
             ))}
@@ -60,7 +73,7 @@ export default function Home() {
             {upcomingLessons.map((lesson) => (
               <div
                 key={lesson.id}
-                className="rounded-lg border border-gray-200 bg-gray-100 p-6 opacity-60"
+                className="rounded-lg border border-gray-600 bg-gray-800 p-6 opacity-60"
               >
                 <div className="flex items-center justify-between">
                   <div>
@@ -83,10 +96,10 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="text-center text-gray-500">
+        <footer className="text-center text-gray-400">
           <p>© 2024 ReacTouch</p>
         </footer>
       </div>
     </div>
-  )
+  );
 }
