@@ -13,6 +13,7 @@ interface MonacoCodeEditorProps {
   onFileAdd?: (parentPath: string, fileName: string) => void;
   onRename?: (oldPath: string, newPath: string) => void;
   onDelete?: (path: string) => void;
+  onEditorReady?: (editor: import('monaco-editor').editor.IStandaloneCodeEditor) => void;
   className?: string;
 }
 
@@ -25,6 +26,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   onFileAdd,
   onRename,
   onDelete,
+  onEditorReady,
   className = '',
 }) => {
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
@@ -101,6 +103,8 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     editor: import('monaco-editor').editor.IStandaloneCodeEditor,
     monaco: typeof import('monaco-editor')
   ) => {
+    // エディターインスタンスを親コンポーネントに渡す
+    onEditorReady?.(editor);
     // カスタムダークテーマの設定
     monaco.editor.defineTheme('custom-dark', {
       base: 'vs-dark',
@@ -134,7 +138,26 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
         jsx: monaco.languages.typescript.JsxEmit.React,
         allowJs: true,
       });
+
+      // TypeScript/JavaScriptフォーマット設定
+      monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+        noSemanticValidation: false,
+        noSyntaxValidation: false,
+      });
+
+      // Monaco内蔵フォーマッターの設定を無効化
+      monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
     }
+
+    // Cmd+S でフォーマット実行のキーバインド追加
+    editor.addAction({
+      id: 'format-on-save',
+      label: 'Format on Save',
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+      run: function(editor) {
+        editor.getAction('editor.action.formatDocument')?.run();
+      }
+    });
   };
 
   const editorOptions = {
@@ -148,8 +171,8 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     automaticLayout: true,
     tabSize: 2,
     insertSpaces: true,
-    formatOnPaste: true,
-    formatOnType: true,
+    formatOnPaste: false,
+    formatOnType: false,
     lineNumbers: 'on' as const,
     renderLineHighlight: 'line' as const,
     selectOnLineNumbers: true,

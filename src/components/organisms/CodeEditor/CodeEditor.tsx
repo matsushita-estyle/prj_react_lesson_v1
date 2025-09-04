@@ -11,6 +11,7 @@ interface CodeEditorProps {
   onRename?: (oldPath: string, newPath: string) => void
   onDelete?: (path: string) => void
   onReset?: () => void
+  onEditorReady?: (editor: import('monaco-editor').editor.IStandaloneCodeEditor) => void
   className?: string
 }
 
