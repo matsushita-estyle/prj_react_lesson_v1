@@ -10,6 +10,7 @@ interface CodeEditorProps {
   onFileAdd?: (parentPath: string, fileName: string) => void
   onRename?: (oldPath: string, newPath: string) => void
   onDelete?: (path: string) => void
+  onReset?: () => void
   className?: string
 }
 

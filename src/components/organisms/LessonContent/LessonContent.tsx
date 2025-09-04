@@ -297,7 +297,7 @@ export default function LessonContent({
               {/* 解答例ボタン */}
               <button
                 onClick={() => toggleSolution(index)}
-                className="flex items-center gap-2 rounded bg-green-500 px-4 py-2 text-sm text-white transition-colors hover:bg-green-600"
+                className="flex cursor-pointer items-center gap-2 rounded bg-green-500 px-4 py-2 text-sm text-white transition-colors hover:bg-green-600"
               >
                 {showSolutions[index] ? (
                   <>
@@ -355,22 +355,40 @@ export default function LessonContent({
         ))}
       </div>
 
-      {/* 完了メッセージ */}
-      <div className="mt-8 rounded-lg border-2 border-green-400 bg-green-50 px-8 py-3">
-        <div className="flex items-center justify-between">
-          <p className="text-lg font-semibold text-green-800">
-            🎉 お疲れ様でした！次のステップに進みましょう。
-          </p>
-          {nextLessonId ? (
-            <a
-              href={`/lessons/${nextLessonId}`}
-              className="rounded bg-blue-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-600"
-            >
-              次のステップに進む →
-            </a>
-          ) : (
-            <span className="text-gray-500">最後のレッスンです</span>
-          )}
+      {/* 完了メッセージ - シンプルで洗練されたデザイン */}
+      <div className="relative mt-8 overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 p-0.5 shadow-lg">
+        {/* メインコンテンツ */}
+        <div className="rounded-xl bg-white px-6 py-4">
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-semibold text-gray-800">
+              お疲れ様でした。次のステップへ進みましょう！
+            </p>
+            {nextLessonId ? (
+              <a
+                href={`/lessons/${nextLessonId}`}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-2.5 font-semibold text-white shadow-md transition-all hover:from-purple-600 hover:to-blue-500"
+              >
+                <span>次のレッスンへ</span>
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </a>
+            ) : (
+              <span className="rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-5 py-2.5 text-white shadow-md">
+                🎓 すべて完了！
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

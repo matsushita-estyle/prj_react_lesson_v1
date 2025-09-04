@@ -33,6 +33,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       ? lesson.defaultFile 
       : Object.keys(initialFiles)[0] || ''
   )
+  const [originalFiles] = useState(initialFiles)
   const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)
   const { isOpen: isSideMenuOpen, closeSideMenu } = useSideMenu()
 
@@ -126,6 +127,15 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     setActiveFile(fileName)
   }
 
+  const handleReset = () => {
+    setFiles(originalFiles)
+    setActiveFile(
+      lesson?.defaultFile && lesson.defaultFile in originalFiles
+        ? lesson.defaultFile
+        : Object.keys(originalFiles)[0] || ''
+    )
+  }
+
 
   const lessonContent = lesson ? (
     <LessonContent
@@ -173,6 +183,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
             onFileAdd={handleFileAdd}
             onRename={handleRename}
             onDelete={handleDelete}
+            onReset={handleReset}
             className="h-full"
           />
         }
