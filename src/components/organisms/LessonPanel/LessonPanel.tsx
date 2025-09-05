@@ -16,7 +16,7 @@ const LessonPanel: React.FC<LessonPanelProps> = ({
   const tabs = [
     {
       id: 'lesson',
-      label: 'Lesson',
+      label: 'LESSON',
       content: (
         <div className="h-full overflow-y-auto p-6">
           <div className="max-w-none">{lessonContent}</div>
@@ -25,7 +25,7 @@ const LessonPanel: React.FC<LessonPanelProps> = ({
     },
     {
       id: 'preview',
-      label: 'Preview',
+      label: 'PREVIEW',
       content: <BrowserFrame>{previewContent}</BrowserFrame>,
     },
   ]
