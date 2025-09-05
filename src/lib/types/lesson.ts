@@ -4,6 +4,24 @@ export interface SolutionCode {
   label?: string  // オプション: ソリューションの説明ラベル
 }
 
+export interface ProjectFile {
+  path: string
+  content: string
+  language?: string
+  description?: string
+  order?: number
+  hidden?: boolean
+}
+
+export interface ProjectStructure {
+  files: ProjectFile[]
+  defaultFile?: string
+  folderConfig?: {
+    collapsed?: string[]
+    displayOrder?: string[]
+  }
+}
+
 export interface LessonStep {
   stepNumber: number
   title: string
@@ -40,7 +58,8 @@ export interface Lesson {
   
   // Code files
   initialFiles?: Record<string, string>  // 後方互換性のため残す
-  initialEditorFiles?: Record<string, string>  // 右のコードエディタの初期ファイル
+  initialEditorFiles?: Record<string, string>  // 右のコードエディタの初期ファイル（後方互換性）
+  projectStructure?: ProjectStructure  // 新しいファイル構造形式
   defaultFile?: string  // デフォルトで表示するファイル名
   
   // Navigation

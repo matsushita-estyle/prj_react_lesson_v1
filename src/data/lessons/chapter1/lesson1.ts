@@ -403,14 +403,23 @@ export default App`,
     },
   ],
 
-  // 右のコードエディタの初期ファイル
-  initialEditorFiles: {
-    'react-app/App.jsx': `const App = () => {
+  // 新しいプロジェクト構造形式
+  projectStructure: {
+    files: [
+      {
+        path: 'react-app/App.jsx',
+        content: `const App = () => {
   return <div>{/* ここにコードを書いてください */}</div>
 }
 
 export default App`,
-    'react-app/styles.css': `/* React学習用のスタイル */
+        language: 'javascript',
+        description: 'メインのReactコンポーネント',
+        order: 1,
+      },
+      {
+        path: 'react-app/styles.css',
+        content: `/* React学習用のスタイル */
 .container {
   max-width: 600px;
   margin: 2rem auto;
@@ -448,6 +457,15 @@ export default App`,
 }
 
 `,
+        language: 'css',
+        description: 'Reactアプリのスタイルシート',
+        order: 2,
+      },
+    ],
+    defaultFile: 'react-app/App.jsx',
+    folderConfig: {
+      displayOrder: ['react-app'],
+    },
   },
 
   nextLessonId: 'chapter1-lesson2',

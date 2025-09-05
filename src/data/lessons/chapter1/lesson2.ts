@@ -482,17 +482,11 @@ export default App`,
     },
   ],
 
-  initialEditorFiles: {
-    'react-app/styles.css': `/* タイトルのスタイル */
-.title {
-/* ここにCSSを書いていきます */
-}
-
-/* 説明文のスタイル */
-.description {
-/* ここにCSSを書いていきます */
-}`,
-    'react-app/App.jsx': `import './styles.css'
+  projectStructure: {
+    files: [
+      {
+        path: 'react-app/App.jsx',
+        content: `import './styles.css'
 
 const App = () => {
   return (
@@ -505,6 +499,30 @@ const App = () => {
 }
 
 export default App`,
+        language: 'javascript',
+        description: 'CSS学習用のReactコンポーネント',
+        order: 1,
+      },
+      {
+        path: 'react-app/styles.css',
+        content: `/* タイトルのスタイル */
+.title {
+/* ここにCSSを書いていきます */
+}
+
+/* 説明文のスタイル */
+.description {
+/* ここにCSSを書いていきます */
+}`,
+        language: 'css',
+        description: 'CSS学習用のスタイルシート',
+        order: 2,
+      },
+    ],
+    defaultFile: 'react-app/styles.css',
+    folderConfig: {
+      displayOrder: ['react-app'],
+    },
   },
 
   defaultFile: 'react-app/styles.css',

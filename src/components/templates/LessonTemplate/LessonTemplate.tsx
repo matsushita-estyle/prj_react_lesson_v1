@@ -12,13 +12,15 @@ import ResizablePanel from '@/components/molecules/ResizablePanel'
 import SideMenu from '@/components/molecules/SideMenu'
 import ConfirmModal from '@/components/molecules/ConfirmModal'
 import { useSideMenu } from '@/hooks/useSideMenu'
-import { Lesson } from '@/lib/types/lesson'
+import { Lesson, ProjectFile } from '@/lib/types/lesson'
 import { allLessons, getAvailableLessons } from '@/data/lessons'
 
 interface LessonTemplateProps {
   lessonTitle: string
   courseTitle: string
   initialFiles: Record<string, string>
+  projectFiles?: ProjectFile[]  // 新形式のファイル構造（オプショナル）
+  defaultFile?: string  // デフォルトファイル（オプショナル）
   lesson?: Lesson
 }
 
@@ -26,13 +28,17 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   lessonTitle,
   courseTitle,
   initialFiles,
+  projectFiles,
+  defaultFile,
   lesson,
 }) => {
   const [files, setFiles] = useState(initialFiles)
   const [activeFile, setActiveFile] = useState(
-    lesson?.defaultFile && lesson.defaultFile in initialFiles 
-      ? lesson.defaultFile 
-      : Object.keys(initialFiles)[0] || ''
+    defaultFile && defaultFile in initialFiles 
+      ? defaultFile 
+      : lesson?.defaultFile && lesson.defaultFile in initialFiles 
+        ? lesson.defaultFile 
+        : Object.keys(initialFiles)[0] || ''
   )
   const [originalFiles] = useState(initialFiles)
   const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)

@@ -535,9 +535,11 @@ export default App`,
     },
   ],
 
-  // 右のコードエディタの初期ファイル
-  initialEditorFiles: {
-    'react-app/App.jsx': `import './styles.css'
+  projectStructure: {
+    files: [
+      {
+        path: 'react-app/App.jsx',
+        content: `import './styles.css'
 
 const App = () => {
   // ここに商品名の変数を定義してください
@@ -551,7 +553,13 @@ const App = () => {
 }
 
 export default App`,
-    'react-app/styles.css': `/* 商品カード用のスタイル */
+        language: 'javascript',
+        description: 'JavaScript変数学習用のReactコンポーネント',
+        order: 1,
+      },
+      {
+        path: 'react-app/styles.css',
+        content: `/* 商品カード用のスタイル */
 .product-card {
   max-width: 420px;
   margin: 2rem auto;
@@ -624,6 +632,15 @@ export default App`,
   border-radius: 50%;
 }
 `,
+        language: 'css',
+        description: '商品カード用のスタイルシート',
+        order: 2,
+      },
+    ],
+    defaultFile: 'react-app/App.jsx',
+    folderConfig: {
+      displayOrder: ['react-app'],
+    },
   },
 
   previousLessonId: 'chapter1-lesson2',

@@ -930,9 +930,11 @@ export default ProductInfo`,
     },
   ],
 
-  // 右のコードエディタの初期ファイル
-  initialEditorFiles: {
-    'react-app/App.jsx': `import './styles.css'
+  projectStructure: {
+    files: [
+      {
+        path: 'react-app/App.jsx',
+        content: `import './styles.css'
 
 const App = () => {
   const getStarRating = (rating) => {
@@ -964,8 +966,20 @@ const App = () => {
 }
 
 export default App`,
-    'react-app/ProductCard.jsx': `// ここにProductCardコンポーネントを作成してください`,
-    'react-app/styles.css': `/* 商品カード用のスタイル */
+        language: 'javascript',
+        description: 'メインアプリケーション（コンポーネント分割前）',
+        order: 1,
+      },
+      {
+        path: 'react-app/ProductCard.jsx',
+        content: `// ここにProductCardコンポーネントを作成してください`,
+        language: 'javascript',
+        description: 'ProductCardコンポーネント（作成予定）',
+        order: 2,
+      },
+      {
+        path: 'react-app/styles.css',
+        content: `/* 商品カード用のスタイル */
 .product-card {
   width: 280px;
   margin: 0;
@@ -1090,6 +1104,15 @@ export default App`,
     font-size: 2rem;
   }
 }`,
+        language: 'css',
+        description: 'アプリケーション全体のスタイルシート',
+        order: 3,
+      },
+    ],
+    defaultFile: 'react-app/App.jsx',
+    folderConfig: {
+      displayOrder: ['react-app'],
+    },
   },
 
   previousLessonId: 'chapter1-lesson3',
