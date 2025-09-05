@@ -119,17 +119,24 @@ const GoodExample = () => {
 - オブジェクトは直接表示できないため、プロパティを指定する`,
 
   taskDescription: `
-このレッスンでは、学んだ知識を使って実際にJSXの中でJavaScriptを使ってみましょう。
-段階的にステップを踏んで、動的な商品カードコンポーネントを完成させます！
+このレッスンでは、JSXにJavaScriptの変数や計算式を埋め込む方法について学習します。
+変数の定義から始めて、最終的には商品情報を動的に表示する商品カードコンポーネントを作成しましょう！
   `,
 
   // 段階的な課題
   steps: [
     {
       stepNumber: 1,
-      title: '商品名とブランド名を表示してみよう',
-      instruction: `まずは、商品名とブランド名をJSXで表示してみましょう。
-「productName」という変数に「スマートウォッチ」を、「brandName」という変数に「TechGear」を代入して、それぞれ表示してください。`,
+      title: '商品名とブランド名を表示してみよう！',
+      instruction: `商品名とブランド名を変数に保存してJSXで表示してみましょう。
+
+JavaScriptの変数は「const 変数名 = 値;」の形式で作成します。
+Reactコンポーネントでは、JSXを返すreturnより前に変数を定義しておく必要があります。
+JSXの中で波括弧{}を使うと、その中のJavaScript式が実行されて結果が画面に表示されます。
+
+以下の変数を定義して表示してください：
+- productName: "スマートウォッチ"
+- brandName: "TechGear"`,
       copyableCode: [
         {
           label: '📝 変数の定義',
@@ -197,10 +204,20 @@ export default App`,
     },
     {
       stepNumber: 2,
-      title: '商品画像を表示しよう',
-      instruction: `HTML要素の属性にも変数を使うことができます。
-「imageUrl」変数に商品画像のURLを代入し、「altText」変数にalt属性の内容を代入して、
-商品カードに画像を表示してください。`,
+      title: '商品画像を表示しよう！',
+      instruction: `今度は商品画像を表示してみましょう。
+JSXでは、要素の属性値にも波括弧{}を使って変数を埋め込むことができます。
+
+以下の変数を定義して、img要素のsrc属性とalt属性に設定し、画像を表示してください：
+- imageUrl: 商品画像のURL
+- altText: "スマートウォッチの商品画像"`,
+      tips: [
+        'HTML要素の属性（src、alt、classNameなど）にも変数を使用できます',
+        '属性に変数を使う際は、属性名={変数名}の形で書きます',
+        'ダブルクォートは不要です（例：src={imageUrl}）',
+        'これにより、同じコンポーネントでも異なるデータを表示可能になります',
+      ],
+      tipsTitle: 'JSXの属性で変数を使う方法',
       copyableCode: [
         {
           label: '📝 画像URLとalt属性の変数',
@@ -283,10 +300,29 @@ export default App`,
     },
     {
       stepNumber: 3,
-      title: '価格と割引を計算しよう',
-      instruction: `次は、商品の価格と割引を計算して表示しましょう。
-「price」変数に12000を代入し、「discountRate」変数に0.20（20%割引）を代入して、
-割引価格、定価、割引率バッジを表示してください。toLocaleString()で数値をカンマ区切りにし、Math.round()で割引率を整数にしましょう。`,
+      title: '価格と割引を計算しよう！',
+      instruction: `今度は商品の価格と割引を計算して表示しましょう。
+JSXの波括弧{}には、変数だけでなく計算式や関数呼び出しなど、
+様々なJavaScript式を埋め込むことができます。
+
+1. returnの前で変数を定義
+- price: 12000
+- discountRate: 0.20（20%割引）
+- discountPercent: Math.round(discountRate * 100)で割引率を整数にする
+
+2. JSX内で記述
+- discount-price: 「{(price - price * discountRate).toLocaleString()}」計算式と関数を直接実行
+- price: 「{price.toLocaleString()}」toLocaleString()を直接実行
+- discount-badge: 「{discountPercent}%OFF」事前に定義した変数を直接参照
+
+変数として事前に計算しておくものと、JSX内で直接計算するものの使い分けを意識してみましょう。`,
+      tips: [
+        '複雑な式も波括弧内に書けます：括弧を使って計算順序を制御',
+        'JSXで関数チェーンが可能：数値.toLocaleString().replace(...) のような連続処理',
+        'returnの前での変数定義は再レンダリング時の計算を効率化',
+        'JSX内での直接計算は動的な値や一時的な処理に適している',
+      ],
+      tipsTitle: 'JSXでの計算式と関数の組み合わせ',
       copyableCode: [
         {
           label: '📝 価格と割引率の変数',

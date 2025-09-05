@@ -1,4 +1,4 @@
-import { Lesson, SolutionCode } from '@/lib/types/lesson';
+import { Lesson, SolutionCode } from '@/lib/types/lesson'
 
 export const chapter1Lesson2: Lesson = {
   id: 'chapter1-lesson2',
@@ -80,14 +80,14 @@ CSSは「セレクタ」と「プロパティ」で構成されます。
 各ステップで見た目がどのように変化するかを確認しながら、CSSの効果を実感してみましょう！`,
 
   taskDescription: `
-Reactアプリに、段階的にCSSスタイルを適用していきます。
+このレッスンでは、LESSON1で作ったReactコンポーネントのCSSスタイルを段階的に作っていきます。
 styles.cssファイルにCSSを書きながら、見た目がどのように変化するかを確認しましょう！
   `,
 
   steps: [
     {
       stepNumber: 1,
-      title: 'タイトルと説明文をスタイリングしよう',
+      title: 'タイトルと説明文にスタイルを適用しよう！',
       instruction: `最初に、タイトルと説明文のスタイルを設定しましょう。
 
 .titleのスタイルを追加してください：
@@ -158,19 +158,6 @@ line-height: 1.6;`,
 .description {
 /* ここにCSSを書いていきます */
 }`,
-        'App.jsx': `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
-}
-
-export default App`,
       },
       defaultFile: 'styles.css',
       validation: {
@@ -179,8 +166,10 @@ export default App`,
     },
     {
       stepNumber: 2,
-      title: 'コンテナのレイアウトを作ろう',
-      instruction: `次に、コンテナの基本的なレイアウトを設定しましょう。
+      title: 'コンテナのレイアウトを作ろう！',
+      instruction: `次に、コンテナ（.container）の基本的なレイアウトを設定しましょう。
+コンテナは他の要素をまとめて包む「箱」で、全体のデザインを決める重要な部分です。
+また、「container」はよく使われる一般的なクラス名で、特別な意味はありません。
 
 .containerのスタイルを追加してください：
 - 最大幅を設定（max-width: 600px）
@@ -288,19 +277,6 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
 .container {
 /* ここにCSSを書いていきます */
 }`,
-        'App.jsx': `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
-}
-
-export default App`,
       },
       defaultFile: 'styles.css',
       validation: {
@@ -309,8 +285,11 @@ export default App`,
     },
     {
       stepNumber: 3,
-      title: '画像を美しくしよう',
-      instruction: `最後に、画像のスタイルを設定して、見た目を最終的に仕上げましょう。
+      title: '画像にアニメーションを適用しよう！',
+      instruction: `最後に、画像にアニメーションを追加して、動きのある楽しいデザインに仕上げましょう。
+
+CSSアニメーションを使うと、画像を回転させたり移動させたりできます。
+@keyframesで動きを定義し、animationプロパティで適用します。
 
 .container imgのスタイルを追加してください：
 - 最大幅100%（max-width: 100%）
@@ -461,19 +440,6 @@ animation: rotate 8s linear infinite;`,
 .container img {
 /* ここにCSSを書いていきます */
 }`,
-        'App.jsx': `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
-}
-
-export default App`,
       },
       defaultFile: 'styles.css',
       validation: {
@@ -529,4 +495,4 @@ export default App`,
 
   previousLessonId: 'chapter1-lesson1',
   nextLessonId: 'chapter1-lesson3',
-};
+}
