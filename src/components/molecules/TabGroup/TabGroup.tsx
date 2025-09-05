@@ -70,7 +70,7 @@ const TabGroup: React.FC<TabGroupProps> = ({
               key={tab.id}
               onClick={() => handleTabClick(tab.id)}
               className={`
-                relative z-10 flex-1 py-2 rounded-full font-medium text-sm transition-all duration-300
+                relative z-10 flex-1 py-2 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer
                 ${tab.id === activeTabId 
                   ? 'text-gray-900' 
                   : 'text-gray-500 hover:text-gray-700'

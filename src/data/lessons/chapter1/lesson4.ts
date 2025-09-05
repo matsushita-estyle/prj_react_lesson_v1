@@ -831,7 +831,7 @@ App.jsxで複数のProductCardを表示して、コンポーネント分割の�
 const App = () => {
   return (
     <div className="app-container">
-      <h1 className="app-title">商品一覧</h1>
+      <p className="category-path">All › 電化製品 › スマートデバイス</p>
       <div className="product-grid">
         <ProductCard />
         <ProductCard />
@@ -852,11 +852,10 @@ export default App`,
   padding: 1.5rem;
 }
 
-.app-title {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #2d3748;
+.category-path {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 24px;
 }
 
 .product-grid {
@@ -957,14 +956,61 @@ export default ProductInfo`,
 import './styles.css'
 
 const App = () => {
+  // 4つの異なる商品データを定義
+  const products = [
+    {
+      id: 1,
+      name: "スマートウォッチ",
+      brand: "TechGear",
+      price: 12000,
+      discountRate: 0.20,
+      rating: 4,
+      reviewCount: 128,
+      imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
+      altText: "スマートウォッチの商品画像"
+    },
+    {
+      id: 2,
+      name: "ワイヤレスイヤホン",
+      brand: "SoundMax",
+      price: 8000,
+      discountRate: 0.15,
+      rating: 5,
+      reviewCount: 95,
+      imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=533&fit=crop&crop=center",
+      altText: "ワイヤレスイヤホンの商品画像"
+    },
+    {
+      id: 3,
+      name: "デジタルカメラ",
+      brand: "PhotoMax",
+      price: 28000,
+      discountRate: 0.15,
+      rating: 5,
+      reviewCount: 89,
+      imageUrl: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=533&fit=crop&crop=center",
+      altText: "デジタルカメラの商品画像"
+    },
+    {
+      id: 4,
+      name: "Bluetoothスピーカー",
+      brand: "AudioWave",
+      price: 15000,
+      discountRate: 0.25,
+      rating: 5,
+      reviewCount: 203,
+      imageUrl: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=533&fit=crop&crop=center",
+      altText: "Bluetoothスピーカーの商品画像"
+    }
+  ];
+
   return (
     <div className="app-container">
-      <h1 className="app-title">商品一覧</h1>
+      <p className="category-path">All › 電化製品 › スマートデバイス</p>
       <div className="product-grid">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
     </div>
   )
@@ -979,40 +1025,21 @@ export default App`,
 import ProductImage from './ProductImage'
 import ProductInfo from './ProductInfo'
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
-      <ProductImage />
-      <ProductInfo />
+      <ProductImage product={product} />
+      <ProductInfo product={product} />
     </div>
   )
 }
 
 export default ProductCard`,
           solutionTargetFile: 'react-app/ProductCard.jsx',
-          label: 'ProductCard.jsx - 完成版（変更不要）',
+          label: 'ProductCard.jsx - propsを受け取って子コンポーネントに渡す',
         },
         {
-          code: `const ProductImage = () => {
-  // 複数の商品画像をランダムに選択する機能を追加
-  const products = [
-    {
-      imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
-      altText: "スマートウォッチの商品画像"
-    },
-    {
-      imageUrl: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=533&fit=crop&crop=center",
-      altText: "サングラスの商品画像"
-    },
-    {
-      imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=533&fit=crop&crop=center",
-      altText: "スニーカーの商品画像"
-    }
-  ];
-  
-  // ランダムに商品を選択
-  const product = products[Math.floor(Math.random() * products.length)];
-
+          code: `const ProductImage = ({ product }) => {
   return (
     <div className="product-image-container">
       <img 
@@ -1026,44 +1053,14 @@ export default ProductCard`,
 
 export default ProductImage`,
           solutionTargetFile: 'react-app/ProductImage.jsx',
-          label: 'ProductImage.jsx - ランダム画像表示機能（オプション）',
+          label: 'ProductImage.jsx - propsから商品データを受け取る',
         },
         {
-          code: `const ProductInfo = () => {
+          code: `const ProductInfo = ({ product }) => {
   const getStarRating = (rating) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
-  // 複数の商品情報をランダムに選択
-  const products = [
-    {
-      name: "スマートウォッチ",
-      brand: "TechGear",
-      price: 12000,
-      discountRate: 0.20,
-      rating: 4,
-      reviewCount: 128
-    },
-    {
-      name: "ワイヤレスイヤホン",
-      brand: "SoundMax",
-      price: 8000,
-      discountRate: 0.15,
-      rating: 5,
-      reviewCount: 95
-    },
-    {
-      name: "ポータブル充電器",
-      brand: "PowerPro",
-      price: 5000,
-      discountRate: 0.10,
-      rating: 3,
-      reviewCount: 67
-    }
-  ];
-  
-  // ランダムに商品を選択
-  const product = products[Math.floor(Math.random() * products.length)];
   const discountPercent = Math.round(product.discountRate * 100);
   const discountedPrice = product.price - product.price * product.discountRate;
 
@@ -1086,7 +1083,7 @@ export default ProductImage`,
 
 export default ProductInfo`,
           solutionTargetFile: 'react-app/ProductInfo.jsx',
-          label: 'ProductInfo.jsx - ランダム商品情報（オプション）',
+          label: 'ProductInfo.jsx - propsから商品データを受け取る',
         },
       ] as SolutionCode[],
       validation: {
@@ -1312,24 +1309,21 @@ body {
   margin-top: 20px;
 }
 
-.app-title {
-  text-align: center;
-  font-size: 20px;
+.category-path {
+  font-size: 14px;
+  color: #666666;
   margin-bottom: 24px;
-  color: #333333;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .product-grid {
   display: flex;
   gap: 16px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: start;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 416px; /* 200px × 2 + gap 16px = 416px */
 }
 
 /* レスポンシブ対応 */
