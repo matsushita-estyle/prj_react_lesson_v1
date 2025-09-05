@@ -8,6 +8,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 interface LessonContentProps {
+  lessonTitle?: string;
   taskDescription?: string;
   steps: LessonStep[];
   onApplyCode?: (fileName: string, code: string) => void;
@@ -15,6 +16,7 @@ interface LessonContentProps {
 }
 
 export default function LessonContent({
+  lessonTitle,
   taskDescription,
   steps,
   onApplyCode,
@@ -38,36 +40,67 @@ export default function LessonContent({
 
       if (line.startsWith('# ')) {
         elements.push(
-          <h1 key={i} className="mt-6 mb-4 text-2xl font-bold text-gray-900">
-            {line.slice(2)}
-          </h1>
+          <div key={i} className="relative mt-6 mb-5 overflow-hidden">
+            {/* 背景グラデーションエフェクト */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 blur-2xl" />
+            
+            {/* タイトルコンテナ */}
+            <div className="relative">
+              <h1 className="text-2xl md:text-3xl font-bold inline-block">
+                <span className="relative inline-block pb-2">
+                  <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
+                    {line.slice(2)}
+                  </span>
+                  {/* 下線 */}
+                  <span className="absolute left-0 right-0 bottom-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full" />
+                </span>
+              </h1>
+            </div>
+          </div>
         );
       } else if (line.startsWith('## ')) {
         const title = line.slice(3);
         if (title.includes('ハンズオンタスク') || title.includes('課題')) {
           elements.push(
-            <h2
-              key={i}
-              className="mt-5 mb-3 text-xl font-semibold text-green-700"
-            >
-              🎯 {title}
-            </h2>
+            <div key={i} className="relative mt-5 mb-3">
+              <h2 className="inline-block text-lg font-semibold">
+                <span className="flex items-center gap-2">
+                  <span className="animate-bounce">🎯</span>
+                  <span className="relative inline-block pb-1.5">
+                    <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
+                      {title}
+                    </span>
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-green-400 to-teal-400 rounded-full" />
+                  </span>
+                </span>
+              </h2>
+            </div>
           );
         } else {
           elements.push(
-            <h2
-              key={i}
-              className="mt-5 mb-3 text-xl font-semibold text-gray-800"
-            >
-              {title}
-            </h2>
+            <div key={i} className="relative mt-5 mb-3">
+              <h2 className="text-lg font-semibold text-gray-800 inline-block">
+                <span className="relative inline-block pb-1.5">
+                  {title}
+                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-gray-400 to-gray-300 rounded-full" />
+                </span>
+              </h2>
+            </div>
           );
         }
       } else if (line.startsWith('### ')) {
         elements.push(
-          <h3 key={i} className="mt-4 mb-2 text-lg font-medium text-gray-700">
-            {line.slice(4)}
-          </h3>
+          <div key={i} className="relative mt-4 mb-2">
+            <h3 className="text-base font-medium text-gray-700 inline-block">
+              <span className="relative flex items-center gap-2">
+                <span className="inline-block w-1 h-4 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full" />
+                <span className="relative inline-block pb-1">
+                  {line.slice(4)}
+                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-gray-300 rounded-full" />
+                </span>
+              </span>
+            </h3>
+          </div>
         );
       } else if (line.match(/^\d+\./)) {
         const listItems = [];
@@ -128,6 +161,27 @@ export default function LessonContent({
 
   return (
     <div className="prose max-w-none">
+      {/* レッスンタイトル */}
+      {lessonTitle && (
+        <div className="relative mt-2 mb-6 overflow-hidden">
+          {/* 背景グラデーションエフェクト */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 blur-2xl" />
+          
+          {/* タイトルコンテナ */}
+          <div className="relative">
+            <h1 className="text-2xl md:text-3xl font-bold inline-block">
+              <span className="relative inline-block pb-2">
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
+                  {lessonTitle}
+                </span>
+                {/* 下線 */}
+                <span className="absolute left-0 right-0 bottom-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full" />
+              </span>
+            </h1>
+          </div>
+        </div>
+      )}
+      
       {/* 全体の説明 */}
       {taskDescription && (
         <div className="mb-8">{renderMarkdownText(taskDescription)}</div>

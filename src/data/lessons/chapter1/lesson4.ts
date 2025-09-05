@@ -1,13 +1,13 @@
-import { Lesson, SolutionCode } from '@/lib/types/lesson';
+import { Lesson, SolutionCode } from '@/lib/types/lesson'
 
 export const chapter1Lesson4: Lesson = {
   id: 'chapter1-lesson4',
-  title: 'コンポーネントを分割して再利用しよう',
+  title: 'コンポーネント分割の実践',
   lessonNumber: 4,
   description: 'コンポーネントを小さな部品に分割して、再利用性を高める方法を学びます',
   difficulty: '中級',
 
-  material: `# コンポーネントを分割して再利用しよう
+  material: `# コンポーネント分割の実践
 
 前のレッスンでは、商品カード全体を1つのコンポーネント内で作成しました。
 今度は、このコンポーネントをより小さな部品に分割して、再利用性を高める方法を学びます。
@@ -104,8 +104,6 @@ App (親コンポーネント)
 この流れで、保守性が高く再利用可能なコンポーネント設計を学んでいきましょう！`,
 
   taskDescription: `
-# コンポーネント分割の実践
-
 前のレッスンで作った商品カードを、再利用可能な小さなコンポーネントに分割していきます。
 段階的に分割作業を進めて、モジュール化されたコンポーネント設計を体験しましょう！
   `,
@@ -383,11 +381,7 @@ export default ProductCard`,
         },
       ] as SolutionCode[],
       validation: {
-        includes: [
-          '<img',
-          'className="product-image"',
-          'export default ProductImage',
-        ],
+        includes: ['<img', 'className="product-image"', 'export default ProductImage'],
       },
     },
     {
@@ -548,12 +542,7 @@ export default ProductCard`,
         },
       ] as SolutionCode[],
       validation: {
-        includes: [
-          '<h1>',
-          '<p className="price">',
-          'getStarRating',
-          'export default ProductInfo',
-        ],
+        includes: ['<h1>', '<p className="price">', 'getStarRating', 'export default ProductInfo'],
       },
     },
     {
@@ -1110,4 +1099,4 @@ export default App`,
 
   previousLessonId: 'chapter1-lesson3',
   nextLessonId: 'chapter1-lesson5',
-};
+}

@@ -152,6 +152,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
 
   const lessonContent = lesson ? (
     <LessonContent
+      lessonTitle={lessonTitle}
       taskDescription={lesson.taskDescription}
       steps={lesson.steps}
       onApplyCode={handleApplyCode}
