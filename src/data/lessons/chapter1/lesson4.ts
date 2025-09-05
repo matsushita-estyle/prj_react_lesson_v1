@@ -120,7 +120,6 @@ ProductCard.jsxファイルを作成し、App.jsxから商品カードの部分�
 - export defaultでProductCardをエクスポート
 - App.jsxでimportして使用
 - getStarRating関数も一緒に移動`,
-      hint: 'export default文とimport文を正しく記述することが重要です',
       copyableCode: [
         {
           label: '📦 ProductCard.jsxの基本構造',
@@ -252,7 +251,6 @@ ProductImage.jsxファイルを作成し、画像表示の責任を持たせま�
 - 商品画像を表示するProductImageコンポーネント
 - ProductCard.jsxから呼び出す
 - 画像関連のスタイルも適用`,
-      hint: 'imgタグの部分をProductImageコンポーネントに移動します',
       copyableCode: [
         {
           label: '🖼️ ProductImageコンポーネントの基本構造',
@@ -394,7 +392,6 @@ ProductInfo.jsxファイルを作成し、商品情報表示の責任を持た�
 - 商品名、価格、割引価格、評価を表示
 - getStarRating関数をProductInfo内に移動
 - ProductCard.jsxから呼び出す`,
-      hint: 'h1, p要素と価格計算ロジック、星評価関数をまとめて移動します',
       copyableCode: [
         {
           label: '📋 ProductInfoコンポーネントの基本構造',
@@ -555,7 +552,6 @@ export default ProductCard`,
 - ProductCard.jsxでProductImageとProductInfoをimport
 - 不要になったロジックを削除
 - きれいなレイアウトコンポーネントとして完成`,
-      hint: 'ProductCardは他のコンポーネントを組み合わせるレイアウト専用になります',
       copyableCode: [
         {
           label: '🏗️ 完成したProductCardの構造',
@@ -693,7 +689,6 @@ App.jsxで複数のProductCardを表示して、コンポーネント分割の�
 - App.jsxで4つのProductCardを表示
 - 各ProductCardが独立して動作することを確認
 - レイアウトの調整`,
-      hint: '同じProductCardコンポーネントを複数回使うだけで、複数の商品カードが表示されます',
       copyableCode: [
         {
           label: '🔄 複数のProductCardを表示',

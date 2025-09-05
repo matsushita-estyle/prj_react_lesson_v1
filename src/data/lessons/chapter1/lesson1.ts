@@ -178,7 +178,6 @@ Appコンポーネントの中で「こんにちは」というテキストを�
         'ブラウザに「この部分はどんな意味か」を伝える役割があります',
       ],
       tipsTitle: 'タグとは？',
-      hint: 'divタグの中に「こんにちは」と書くだけでOKです',
       initialStepFiles: {
         'App.jsx': `const App = () => {
   return <div>{/* ここにコードを書いてください */}</div>
@@ -212,7 +211,6 @@ export default App`,
       title: '見出しタグを使ってみよう',
       instruction: `次は、h1タグを使って「ようこそReactへ！」という見出しを作りましょう。
 h1タグは大きな見出しを表示するためのタグです。`,
-      hint: 'divタグの代わりにh1タグを使います',
       initialStepFiles: {
         'App.jsx': `const App = () => {
   return <div>こんにちは</div>
@@ -247,7 +245,6 @@ export default App`,
       instruction: `複数のタグを表示する時は、全体を1つのdivタグで囲む必要があります。
 これは、JSXでは「1つのコンテナの中に複数の要素を入れる」というルールがあるためです。
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
-      hint: 'divタグで全体を包み、その中にh1とpタグを入れます',
       initialStepFiles: {
         'App.jsx': `const App = () => {
   return <h1>ようこそReactへ！</h1>
@@ -307,7 +304,6 @@ export default App`,
         'import文でCSSファイルを読み込むことで、ReactがスタイルをWebページに反映してくれます',
       ],
       tipsTitle: 'なぜCSSが適用されるの？',
-      hint: 'JSXではclassではなくclassNameを使います。また、ファイルの先頭にimport文も忘れずに！',
       initialStepFiles: {
         'App.jsx': `const App = () => {
   return (
@@ -357,13 +353,11 @@ export default App`,
     },
     {
       stepNumber: 5,
-      title: 'セルフクロージングタグを使ってみよう',
-      instruction: `JSXでは、すべてのタグを閉じる必要があります。
-画像を表示するimgタグを追加してみましょう。
-imgタグは「セルフクロージング」といって、最後に/を付けて閉じます。
+      title: '画像を表示しよう',
+      instruction: `画像を表示するimgタグを追加しましょう。
 
-**忘れずに、ファイルの先頭に \`import './styles.css'\` も追加してくださいね！**`,
-      hint: 'imgタグの最後に必ず/を付けてください。import文も忘れずに！',
+imgタグはsrc属性で画像のパスを指定し、JSXでは<img />のように最後に/を付けて閉じます。
+これを「セルフクロージング」と呼び、間にテキストやコンポーネントが入らないタグで使います。`,
       initialStepFiles: {
         'App.jsx': `import './styles.css'
 

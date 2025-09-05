@@ -102,7 +102,6 @@ styles.cssファイルにCSSを書きながら、見た目がどのように変�
 - 下に余白を追加（margin: 0 0 2rem 0）
 - 少し透明に（opacity: 0.9）
 - 行間を広く（line-height: 1.6）`,
-      hint: '複数のクラスを同時にスタイリングできます。フォントのサイズや太さで見た目が大きく変わります。',
       copyableCode: [
         {
           label: '📝 .titleクラスの中身をコピー（大きく太い見出しにする）',
@@ -193,7 +192,6 @@ export default App`,
 - テキストを中央寄せ（text-align: center）
 - 白いテキスト色（color: white）
 - システムフォント（font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif）`,
-      hint: 'linear-gradientでグラデーション背景を作ることができます。数値が大きいほど影が大きくなります。',
       copyableCode: [
         {
           label: '🎨 まず.containerクラスの枠組みをコピー',
@@ -322,7 +320,6 @@ export default App`,
 @keyframes rotateで回転アニメーションを定義：
 - from：transform: rotate(0deg)
 - to：transform: rotate(360deg)`,
-      hint: '@keyframesでアニメーションを定義できます。linearは一定速度、infiniteは無限ループを意味します。',
       copyableCode: [
         {
           label: '🖼️ まず.container imgクラスの枠組みをコピー',
