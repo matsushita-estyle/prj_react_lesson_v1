@@ -1,4 +1,4 @@
-import { Lesson, SolutionCode } from '@/lib/types/lesson';
+import { Lesson, SolutionCode } from '@/lib/types/lesson'
 
 export const chapter1Lesson1: Lesson = {
   id: 'chapter1-lesson1',
@@ -180,7 +180,7 @@ Appコンポーネントの中で「こんにちは」というテキストを�
   return <div>{/* ここにコードを書いてください */}</div>
 }
 
-export default App`
+export default App`,
       },
       copyableCode: [
         {
@@ -214,7 +214,7 @@ h1タグは大きな見出しを表示するためのタグです。`,
   return <div>こんにちは</div>
 }
 
-export default App`
+export default App`,
       },
       copyableCode: [
         {
@@ -248,7 +248,7 @@ h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表
   return <h1>ようこそReactへ！</h1>
 }
 
-export default App`
+export default App`,
       },
       copyableCode: [
         {
@@ -287,7 +287,7 @@ export default App`,
     {
       stepNumber: 4,
       title: 'クラス名を追加してスタイリングの準備をしよう',
-      instruction: `最後に、classNameを使ってクラス名を追加してみましょう。
+      instruction: `次に、classNameを使ってクラス名を追加してみましょう。
 divタグに「container」、h1タグに「title」、pタグに「description」というクラス名を追加してください。
 
 今度は、CSSを適用するためのインポート文も追加する必要があります！
@@ -303,7 +303,7 @@ divタグに「container」、h1タグに「title」、pタグに「description�
   )
 }
 
-export default App`
+export default App`,
       },
       copyableCode: [
         {
@@ -337,11 +337,7 @@ export default App`,
         },
       ] as SolutionCode[],
       validation: {
-        includes: [
-          'className="container"',
-          'className="title"',
-          'className="description"',
-        ],
+        includes: ['className="container"', 'className="title"', 'className="description"'],
       },
     },
     {
@@ -365,7 +361,7 @@ const App = () => {
   )
 }
 
-export default App`
+export default App`,
       },
       copyableCode: [
         {
@@ -446,4 +442,4 @@ export default App`,
   },
 
   nextLessonId: 'chapter1-lesson2',
-};
+}
