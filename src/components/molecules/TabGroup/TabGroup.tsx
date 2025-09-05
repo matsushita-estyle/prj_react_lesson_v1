@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Tab from '@/components/atoms/Tab'
 
 interface TabItem {
@@ -23,13 +23,31 @@ const TabGroup: React.FC<TabGroupProps> = ({
   onTabChange,
 }) => {
   const [activeTabId, setActiveTabId] = useState(defaultActiveId || tabs[0]?.id)
+  const scrollPositions = useRef<Record<string, number>>({})
+  const tabPanelRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
   const handleTabClick = (tabId: string) => {
+    // 現在のタブのスクロール位置を保存
+    const currentTabPanel = tabPanelRefs.current[activeTabId]
+    if (currentTabPanel) {
+      scrollPositions.current[activeTabId] = currentTabPanel.scrollTop
+    }
+
     setActiveTabId(tabId)
     onTabChange?.(tabId)
   }
 
-  const activeTab = tabs.find((tab) => tab.id === activeTabId)
+  // タブが切り替わった時にスクロール位置を復元
+  useEffect(() => {
+    const tabPanel = tabPanelRefs.current[activeTabId]
+    if (tabPanel && scrollPositions.current[activeTabId] !== undefined) {
+      // 次のフレームでスクロール位置を復元（レンダリング完了後）
+      requestAnimationFrame(() => {
+        tabPanel.scrollTop = scrollPositions.current[activeTabId] || 0
+      })
+    }
+  }, [activeTabId])
+
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTabId)
 
   return (
@@ -67,9 +85,16 @@ const TabGroup: React.FC<TabGroupProps> = ({
       </div>
 
       {/* タブコンテンツ */}
-      <div className="flex-1 overflow-auto" role="tabpanel">
-        {activeTab?.content}
-      </div>
+      {tabs.map((tab) => (
+        <div 
+          key={tab.id}
+          ref={(el) => { tabPanelRefs.current[tab.id] = el }}
+          className={`flex-1 overflow-auto ${tab.id === activeTabId ? 'block' : 'hidden'}`} 
+          role="tabpanel"
+        >
+          {tab.content}
+        </div>
+      ))}
     </div>
   )
 }
