@@ -452,7 +452,6 @@ export default App`,
   max-width: 100%;
   height: auto;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
