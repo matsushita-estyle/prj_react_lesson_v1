@@ -154,29 +154,45 @@ export default App`,
 
 const App = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
     rating: 4,
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    reviewCount: 128,
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={product.imageUrl}
+          alt={product.altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -205,29 +221,45 @@ export default App`,
 
 const ProductCard = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
     rating: 4,
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    reviewCount: 128,
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={product.imageUrl}
+          alt={product.altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -256,16 +288,18 @@ ProductImage.jsxファイルを作成し、画像表示の責任を持たせま�
           label: '🖼️ ProductImageコンポーネントの基本構造',
           code: `const ProductImage = () => {
   const product = {
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
 
   return (
-    <img 
-      className="product-image"
-      src={product.imageUrl}
-      alt={product.altText}
-    />
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
   );
 }
 
@@ -295,29 +329,45 @@ export default App`,
 
 const ProductCard = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
     rating: 4,
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    reviewCount: 128,
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={product.imageUrl}
+          alt={product.altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -329,16 +379,18 @@ export default ProductCard`,
         {
           code: `const ProductImage = () => {
   const product = {
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
 
   return (
-    <img 
-      className="product-image"
-      src={product.imageUrl}
-      alt={product.altText}
-    />
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
   );
 }
 
@@ -352,23 +404,37 @@ import ProductImage from './ProductImage'
 
 const ProductCard = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
-    rating: 4
+    rating: 4,
+    reviewCount: 128
   };
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
   
   return (
     <div className="product-card">
       <ProductImage />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -397,23 +463,35 @@ ProductInfo.jsxファイルを作成し、商品情報表示の責任を持た�
           label: '📋 ProductInfoコンポーネントの基本構造',
           code: `const ProductInfo = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
-    rating: 4
+    rating: 4,
+    reviewCount: 128
   };
 
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
+
   return (
-    <>
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
       <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
-    </>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountPercent}%OFF</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
   );
 }
 
@@ -451,23 +529,37 @@ import ProductImage from './ProductImage'
 
 const ProductCard = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
-    rating: 4
+    rating: 4,
+    reviewCount: 128
   };
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
   
   return (
     <div className="product-card">
       <ProductImage />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -475,16 +567,18 @@ const ProductCard = () => {
 export default ProductCard`,
         'ProductImage.jsx': `const ProductImage = () => {
   const product = {
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
 
   return (
-    <img 
-      className="product-image"
-      src={product.imageUrl}
-      alt={product.altText}
-    />
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
   );
 }
 
@@ -495,23 +589,35 @@ export default ProductImage`,
         {
           code: `const ProductInfo = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
-    rating: 4
+    rating: 4,
+    reviewCount: 128
   };
 
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
+
   return (
-    <>
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
       <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
-    </>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountPercent}%OFF</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
   );
 }
 
@@ -588,23 +694,37 @@ import ProductImage from './ProductImage'
 
 const ProductCard = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
-    rating: 4
+    rating: 4,
+    reviewCount: 128
   };
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
   
   return (
     <div className="product-card">
       <ProductImage />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -612,39 +732,53 @@ const ProductCard = () => {
 export default ProductCard`,
         'ProductImage.jsx': `const ProductImage = () => {
   const product = {
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
 
   return (
-    <img 
-      className="product-image"
-      src={product.imageUrl}
-      alt={product.altText}
-    />
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
   );
 }
 
 export default ProductImage`,
         'ProductInfo.jsx': `const ProductInfo = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
-    rating: 4
+    rating: 4,
+    reviewCount: 128
   };
 
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
+
   return (
-    <>
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
       <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
-    </>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountPercent}%OFF</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
   );
 }
 
@@ -765,39 +899,53 @@ const ProductCard = () => {
 export default ProductCard`,
         'ProductImage.jsx': `const ProductImage = () => {
   const product = {
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
 
   return (
-    <img 
-      className="product-image"
-      src={product.imageUrl}
-      alt={product.altText}
-    />
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
   );
 }
 
 export default ProductImage`,
         'ProductInfo.jsx': `const ProductInfo = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
-    rating: 4
+    rating: 4,
+    reviewCount: 128
   };
 
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
+
   return (
-    <>
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
       <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
-    </>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountPercent}%OFF</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
   );
 }
 
@@ -849,15 +997,15 @@ export default ProductCard`,
   // 複数の商品画像をランダムに選択する機能を追加
   const products = [
     {
-      imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+      imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
       altText: "スマートウォッチの商品画像"
     },
     {
-      imageUrl: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=300&h=300&fit=crop&crop=center",
+      imageUrl: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=533&fit=crop&crop=center",
       altText: "サングラスの商品画像"
     },
     {
-      imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop&crop=center",
+      imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=533&fit=crop&crop=center",
       altText: "スニーカーの商品画像"
     }
   ];
@@ -866,11 +1014,13 @@ export default ProductCard`,
   const product = products[Math.floor(Math.random() * products.length)];
 
   return (
-    <img 
-      className="product-image"
-      src={product.imageUrl}
-      alt={product.altText}
-    />
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
   );
 }
 
@@ -881,41 +1031,56 @@ export default ProductImage`,
         {
           code: `const ProductInfo = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   // 複数の商品情報をランダムに選択
   const products = [
     {
       name: "スマートウォッチ",
+      brand: "TechGear",
       price: 12000,
       discountRate: 0.20,
-      rating: 4
+      rating: 4,
+      reviewCount: 128
     },
     {
       name: "ワイヤレスイヤホン",
+      brand: "SoundMax",
       price: 8000,
       discountRate: 0.15,
-      rating: 5
+      rating: 5,
+      reviewCount: 95
     },
     {
       name: "ポータブル充電器",
+      brand: "PowerPro",
       price: 5000,
       discountRate: 0.10,
-      rating: 3
+      rating: 3,
+      reviewCount: 67
     }
   ];
   
   // ランダムに商品を選択
   const product = products[Math.floor(Math.random() * products.length)];
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
 
   return (
-    <>
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
       <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
-    </>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountPercent}%OFF</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
   );
 }
 
@@ -938,29 +1103,45 @@ export default ProductInfo`,
 
 const App = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
     rating: 4,
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    reviewCount: 128,
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={product.imageUrl}
+          alt={product.altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -979,129 +1160,195 @@ export default App`,
       },
       {
         path: 'react-app/styles.css',
-        content: `/* 商品カード用のスタイル */
+        content: `/* 全体の基本設定 */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* app-containerがある場合は通常のレイアウト */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ZOZOTOWNスタイルの商品カード */
 .product-card {
-  width: 280px;
+  width: 200px;
   margin: 0;
   padding: 0;
-  flex-shrink: 0;
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  border-radius: 20px;
+  background: #ffffff;
+  border-radius: 0;
   border: none;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 1px 8px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
   overflow: hidden;
 }
 
 .product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 180px;
+  height: 100%;
   object-fit: cover;
   border-radius: 0;
-  margin-bottom: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 0 10px 10px 10px;
+}
+
+.brand-name {
+  font-size: 11px;
+  color: #333333;
+  margin: 6px 0 3px 0;
+  font-weight: 400;
+  line-height: 1.3;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .product-card h1 {
-  font-size: 1.25rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 1rem 1rem 0.75rem 1rem;
-  letter-spacing: -0.02em;
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 6px 0;
+  letter-spacing: 0;
+  line-height: 1.4;
+  height: 34px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
 }
 
 .price {
-  font-size: 0.875rem;
-  color: #a0aec0;
-  margin: 0.25rem 1rem;
+  font-size: 11px;
+  color: #999999;
+  margin: 0;
   text-decoration: line-through;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .discount-price {
-  font-size: 1.125rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0.25rem 1rem;
-  letter-spacing: -0.01em;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 2px;
 }
 
 .rating {
-  font-size: 1rem;
-  color: #4a5568;
-  margin: 0.5rem 1rem 1rem 1rem;
-  font-weight: 600;
+  font-size: 10px;
+  color: #666666;
+  margin: 3px 0 0 0;
+  font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 3px;
 }
 
-.rating::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
-  border-radius: 50%;
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 10px;
+  margin-left: 1px;
 }
 
 /* アプリ全体のレイアウト */
 .app-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  min-height: 100vh;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .app-title {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  margin-bottom: 24px;
+  color: #333333;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .product-grid {
   display: flex;
-  gap: 1.5rem;
+  gap: 16px;
   justify-content: center;
   align-items: start;
   flex-wrap: wrap;
-  padding: 1.5rem 1rem;
-  max-width: fit-content;
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .product-grid {
-    justify-content: flex-start;
-    padding: 1rem 0;
+  .product-card {
+    width: 160px;
   }
   
-  .product-card {
-    width: 260px;
+  .product-grid {
+    gap: 12px;
   }
   
   .app-container {
-    padding: 1rem;
+    padding: 16px;
   }
   
   .app-title {
-    font-size: 2rem;
+    font-size: 18px;
+    margin-bottom: 20px;
   }
 }`,
         language: 'css',

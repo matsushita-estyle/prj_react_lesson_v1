@@ -127,29 +127,38 @@ const GoodExample = () => {
   steps: [
     {
       stepNumber: 1,
-      title: '商品名を表示してみよう',
-      instruction: `まずは、商品名をJSXで表示してみましょう。
-「productName」という変数に「スマートウォッチ」を代入して、h1タグで表示してください。`,
+      title: '商品名とブランド名を表示してみよう',
+      instruction: `まずは、商品名とブランド名をJSXで表示してみましょう。
+「productName」という変数に「スマートウォッチ」を、「brandName」という変数に「TechGear」を代入して、それぞれ表示してください。`,
       copyableCode: [
         {
           label: '📝 変数の定義',
-          code: `const productName = "スマートウォッチ";`,
+          code: `const productName = "スマートウォッチ";
+const brandName = "TechGear";`,
         },
         {
           label: '📝 JSXへの埋め込み',
-          code: `<h1>{productName}</h1>`,
+          code: `<p className="brand-name">{brandName}</p>
+<h1>{productName}</h1>`,
         },
       ],
       initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
-  // ここに商品名の変数を定義してください
+  // ここに商品名とブランド名の変数を定義してください
   const productName = "???";
+  const brandName = "???";
   
   return (
     <div className="product-card">
-      <h1>{/* ここに商品名を表示 */}</h1>
+      <div className="product-image-container">
+        {/* 画像はステップ2で追加 */}
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{/* ここにブランド名を表示 */}</p>
+        <h1>{/* ここに商品名を表示 */}</h1>
+      </div>
     </div>
   )
 }
@@ -162,10 +171,17 @@ export default App`
 
 const App = () => {
   const productName = "スマートウォッチ";
+  const brandName = "TechGear";
   
   return (
     <div className="product-card">
-      <h1>{productName}</h1>
+      <div className="product-image-container">
+        {/* 画像はステップ2で追加 */}
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{brandName}</p>
+        <h1>{productName}</h1>
+      </div>
     </div>
   )
 }
@@ -176,7 +192,7 @@ export default App`,
         },
       ] as SolutionCode[],
       validation: {
-        includes: ['{productName}', "import './styles.css'"],
+        includes: ['{productName}', '{brandName}', "import './styles.css'"],
       },
     },
     {
@@ -188,16 +204,18 @@ export default App`,
       copyableCode: [
         {
           label: '📝 画像URLとalt属性の変数',
-          code: `const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
+          code: `const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center";
 const altText = "スマートウォッチの商品画像";`,
         },
         {
           label: '📝 img要素での変数使用',
-          code: `<img 
-  className="product-image"
-  src={imageUrl}
-  alt={altText}
-/>`,
+          code: `<div className="product-image-container">
+  <img 
+    className="product-image"
+    src={imageUrl}
+    alt={altText}
+  />
+</div>`,
         },
       ],
       initialStepFiles: {
@@ -205,16 +223,20 @@ const altText = "スマートウォッチの商品画像";`,
 
 const App = () => {
   const productName = "スマートウォッチ";
+  const brandName = "TechGear";
   
   // ここに画像URLとalt属性の変数を追加してください
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={/* 画像URLを設定 */}
-        alt={/* alt属性を設定 */}
-      />
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={/* 画像URLを設定 */}
+          alt={/* alt属性を設定 */}
+        />
+      </div>
+      <p className="brand-name">{brandName}</p>
       <h1>{productName}</h1>
     </div>
   )
@@ -228,18 +250,24 @@ export default App`
 
 const App = () => {
   const productName = "スマートウォッチ";
+  const brandName = "TechGear";
   
-  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
+  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center";
   const altText = "スマートウォッチの商品画像";
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={imageUrl}
-        alt={altText}
-      />
-      <h1>{productName}</h1>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={imageUrl}
+          alt={altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{brandName}</p>
+        <h1>{productName}</h1>
+      </div>
     </div>
   )
 }
@@ -258,17 +286,21 @@ export default App`,
       title: '価格と割引を計算しよう',
       instruction: `次は、商品の価格と割引を計算して表示しましょう。
 「price」変数に12000を代入し、「discountRate」変数に0.20（20%割引）を代入して、
-「定価: 12000円」と「割引価格: 9600円」を表示してください。`,
+割引価格、定価、割引率バッジを表示してください。toLocaleString()で数値をカンマ区切りにし、Math.round()で割引率を整数にしましょう。`,
       copyableCode: [
         {
           label: '📝 価格と割引率の変数',
           code: `const price = 12000;
-const discountRate = 0.20;`,
+const discountRate = 0.20;
+const discountPercent = Math.round(discountRate * 100);`,
         },
         {
           label: '📝 価格の表示',
-          code: `<p className="price">定価: {price}円</p>
-<p className="discount-price">割引価格: {price - price * discountRate}円</p>`,
+          code: `<div className="price-container">
+  <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
+  <p className="price">¥{price.toLocaleString()}</p>
+  <span className="discount-badge">{discountPercent}%OFF</span>
+</div>`,
         },
       ],
       initialStepFiles: {
@@ -276,22 +308,29 @@ const discountRate = 0.20;`,
 
 const App = () => {
   const productName = "スマートウォッチ";
+  const brandName = "TechGear";
   
-  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
+  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center";
   const altText = "スマートウォッチの商品画像";
   
   // ここに価格と割引率の変数を追加してください
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={imageUrl}
-        alt={altText}
-      />
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={imageUrl}
+          alt={altText}
+        />
+      </div>
+      <p className="brand-name">{brandName}</p>
       <h1>{productName}</h1>
-      <p className="price">定価: {/* 定価を表示 */}円</p>
-      <p className="discount-price">割引価格: {/* 割引価格を計算して表示 */}円</p>
+      <div className="price-container">
+        <p className="discount-price">{/* 割引価格を表示 */}</p>
+        <p className="price">{/* 定価を表示 */}</p>
+        <span className="discount-badge">{/* 割引率を表示 */}</span>
+      </div>
     </div>
   )
 }
@@ -304,23 +343,33 @@ export default App`
 
 const App = () => {
   const productName = "スマートウォッチ";
+  const brandName = "TechGear";
   
-  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
+  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center";
   const altText = "スマートウォッチの商品画像";
   
   const price = 12000;
   const discountRate = 0.20;
+  const discountPercent = Math.round(discountRate * 100);
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={imageUrl}
-        alt={altText}
-      />
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={imageUrl}
+          alt={altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{brandName}</p>
+        <h1>{productName}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
+          <p className="price">¥{price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+      </div>
     </div>
   )
 }
@@ -342,18 +391,23 @@ export default App`,
       stepNumber: 4,
       title: '星評価の関数を作ろう',
       instruction: `今度は、商品の評価を星で表示する関数を作ってみましょう。
-「getStarRating」という関数を定義し、引数で受け取った数だけ星（⭐）を返すようにしてください。
-そして、評価4つ星を表示してください。`,
+「getStarRating」という関数を定義し、塗りつぶし星（★）と空の星（☆）でと5段階評価を表示しましょう。
+そして、評価4つ星とレビュー数を表示してください。`,
       copyableCode: [
         {
           label: '📝 星評価を返す関数',
           code: `const getStarRating = (rating) => {
-  return '⭐'.repeat(rating);
-}`,
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+
+const reviewCount = 128;`,
         },
         {
           label: '📝 関数の呼び出し',
-          code: `<p className="rating">評価: {getStarRating(4)}</p>`,
+          code: `<p className="rating">
+  {getStarRating(4)}
+  <span className="review-count">({reviewCount})</span>
+</p>`,
         },
       ],
       initialStepFiles: {
@@ -361,26 +415,36 @@ export default App`,
 
 const App = () => {
   const productName = "スマートウォッチ";
+  const brandName = "TechGear";
   
-  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
+  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center";
   const altText = "スマートウォッチの商品画像";
   
   const price = 12000;
   const discountRate = 0.20;
+  const discountPercent = Math.round(discountRate * 100);
   
   // ここに星評価を返す関数を作ってください
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={imageUrl}
-        alt={altText}
-      />
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
-      <p className="rating">評価: {/* 星評価関数を呼び出してください */}</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={imageUrl}
+          alt={altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{brandName}</p>
+        <h1>{productName}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
+          <p className="price">¥{price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">{/* 星評価関数を呼び出してください */}</p>
+      </div>
     </div>
   )
 }
@@ -393,28 +457,43 @@ export default App`
 
 const App = () => {
   const productName = "スマートウォッチ";
+  const brandName = "TechGear";
   
-  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
+  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center";
   const altText = "スマートウォッチの商品画像";
   
   const price = 12000;
   const discountRate = 0.20;
+  const discountPercent = Math.round(discountRate * 100);
   
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
+  
+  const reviewCount = 128;
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={imageUrl}
-        alt={altText}
-      />
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
-      <p className="rating">評価: {getStarRating(4)}</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={imageUrl}
+          alt={altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{brandName}</p>
+        <h1>{productName}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
+          <p className="price">¥{price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(4)}
+          <span className="review-count">({reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -432,31 +511,45 @@ export default App`,
       stepNumber: 5,
       title: '商品オブジェクトを完成させよう',
       instruction: `最後に、すべての商品情報を1つのオブジェクトにまとめてみましょう。
-「product」オブジェクトを作成し、name、price、discountRate、rating、imageUrl、altTextプロパティを持たせてください。
+「product」オブジェクトを作成し、name、brand、price、discountRate、rating、reviewCount、imageUrl、altTextプロパティを持たせてください。
 そして、すべてのプロパティを使って商品カードを表示してください。`,
       copyableCode: [
         {
           label: '📝 商品オブジェクトの作成',
           code: `const product = {
   name: "スマートウォッチ",
+  brand: "TechGear",
   price: 12000,
   discountRate: 0.20,
   rating: 4,
-  imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+  reviewCount: 128,
+  imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
   altText: "スマートウォッチの商品画像"
-};`,
+};
+
+const discountPercent = Math.round(product.discountRate * 100);
+const discountedPrice = product.price - product.price * product.discountRate;`,
         },
         {
           label: '📝 オブジェクトのプロパティを使った表示',
-          code: `<img 
-  className="product-image"
-  src={product.imageUrl}
-  alt={product.altText}
-/>
+          code: `<div className="product-image-container">
+  <img 
+    className="product-image"
+    src={product.imageUrl}
+    alt={product.altText}
+  />
+</div>
+<p className="brand-name">{product.brand}</p>
 <h1>{product.name}</h1>
-<p className="price">定価: {product.price}円</p>
-<p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-<p className="rating">評価: {getStarRating(product.rating)}</p>`,
+<div className="price-container">
+  <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+  <p className="price">¥{product.price.toLocaleString()}</p>
+  <span className="discount-badge">{discountPercent}%OFF</span>
+</div>
+<p className="rating">
+  {getStarRating(product.rating)}
+  <span className="review-count">({product.reviewCount})</span>
+</p>`,
         },
       ],
       initialStepFiles: {
@@ -464,22 +557,28 @@ export default App`,
 
 const App = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   // ここにproductオブジェクトを作成してください
   
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={/* product.imageUrl */}
-        alt={/* product.altText */}
-      />
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={/* product.imageUrl */}
+          alt={/* product.altText */}
+        />
+      </div>
+      <p className="brand-name">{/* product.brand */}</p>
       <h1>{/* product.name */}</h1>
-      <p className="price">定価: {/* product.price */}円</p>
-      <p className="discount-price">割引価格: {/* 計算式 */}円</p>
-      <p className="rating">評価: {/* getStarRating(product.rating) */}</p>
+      <div className="price-container">
+        <p className="discount-price">{/* 割引価格 */}</p>
+        <p className="price">{/* 定価 */}</p>
+        <span className="discount-badge">{/* 割引率 */}</span>
+      </div>
+      <p className="rating">{/* getStarRatingとレビュー数 */}</p>
     </div>
   )
 }
@@ -492,29 +591,45 @@ export default App`
 
 const App = () => {
   const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
   
   const product = {
     name: "スマートウォッチ",
+    brand: "TechGear",
     price: 12000,
     discountRate: 0.20,
     rating: 4,
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    reviewCount: 128,
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
   };
   
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
+  
   return (
     <div className="product-card">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+      <div className="product-image-container">
+        <img 
+          className="product-image"
+          src={product.imageUrl}
+          alt={product.altText}
+        />
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <div className="price-container">
+          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+          <p className="price">¥{product.price.toLocaleString()}</p>
+          <span className="discount-badge">{discountPercent}%OFF</span>
+        </div>
+        <p className="rating">
+          {getStarRating(product.rating)}
+          <span className="review-count">({product.reviewCount})</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -527,7 +642,8 @@ export default App`,
       validation: {
         includes: [
           '{product.name}',
-          '{product.price}',
+          '{product.brand}',
+          '{discountedPrice.toLocaleString()}',
           '{getStarRating(product.rating)}',
           "import './styles.css'",
         ],
@@ -542,12 +658,19 @@ export default App`,
         content: `import './styles.css'
 
 const App = () => {
-  // ここに商品名の変数を定義してください
+  // ここに商品名とブランド名の変数を定義してください
   const productName = "???";
+  const brandName = "???";
   
   return (
     <div className="product-card">
-      <h1>{/* ここに商品名を表示 */}</h1>
+      <div className="product-image-container">
+        {/* 画像はステップ2で追加 */}
+      </div>
+      <div className="product-info">
+        <p className="brand-name">{/* ここにブランド名を表示 */}</p>
+        <h1>{/* ここに商品名を表示 */}</h1>
+      </div>
     </div>
   )
 }
@@ -559,77 +682,140 @@ export default App`,
       },
       {
         path: 'react-app/styles.css',
-        content: `/* 商品カード用のスタイル */
+        content: `/* 全体を中央揃えするためのコンテナ */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* ZOZOTOWNスタイルの商品カード */
 .product-card {
-  max-width: 420px;
-  margin: 2rem auto;
+  width: 220px;
+  margin: 0;
   padding: 0;
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  border-radius: 20px;
+  background: #ffffff;
+  border-radius: 0;
   border: none;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 1px 8px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
   overflow: hidden;
 }
 
 .product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 280px;
+  height: 100%;
   object-fit: cover;
   border-radius: 0;
-  margin-bottom: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 12px;
+}
+
+.brand-name {
+  font-size: 12px;
+  color: #333333;
+  margin: 8px 0 4px 0;
+  font-weight: 400;
+  line-height: 1.4;
+  height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .product-card h1 {
-  font-size: 1.75rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 1.5rem 1.5rem 1rem 1.5rem;
-  letter-spacing: -0.02em;
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 8px 0;
+  letter-spacing: 0;
+  line-height: 1.5;
+  height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
 }
 
 .price {
-  font-size: 1rem;
-  color: #a0aec0;
-  margin: 0.5rem 1.5rem;
+  font-size: 12px;
+  color: #999999;
+  margin: 0;
   text-decoration: line-through;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .discount-price {
-  font-size: 1.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0.5rem 1.5rem;
-  letter-spacing: -0.01em;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 4px;
 }
 
 .rating {
-  font-size: 1.2rem;
-  color: #4a5568;
-  margin: 1rem 1.5rem 1.5rem 1.5rem;
-  font-weight: 600;
+  font-size: 11px;
+  color: #666666;
+  margin: 4px 0 0 0;
+  font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 4px;
 }
 
-.rating::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
-  border-radius: 50%;
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 11px;
+  margin-left: 2px;
 }
 `,
         language: 'css',
