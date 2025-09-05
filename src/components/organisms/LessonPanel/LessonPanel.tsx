@@ -1,5 +1,6 @@
 import React from 'react'
 import TabGroup from '@/components/molecules/TabGroup'
+import BrowserFrame from '@/components/molecules/BrowserFrame'
 
 interface LessonPanelProps {
   lessonContent: React.ReactNode
@@ -25,14 +26,7 @@ const LessonPanel: React.FC<LessonPanelProps> = ({
     {
       id: 'preview',
       label: 'Preview',
-      content: (
-        <div className="h-full">
-          <div className="border-b border-gray-200 bg-gray-100 p-3">
-            <p className="text-sm text-gray-700">あなたのコードの実行結果</p>
-          </div>
-          <div className="h-[calc(100%-3rem)]">{previewContent}</div>
-        </div>
-      ),
+      content: <BrowserFrame>{previewContent}</BrowserFrame>,
     },
   ]
 
