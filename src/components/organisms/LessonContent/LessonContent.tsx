@@ -32,6 +32,19 @@ export default function LessonContent({
     setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
   }
 
+  // 全ステップの解答コードを一度に適用
+  const applyAllSolutions = () => {
+    if (!onApplyCode) return
+
+    steps.forEach((step) => {
+      if (step.solutionCodes && step.solutionCodes.length > 0) {
+        step.solutionCodes.forEach((solution) => {
+          onApplyCode(solution.solutionTargetFile, solution.code)
+        })
+      }
+    })
+  }
+
   return (
     <div className="prose max-w-none">
       {/* レッスンタイトル */}
@@ -40,32 +53,46 @@ export default function LessonContent({
           {/* 背景グラデーションエフェクト */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 blur-2xl" />
 
-          {/* タイトルコンテナ */}
-          <div className="relative inline-block">
-            <div className="relative flex items-center gap-3 pr-6 pb-2">
-              {/* Favicon */}
-              <img src="/favicon.svg" alt="React Logo" className="h-10 w-10 md:h-12 md:w-12" />
+          {/* タイトルコンテナとデバッグボタン */}
+          <div className="relative flex items-start justify-between">
+            {/* タイトルコンテナ */}
+            <div className="relative inline-block">
+              <div className="relative flex items-center gap-3 pr-6 pb-2">
+                {/* Favicon */}
+                <img src="/favicon.svg" alt="React Logo" className="h-10 w-10 md:h-12 md:w-12" />
 
-              {/* レッスン番号 */}
-              {lessonNumber && (
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-gray-500 md:text-base">
-                    LESSON {lessonNumber}
+                {/* レッスン番号 */}
+                {lessonNumber && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-500 md:text-base">
+                      LESSON {lessonNumber}
+                    </span>
+                    <span className="text-gray-400">|</span>
+                  </div>
+                )}
+
+                {/* タイトル */}
+                <h1 className="text-2xl font-bold md:text-3xl">
+                  <span className="animate-gradient bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    {lessonTitle}
                   </span>
-                  <span className="text-gray-400">|</span>
-                </div>
-              )}
+                </h1>
+              </div>
 
-              {/* タイトル */}
-              <h1 className="text-2xl font-bold md:text-3xl">
-                <span className="animate-gradient bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  {lessonTitle}
-                </span>
-              </h1>
+              {/* 下線 - アイコンとタイトル全体にかかる */}
+              <span className="absolute right-0 bottom-0 left-0 h-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
             </div>
 
-            {/* 下線 - アイコンとタイトル全体にかかる */}
-            <span className="absolute right-0 bottom-0 left-0 h-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+            {/* デバッグボタン */}
+            {onApplyCode && (
+              <button
+                onClick={applyAllSolutions}
+                className="mt-2 flex cursor-pointer items-center gap-2 rounded-lg border-2 border-orange-400 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-600 transition-all hover:bg-orange-100 hover:shadow-md"
+                title="全ステップの解答コードを一度に適用します"
+              >
+                Debug
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -105,7 +132,7 @@ export default function LessonContent({
 
               {/* Tips ボタン */}
               {step.tips && step.tips.length > 0 && (
-                <div className="relative flex justify-end mt-1">
+                <div className="relative mt-1 flex justify-end">
                   <div
                     className="inline-block"
                     onMouseEnter={() => setShowTips((prev) => ({ ...prev, [index]: true }))}
@@ -121,7 +148,9 @@ export default function LessonContent({
                       <div className="absolute right-0 bottom-full z-50 mb-2 w-[500px] max-w-[95vw] rounded-lg border border-purple-200 bg-white shadow-lg">
                         <div className="rounded-lg border-l-4 border-purple-400 bg-purple-50 p-4">
                           <div className="mb-3 flex items-center gap-2">
-                            <span className="text-base font-semibold text-purple-600">💡 {step.tipsTitle || 'Tips'}</span>
+                            <span className="text-base font-semibold text-purple-600">
+                              💡 {step.tipsTitle || 'Tips'}
+                            </span>
                           </div>
                           <ul className="space-y-2 text-base text-gray-700">
                             {step.tips.map((tip, tipIndex) => (
@@ -274,6 +303,24 @@ export default function LessonContent({
                   </>
                 )}
               </button>
+              
+              {/* 全てコードに反映ボタン（解答例表示時かつ複数の解答コードがある場合のみ） */}
+              {showSolutions[index] && 
+               step.solutionCodes && 
+               step.solutionCodes.length > 1 && 
+               onApplyCode && (
+                <button
+                  onClick={() => {
+                    step.solutionCodes?.forEach((solution) => {
+                      onApplyCode(solution.solutionTargetFile, solution.code)
+                    })
+                  }}
+                  className="flex cursor-pointer items-center gap-2 rounded bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-600"
+                >
+                  全てコードに反映
+                  <IntegrationInstructionsIcon fontSize="small" />
+                </button>
+              )}
             </div>
 
             {/* 解答例表示 */}
