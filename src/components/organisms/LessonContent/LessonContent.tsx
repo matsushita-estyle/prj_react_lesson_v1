@@ -31,136 +31,11 @@ export default function LessonContent({
     setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
   }
 
-  const renderMarkdownText = (text: string) => {
-    const lines = text.trim().split('\n')
-    const elements: React.ReactNode[] = []
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i]
-
-      if (line.startsWith('# ')) {
-        elements.push(
-          <div key={i} className="relative mt-6 mb-5 overflow-hidden">
-            {/* 背景グラデーションエフェクト */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 blur-2xl" />
-
-            {/* タイトルコンテナ */}
-            <div className="relative">
-              <h1 className="inline-block text-2xl font-bold md:text-3xl">
-                <span className="relative inline-block pb-2">
-                  <span className="animate-gradient bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    {line.slice(2)}
-                  </span>
-                  {/* 下線 */}
-                  <span className="absolute right-0 bottom-0 left-0 h-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-                </span>
-              </h1>
-            </div>
-          </div>
-        )
-      } else if (line.startsWith('## ')) {
-        const title = line.slice(3)
-        if (title.includes('ハンズオンタスク') || title.includes('課題')) {
-          elements.push(
-            <div key={i} className="relative mt-5 mb-3">
-              <h2 className="inline-block text-lg font-semibold">
-                <span className="flex items-center gap-2">
-                  <span className="animate-bounce">🎯</span>
-                  <span className="relative inline-block pb-1.5">
-                    <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
-                      {title}
-                    </span>
-                    <span className="absolute right-0 bottom-0 left-0 h-0.5 rounded-full bg-gradient-to-r from-green-400 to-teal-400" />
-                  </span>
-                </span>
-              </h2>
-            </div>
-          )
-        } else {
-          elements.push(
-            <div key={i} className="relative mt-5 mb-3">
-              <h2 className="inline-block text-lg font-semibold text-gray-800">
-                <span className="relative inline-block pb-1.5">
-                  {title}
-                  <span className="absolute right-0 bottom-0 left-0 h-0.5 rounded-full bg-gradient-to-r from-gray-400 to-gray-300" />
-                </span>
-              </h2>
-            </div>
-          )
-        }
-      } else if (line.startsWith('### ')) {
-        elements.push(
-          <div key={i} className="relative mt-4 mb-2">
-            <h3 className="inline-block text-base font-medium text-gray-700">
-              <span className="relative flex items-center gap-2">
-                <span className="inline-block h-4 w-1 rounded-full bg-gradient-to-b from-blue-500 to-purple-500" />
-                <span className="relative inline-block pb-1">
-                  {line.slice(4)}
-                  <span className="absolute right-0 bottom-0 left-0 h-0.5 rounded-full bg-gray-300" />
-                </span>
-              </span>
-            </h3>
-          </div>
-        )
-      } else if (line.match(/^\d+\./)) {
-        const listItems = []
-        let j = i
-        while (j < lines.length && lines[j].match(/^\d+\./)) {
-          listItems.push(lines[j].replace(/^\d+\.\s*/, ''))
-          j++
-        }
-
-        elements.push(
-          <div key={i} className="mb-4 border-l-4 border-green-400 bg-green-50 p-4">
-            <h4 className="mb-2 font-medium text-green-800">実装タスク</h4>
-            <ol className="space-y-2">
-              {listItems.map((item, idx) => (
-                <li key={idx} className="flex items-start text-green-700">
-                  <span className="mr-2 font-bold">{idx + 1}.</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        )
-        i = j - 1
-      } else if (line.startsWith('- ')) {
-        const listItems = []
-        let j = i
-        while (j < lines.length && lines[j].startsWith('- ')) {
-          listItems.push(lines[j].slice(2))
-          j++
-        }
-
-        elements.push(
-          <ul key={i} className="mb-4 list-disc pl-5 text-gray-700">
-            {listItems.map((item, idx) => (
-              <li key={idx} className="mb-1">
-                {item}
-              </li>
-            ))}
-          </ul>
-        )
-        i = j - 1
-      } else if (line.trim() === '') {
-        continue
-      } else {
-        elements.push(
-          <p key={i} className="mb-3 leading-relaxed text-gray-700">
-            {line}
-          </p>
-        )
-      }
-    }
-
-    return elements
-  }
-
   return (
     <div className="prose max-w-none">
       {/* レッスンタイトル */}
       {lessonTitle && (
-        <div className="relative mt-2 mb-4 overflow-hidden">
+        <div className="relative mt-2 overflow-hidden">
           {/* 背景グラデーションエフェクト */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 blur-2xl" />
 
@@ -195,7 +70,14 @@ export default function LessonContent({
       )}
 
       {/* 全体の説明 */}
-      {taskDescription && <div className="mt-8 mb-8">{renderMarkdownText(taskDescription)}</div>}
+      {taskDescription && (
+        <div
+          className="mb-8 leading-relaxed whitespace-pre-line text-gray-700"
+          style={{ letterSpacing: '-0.02em' }}
+        >
+          {taskDescription}
+        </div>
+      )}
 
       {/* 全ステップを縦に表示 */}
       <div className="space-y-8">
