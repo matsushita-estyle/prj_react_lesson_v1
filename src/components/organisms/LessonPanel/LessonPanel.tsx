@@ -15,24 +15,20 @@ const LessonPanel: React.FC<LessonPanelProps> = ({
   const tabs = [
     {
       id: 'lesson',
-      label: 'レッスン',
+      label: 'Lesson',
       content: (
-        <div className="p-6 h-full overflow-y-auto">
-          <div className="max-w-none">
-            {lessonContent}
-          </div>
+        <div className="h-full overflow-y-auto p-6">
+          <div className="max-w-none">{lessonContent}</div>
         </div>
       ),
     },
     {
       id: 'preview',
-      label: 'プレビュー',
+      label: 'Preview',
       content: (
         <div className="h-full">
-          <div className="p-3 bg-gray-100 border-b border-gray-200">
-            <p className="text-sm text-gray-700">
-              あなたのコードの実行結果
-            </p>
+          <div className="border-b border-gray-200 bg-gray-100 p-3">
+            <p className="text-sm text-gray-700">あなたのコードの実行結果</p>
           </div>
           <div className="h-[calc(100%-3rem)]">{previewContent}</div>
         </div>
