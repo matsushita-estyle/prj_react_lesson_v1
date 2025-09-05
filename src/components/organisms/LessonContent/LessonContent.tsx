@@ -87,11 +87,13 @@ export default function LessonContent({
             className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
           >
             {/* ステップヘッダー */}
-            <div className="mb-4 flex items-center">
-              <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 font-bold text-white">
-                {step.stepNumber}
+            <div className="mb-6">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center rounded-lg bg-gradient-to-r from-indigo-500 to-blue-600 px-6 py-1.5 shadow-sm">
+                  <span className="text-base font-semibold text-white">Step {step.stepNumber}</span>
+                </div>
+                <h2 className="text-xl font-semibold text-gray-800">{step.title}</h2>
               </div>
-              <h2 className="text-xl font-bold text-gray-900">{step.title}</h2>
             </div>
 
             {/* 課題内容 */}
