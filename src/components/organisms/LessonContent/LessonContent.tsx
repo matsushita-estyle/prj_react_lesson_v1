@@ -160,7 +160,7 @@ export default function LessonContent({
     <div className="prose max-w-none">
       {/* レッスンタイトル */}
       {lessonTitle && (
-        <div className="relative mt-2 mb-6 overflow-hidden">
+        <div className="relative mt-2 mb-4 overflow-hidden">
           {/* 背景グラデーションエフェクト */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 blur-2xl" />
 
@@ -195,7 +195,7 @@ export default function LessonContent({
       )}
 
       {/* 全体の説明 */}
-      {taskDescription && <div className="mb-8">{renderMarkdownText(taskDescription)}</div>}
+      {taskDescription && <div className="mt-8 mb-8">{renderMarkdownText(taskDescription)}</div>}
 
       {/* 全ステップを縦に表示 */}
       <div className="space-y-8">
