@@ -1,4 +1,4 @@
-import { Lesson, SolutionCode } from '@/lib/types/lesson';
+import { Lesson, SolutionCode } from '@/lib/types/lesson'
 
 export const chapter1Lesson3: Lesson = {
   id: 'chapter1-lesson3',
@@ -163,7 +163,7 @@ const App = () => {
   )
 }
 
-export default App`
+export default App`,
       },
       solutionCodes: [
         {
@@ -242,7 +242,7 @@ const App = () => {
   )
 }
 
-export default App`
+export default App`,
       },
       solutionCodes: [
         {
@@ -335,7 +335,7 @@ const App = () => {
   )
 }
 
-export default App`
+export default App`,
       },
       solutionCodes: [
         {
@@ -380,11 +380,7 @@ export default App`,
         },
       ] as SolutionCode[],
       validation: {
-        includes: [
-          '{price}',
-          '{price - price * discountRate}',
-          "import './styles.css'",
-        ],
+        includes: ['{price}', '{price - price * discountRate}', "import './styles.css'"],
       },
     },
     {
@@ -449,7 +445,7 @@ const App = () => {
   )
 }
 
-export default App`
+export default App`,
       },
       solutionCodes: [
         {
@@ -583,7 +579,7 @@ const App = () => {
   )
 }
 
-export default App`
+export default App`,
       },
       solutionCodes: [
         {
@@ -694,7 +690,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
 }
 
-/* ZOZOTOWNスタイルの商品カード */
+/* 商品カード */
 .product-card {
   width: 220px;
   margin: 0;
@@ -831,4 +827,4 @@ body {
 
   previousLessonId: 'chapter1-lesson2',
   nextLessonId: 'chapter1-lesson4',
-};
+}

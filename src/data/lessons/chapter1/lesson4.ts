@@ -1178,7 +1178,7 @@ body {
   max-width: 1200px;
 }
 
-/* ZOZOTOWNスタイルの商品カード */
+/* 商品カード */
 .product-card {
   width: 200px;
   margin: 0;
