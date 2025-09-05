@@ -26,6 +26,7 @@ export default function LessonContent({
 }: LessonContentProps) {
   const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>({})
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null)
+  const [showTips, setShowTips] = useState<Record<number, boolean>>({})
 
   const toggleSolution = (stepIndex: number) => {
     setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
@@ -97,8 +98,45 @@ export default function LessonContent({
             </div>
 
             {/* 課題内容 */}
-            <div className="mb-4 rounded-lg border-l-4 border-blue-400 bg-blue-50 p-4">
-              <p className="whitespace-pre-line text-gray-700">{step.instruction}</p>
+            <div className="mb-4">
+              <div className="rounded-lg border-l-4 border-blue-400 bg-blue-50 p-4">
+                <p className="whitespace-pre-line text-gray-700">{step.instruction}</p>
+              </div>
+
+              {/* Tips ボタン */}
+              {step.tips && step.tips.length > 0 && (
+                <div className="relative flex justify-end mt-1">
+                  <div
+                    className="inline-block"
+                    onMouseEnter={() => setShowTips((prev) => ({ ...prev, [index]: true }))}
+                    onMouseLeave={() => setShowTips((prev) => ({ ...prev, [index]: false }))}
+                  >
+                    <div className="flex cursor-help items-center gap-1 rounded-full border border-purple-200 bg-white px-2 py-1 text-xs text-purple-600 shadow-sm transition-colors hover:bg-white hover:text-purple-800">
+                      💡
+                      <span className="hidden sm:inline">{step.tipsTitle || 'Tips'}</span>
+                    </div>
+
+                    {/* Tips ポップオーバー */}
+                    {showTips[index] && (
+                      <div className="absolute right-0 bottom-full z-50 mb-2 w-[500px] max-w-[95vw] rounded-lg border border-purple-200 bg-white shadow-lg">
+                        <div className="rounded-lg border-l-4 border-purple-400 bg-purple-50 p-4">
+                          <div className="mb-3 flex items-center gap-2">
+                            <span className="text-base font-semibold text-purple-600">💡 {step.tipsTitle || 'Tips'}</span>
+                          </div>
+                          <ul className="space-y-2 text-base text-gray-700">
+                            {step.tips.map((tip, tipIndex) => (
+                              <li key={tipIndex} className="flex items-start gap-3">
+                                <span className="font-bold text-purple-500">{tipIndex + 1}.</span>
+                                <span>{tip}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* 初期コード（あれば） */}

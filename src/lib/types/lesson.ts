@@ -9,6 +9,8 @@ export interface LessonStep {
   title: string
   instruction: string
   hint?: string
+  tips?: string[]  // 学習のヒントや補足説明
+  tipsTitle?: string  // tipsのタイトル
   initialCode?: string
   solutionCodes?: SolutionCode[]  // 複数のソリューションコード
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット

@@ -169,9 +169,15 @@ const Footer = () => {
   steps: [
     {
       stepNumber: 1,
-      title: 'シンプルなコンポーネントを作ろう',
-      instruction: `Reactの第一歩として、シンプルなテキスト表示から始めましょう。
+      title: 'シンプルなテキストを表示しよう',
+      instruction: `最初のステップとして、シンプルなテキスト表示から始めましょう。
 Appコンポーネントの中で「こんにちは」というテキストを表示してみます。`,
+      tips: [
+        'タグとは、HTMLやJSXで使う「要素を囲む記号」のことです',
+        '例：`<div>内容</div>` のように、`<>`と`</>`で内容を囲みます',
+        'ブラウザに「この部分はどんな意味か」を伝える役割があります',
+      ],
+      tipsTitle: 'タグとは？',
       hint: 'divタグの中に「こんにちは」と書くだけでOKです',
       initialStepFiles: {
         'App.jsx': `const App = () => {
@@ -238,7 +244,8 @@ export default App`,
     {
       stepNumber: 3,
       title: '複数の要素を表示しよう',
-      instruction: `複数の要素を返すときは、必ず1つの親要素で包む必要があります。
+      instruction: `複数のタグを表示する時は、全体を1つのdivタグで囲む必要があります。
+これは、JSXでは「1つのコンテナの中に複数の要素を入れる」というルールがあるためです。
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
       hint: 'divタグで全体を包み、その中にh1とpタグを入れます',
       initialStepFiles: {
@@ -284,12 +291,22 @@ export default App`,
     },
     {
       stepNumber: 4,
-      title: 'クラス名を追加してスタイリングの準備をしよう',
-      instruction: `次に、classNameを使ってクラス名を追加してみましょう。
-divタグに「container」、h1タグに「title」、pタグに「description」というクラス名を追加してください。
+      title: 'クラス名を追加してスタイルを適用しよう',
+      instruction: `今度は、CSSでスタイルを付けるためにclassNameを追加しましょう。
 
-今度は、CSSを適用するためのインポート文も追加する必要があります！
-ファイルの先頭に \`import './styles.css'\` を追加してスタイルを読み込みましょう。`,
+各タグにクラス名を設定してください：
+・divタグに「container」
+・h1タグに「title」  
+・pタグに「description」
+
+また、CSSファイルを使用するために、
+ファイルの先頭に \`import './styles.css'\` を追加してスタイルを読み込む必要があります。`,
+      tips: [
+        'styles.cssファイルに、各クラス名（.container、.titleなど）のスタイルが定義されています',
+        'classNameで指定したクラス名と、CSSファイルのクラス名が一致すると、スタイルが適用されます',
+        'import文でCSSファイルを読み込むことで、ReactがスタイルをWebページに反映してくれます',
+      ],
+      tipsTitle: 'なぜCSSが適用されるの？',
       hint: 'JSXではclassではなくclassNameを使います。また、ファイルの先頭にimport文も忘れずに！',
       initialStepFiles: {
         'App.jsx': `const App = () => {
