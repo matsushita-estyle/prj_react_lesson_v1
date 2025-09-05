@@ -169,7 +169,7 @@ const Footer = () => {
   steps: [
     {
       stepNumber: 1,
-      title: 'シンプルなテキストを表示しよう',
+      title: 'シンプルなテキストを表示しよう！',
       instruction: `最初のステップとして、シンプルなテキスト表示から始めましょう。
 Appコンポーネントの中で「こんにちは」というテキストを表示してみます。`,
       tips: [
@@ -208,7 +208,7 @@ export default App`,
     },
     {
       stepNumber: 2,
-      title: '見出しタグを使ってみよう',
+      title: '見出しタグを使ってみよう！',
       instruction: `次は、h1タグを使って「ようこそReactへ！」という見出しを作りましょう。
 h1タグは大きな見出しを表示するためのタグです。`,
       initialStepFiles: {
@@ -241,7 +241,7 @@ export default App`,
     },
     {
       stepNumber: 3,
-      title: '複数の要素を表示しよう',
+      title: '複数の要素を表示しよう！',
       instruction: `複数のタグを表示する時は、全体を1つのdivタグで囲む必要があります。
 これは、JSXでは「1つのコンテナの中に複数の要素を入れる」というルールがあるためです。
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
@@ -288,7 +288,7 @@ export default App`,
     },
     {
       stepNumber: 4,
-      title: 'クラス名を追加してスタイルを適用しよう',
+      title: 'クラス名を追加してスタイルを適用しよう！',
       instruction: `今度は、CSSでスタイルを付けるためにclassNameを追加しましょう。
 
 各タグにクラス名を設定してください：
@@ -353,7 +353,7 @@ export default App`,
     },
     {
       stepNumber: 5,
-      title: '画像を表示しよう',
+      title: '画像を表示しよう！',
       instruction: `画像を表示するimgタグを追加しましょう。
 
 imgタグはsrc属性で画像のパスを指定し、JSXでは<img />のように最後に/を付けて閉じます。
