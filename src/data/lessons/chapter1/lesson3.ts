@@ -150,7 +150,8 @@ const brandName = "TechGear";`,
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import './styles.css'
+        'App.jsx': {
+          content: `import './styles.css'
 
 const App = () => {
   // ここに商品名とブランド名の変数を定義してください
@@ -171,6 +172,146 @@ const App = () => {
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* 全体を中央揃えするためのコンテナ */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* 商品カード */
+.product-card {
+  width: 220px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 12px;
+}
+
+.brand-name {
+  font-size: 12px;
+  color: #333333;
+  margin: 8px 0 4px 0;
+  font-weight: 400;
+  line-height: 1.4;
+  height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 8px 0;
+  letter-spacing: 0;
+  line-height: 1.5;
+  height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 12px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.rating {
+  font-size: 11px;
+  color: #666666;
+  margin: 4px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 11px;
+  margin-left: 2px;
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {
@@ -236,7 +377,8 @@ const altText = "スマートウォッチの商品画像";`,
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import './styles.css'
+        'App.jsx': {
+          content: `import './styles.css'
 
 const App = () => {
   const productName = "スマートウォッチ";
@@ -260,6 +402,146 @@ const App = () => {
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* 全体を中央揃えするためのコンテナ */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* 商品カード */
+.product-card {
+  width: 220px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 12px;
+}
+
+.brand-name {
+  font-size: 12px;
+  color: #333333;
+  margin: 8px 0 4px 0;
+  font-weight: 400;
+  line-height: 1.4;
+  height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 8px 0;
+  letter-spacing: 0;
+  line-height: 1.5;
+  height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 12px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.rating {
+  font-size: 11px;
+  color: #666666;
+  margin: 4px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 11px;
+  margin-left: 2px;
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {
@@ -352,7 +634,8 @@ const discountBadge = Math.round(discountRate * 100) + '%OFF';`,
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import './styles.css'
+        'App.jsx': {
+          content: `import './styles.css'
 
 const App = () => {
   const productName = "スマートウォッチ";
@@ -384,6 +667,146 @@ const App = () => {
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* 全体を中央揃えするためのコンテナ */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* 商品カード */
+.product-card {
+  width: 220px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 12px;
+}
+
+.brand-name {
+  font-size: 12px;
+  color: #333333;
+  margin: 8px 0 4px 0;
+  font-weight: 400;
+  line-height: 1.4;
+  height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 8px 0;
+  letter-spacing: 0;
+  line-height: 1.5;
+  height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 12px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.rating {
+  font-size: 11px;
+  color: #666666;
+  margin: 4px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 11px;
+  margin-left: 2px;
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {
@@ -475,7 +898,8 @@ const reviewCount = 128;`,
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import './styles.css'
+        'App.jsx': {
+          content: `import './styles.css'
 
 const App = () => {
   const productName = "スマートウォッチ";
@@ -514,6 +938,146 @@ const App = () => {
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* 全体を中央揃えするためのコンテナ */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* 商品カード */
+.product-card {
+  width: 220px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 12px;
+}
+
+.brand-name {
+  font-size: 12px;
+  color: #333333;
+  margin: 8px 0 4px 0;
+  font-weight: 400;
+  line-height: 1.4;
+  height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 8px 0;
+  letter-spacing: 0;
+  line-height: 1.5;
+  height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 12px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.rating {
+  font-size: 11px;
+  color: #666666;
+  margin: 4px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 11px;
+  margin-left: 2px;
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {
@@ -642,7 +1206,8 @@ const getStarRating = (rating) => {
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import './styles.css'
+        'App.jsx': {
+          content: `import './styles.css'
 
 const App = () => {
   
@@ -676,6 +1241,146 @@ const App = () => {
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* 全体を中央揃えするためのコンテナ */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* 商品カード */
+.product-card {
+  width: 220px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 12px;
+}
+
+.brand-name {
+  font-size: 12px;
+  color: #333333;
+  margin: 8px 0 4px 0;
+  font-weight: 400;
+  line-height: 1.4;
+  height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 8px 0;
+  letter-spacing: 0;
+  line-height: 1.5;
+  height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 12px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.rating {
+  font-size: 11px;
+  color: #666666;
+  margin: 4px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 11px;
+  margin-left: 2px;
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {

@@ -226,18 +226,23 @@ export default function LessonContent({
               <div className="mb-4">
                 {/* 新しいinitialStepFilesを優先的に表示 */}
                 {step.initialStepFiles &&
-                  Object.entries(step.initialStepFiles).map(([fileName, fileContent]) => (
-                    <div key={fileName} className="mb-2">
-                      <h4 className="mb-1 text-xs font-semibold text-gray-500">{fileName}</h4>
-                      <div className="overflow-hidden rounded-lg border border-gray-300">
-                        <div className="bg-gray-100 p-4">
-                          <pre className="overflow-x-auto text-xs text-gray-700">
-                            <code>{fileContent}</code>
-                          </pre>
+                  Object.entries(step.initialStepFiles)
+                    .filter(([, fileContent]) => {
+                      // string の場合は表示、StepFile の場合は isVisible をチェック
+                      return typeof fileContent === 'string' || fileContent.isVisible !== false
+                    })
+                    .map(([fileName, fileContent]) => (
+                      <div key={fileName} className="mb-2">
+                        <h4 className="mb-1 text-xs font-semibold text-gray-500">{fileName}</h4>
+                        <div className="overflow-hidden rounded-lg border border-gray-300">
+                          <div className="bg-gray-100 p-4">
+                            <pre className="overflow-x-auto text-xs text-gray-700">
+                              <code>{typeof fileContent === 'string' ? fileContent : fileContent.content}</code>
+                            </pre>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
 
                 {/* 後方互換性のためinitialFilesもサポート */}
                 {!step.initialStepFiles &&

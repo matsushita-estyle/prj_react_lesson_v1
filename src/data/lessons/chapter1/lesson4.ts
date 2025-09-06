@@ -203,7 +203,8 @@ export default App`,
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import './styles.css'
+        'App.jsx': {
+          content: `import './styles.css'
 
 const App = () => {
   const getStarRating = (rating) => {
@@ -251,6 +252,199 @@ const App = () => {
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* 全体の基本設定 */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* app-containerがある場合は通常のレイアウト */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* 商品カード */
+.product-card {
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 0 10px 10px 10px;
+}
+
+.brand-name {
+  font-size: 11px;
+  color: #333333;
+  margin: 6px 0 3px 0;
+  font-weight: 400;
+  line-height: 1.3;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 6px 0;
+  letter-spacing: 0;
+  line-height: 1.4;
+  height: 34px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-size: 11px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.rating {
+  font-size: 10px;
+  color: #666666;
+  margin: 3px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 10px;
+  margin-left: 1px;
+}
+
+/* アプリ全体のレイアウト */
+.app-container {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.category-path {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.product-grid {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: start;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 416px; /* 200px × 2 + gap 16px = 416px */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .product-card {
+    width: 160px;
+  }
+  
+  .product-grid {
+    gap: 12px;
+  }
+  
+  .app-container {
+    padding: 16px;
+  }
+  
+  .app-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {
@@ -372,7 +566,8 @@ export default ProductImage`,
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import ProductCard from './ProductCard'
+        'App.jsx': {
+          content: `import ProductCard from './ProductCard'
 
 const App = () => {
   return (
@@ -383,7 +578,10 @@ const App = () => {
 }
 
 export default App`,
-        'ProductCard.jsx': `import './styles.css'
+          isVisible: false,
+        },
+        'ProductCard.jsx': {
+          content: `import './styles.css'
 
 const ProductCard = () => {
   const getStarRating = (rating) => {
@@ -431,7 +629,203 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-        'ProductImage.jsx': `// ここにProductImageコンポーネントを作成してください`,
+          isVisible: true,
+        },
+        'ProductImage.jsx': {
+          content: `// ここにProductImageコンポーネントを作成してください`,
+          isVisible: false,
+        },
+        'styles.css': {
+          content: `/* 全体の基本設定 */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* app-containerがある場合は通常のレイアウト */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* 商品カード */
+.product-card {
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 0 10px 10px 10px;
+}
+
+.brand-name {
+  font-size: 11px;
+  color: #333333;
+  margin: 6px 0 3px 0;
+  font-weight: 400;
+  line-height: 1.3;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 6px 0;
+  letter-spacing: 0;
+  line-height: 1.4;
+  height: 34px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-size: 11px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.rating {
+  font-size: 10px;
+  color: #666666;
+  margin: 3px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 10px;
+  margin-left: 1px;
+}
+
+/* アプリ全体のレイアウト */
+.app-container {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.category-path {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.product-grid {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: start;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 416px; /* 200px × 2 + gap 16px = 416px */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .product-card {
+    width: 160px;
+  }
+  
+  .product-grid {
+    gap: 12px;
+  }
+  
+  .app-container {
+    padding: 16px;
+  }
+  
+  .app-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {
@@ -564,7 +958,8 @@ export default ProductInfo`,
         },
         {
           label: '📦 ProductCardでのProductInfo使用',
-          code: `import ProductImage from './ProductImage'
+          code: `import './styles.css'
+import ProductImage from './ProductImage'
 import ProductInfo from './ProductInfo'
 
 const ProductCard = () => {
@@ -574,11 +969,14 @@ const ProductCard = () => {
       <ProductInfo />
     </div>
   )
-}`,
+}
+
+export default ProductCard`,
         },
       ],
       initialStepFiles: {
-        'App.jsx': `import ProductCard from './ProductCard'
+        'App.jsx': {
+          content: `import ProductCard from './ProductCard'
 
 const App = () => {
   return (
@@ -589,7 +987,10 @@ const App = () => {
 }
 
 export default App`,
-        'ProductCard.jsx': `import './styles.css'
+          isVisible: false,
+        },
+        'ProductCard.jsx': {
+          content: `import './styles.css'
 import ProductImage from './ProductImage'
 
 const ProductCard = () => {
@@ -630,7 +1031,10 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-        'ProductImage.jsx': `const ProductImage = () => {
+          isVisible: true,
+        },
+        'ProductImage.jsx': {
+          content: `const ProductImage = () => {
   const product = {
     imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
@@ -648,7 +1052,203 @@ export default ProductCard`,
 }
 
 export default ProductImage`,
-        'ProductInfo.jsx': `// ここにProductInfoコンポーネントを作成してください`,
+          isVisible: false,
+        },
+        'ProductInfo.jsx': {
+          content: `// ここにProductInfoコンポーネントを作成してください`,
+          isVisible: false,
+        },
+        'styles.css': {
+          content: `/* 全体の基本設定 */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* app-containerがある場合は通常のレイアウト */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* 商品カード */
+.product-card {
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 0 10px 10px 10px;
+}
+
+.brand-name {
+  font-size: 11px;
+  color: #333333;
+  margin: 6px 0 3px 0;
+  font-weight: 400;
+  line-height: 1.3;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 6px 0;
+  letter-spacing: 0;
+  line-height: 1.4;
+  height: 34px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-size: 11px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.rating {
+  font-size: 10px;
+  color: #666666;
+  margin: 3px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 10px;
+  margin-left: 1px;
+}
+
+/* アプリ全体のレイアウト */
+.app-container {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.category-path {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.product-grid {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: start;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 416px; /* 200px × 2 + gap 16px = 416px */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .product-card {
+    width: 160px;
+  }
+  
+  .product-grid {
+    gap: 12px;
+  }
+  
+  .app-container {
+    padding: 16px;
+  }
+  
+  .app-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {
@@ -715,18 +1315,167 @@ export default ProductCard`,
     },
     {
       stepNumber: 4,
-      title: 'ProductCardで分割したコンポーネントを組み合わせよう',
-      instruction: `ProductCardコンポーネントで、ProductImageとProductInfoを組み合わせて使用しましょう。
-これでコンポーネントの分割が完成します。
+      title: 'Propsでデータを管理しよう',
+      instruction: `コンポーネント分割ができました。次は、各コンポーネントにハードコーディングされているデータをProps（プロパティ）を使って外部から渡すように改善しましょう。
+
+Propsを使うことで：
+- コンポーネントの再利用性が向上
+- データの一元管理ができる
+- 異なる商品データで同じコンポーネントを使いまわせる
 
 実装する内容：
-- ProductCard.jsxでProductImageとProductInfoをimport
-- 不要になったロジックを削除
-- きれいなレイアウトコンポーネントとして完成`,
+- App.jsxで商品データを定義
+- ProductCard → ProductImage, ProductInfoへpropsでデータを渡す
+- 各コンポーネントのハードコーディングされたデータを削除`,
       copyableCode: [
         {
-          label: '🏗️ 完成したProductCardの構造',
+          label: '📦 App.jsxで商品データを定義し、複数のProductCardを表示',
+          code: `import ProductCard from './ProductCard'
+import './styles.css'
+
+const App = () => {
+  // 4つの異なる商品データを定義
+  const products = [
+    {
+      id: 1,
+      name: "スマートウォッチ",
+      brand: "TechGear",
+      price: 12000,
+      discountRate: 0.20,
+      rating: 4,
+      reviewCount: 128,
+      imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
+      altText: "スマートウォッチの商品画像"
+    },
+    {
+      id: 2,
+      name: "ワイヤレスイヤホン",
+      brand: "SoundMax",
+      price: 8000,
+      discountRate: 0.15,
+      rating: 5,
+      reviewCount: 95,
+      imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=533&fit=crop&crop=center",
+      altText: "ワイヤレスイヤホンの商品画像"
+    },
+    {
+      id: 3,
+      name: "デジタルカメラ",
+      brand: "PhotoMax",
+      price: 28000,
+      discountRate: 0.15,
+      rating: 5,
+      reviewCount: 89,
+      imageUrl: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=533&fit=crop&crop=center",
+      altText: "デジタルカメラの商品画像"
+    },
+    {
+      id: 4,
+      name: "Bluetoothスピーカー",
+      brand: "AudioWave",
+      price: 15000,
+      discountRate: 0.25,
+      rating: 5,
+      reviewCount: 203,
+      imageUrl: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=533&fit=crop&crop=center",
+      altText: "Bluetoothスピーカーの商品画像"
+    }
+  ];
+
+  return (
+    <div className="app-container">
+      <p className="category-path">All › 電化製品 › スマートデバイス</p>
+      <div className="product-grid">
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default App`,
+        },
+        {
+          label: '🔧 ProductCard.jsxをProps対応に修正',
           code: `import './styles.css'
+import ProductImage from './ProductImage'
+import ProductInfo from './ProductInfo'
+
+const ProductCard = ({ product }) => {
+  return (
+    <div className="product-card">
+      <ProductImage product={product} />
+      <ProductInfo product={product} />
+    </div>
+  )
+}
+
+export default ProductCard`,
+        },
+        {
+          label: '🖼️ ProductImage.jsxをProps対応に修正',
+          code: `const ProductImage = ({ product }) => {
+  return (
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
+  );
+}
+
+export default ProductImage`,
+        },
+        {
+          label: '📋 ProductInfo.jsxをProps対応に修正',
+          code: `const ProductInfo = ({ product }) => {
+  const getStarRating = (rating) => {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  }
+
+  const discountPercent = Math.round(product.discountRate * 100);
+  const discountedPrice = product.price - product.price * product.discountRate;
+
+  return (
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
+      <h1>{product.name}</h1>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountPercent}%OFF</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
+  );
+}
+
+export default ProductInfo`,
+        },
+      ],
+      initialStepFiles: {
+        'App.jsx': {
+          content: `import ProductCard from './ProductCard'
+
+const App = () => {
+  return (
+    <div>
+      <ProductCard />
+    </div>
+  )
+}
+
+export default App`,
+          isVisible: false,
+        },
+        'ProductCard.jsx': {
+          content: `import './styles.css'
 import ProductImage from './ProductImage'
 import ProductInfo from './ProductInfo'
 
@@ -740,62 +1489,10 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
+          isVisible: false,
         },
-      ],
-      initialStepFiles: {
-        'App.jsx': `import ProductCard from './ProductCard'
-
-const App = () => {
-  return (
-    <div>
-      <ProductCard />
-    </div>
-  )
-}
-
-export default App`,
-        'ProductCard.jsx': `import './styles.css'
-import ProductImage from './ProductImage'
-
-const ProductCard = () => {
-  const getStarRating = (rating) => {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  }
-  
-  const product = {
-    name: "スマートウォッチ",
-    brand: "TechGear",
-    price: 12000,
-    discountRate: 0.20,
-    rating: 4,
-    reviewCount: 128
-  };
-
-  const discountPercent = Math.round(product.discountRate * 100);
-  const discountedPrice = product.price - product.price * product.discountRate;
-  
-  return (
-    <div className="product-card">
-      <ProductImage />
-      <div className="product-info">
-        <p className="brand-name">{product.brand}</p>
-        <h1>{product.name}</h1>
-        <div className="price-container">
-          <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
-          <p className="price">¥{product.price.toLocaleString()}</p>
-          <span className="discount-badge">{discountPercent}%OFF</span>
-        </div>
-        <p className="rating">
-          {getStarRating(product.rating)}
-          <span className="review-count">({product.reviewCount})</span>
-        </p>
-      </div>
-    </div>
-  )
-}
-
-export default ProductCard`,
-        'ProductImage.jsx': `const ProductImage = () => {
+        'ProductImage.jsx': {
+          content: `const ProductImage = () => {
   const product = {
     imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
@@ -813,7 +1510,10 @@ export default ProductCard`,
 }
 
 export default ProductImage`,
-        'ProductInfo.jsx': `const ProductInfo = () => {
+          isVisible: false,
+        },
+        'ProductInfo.jsx': {
+          content: `const ProductInfo = () => {
   const getStarRating = (rating) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   }
@@ -848,73 +1548,159 @@ export default ProductImage`,
 }
 
 export default ProductInfo`,
-      },
-      solutionCodes: [
-        {
-          code: `import './styles.css'
-import ProductImage from './ProductImage'
-import ProductInfo from './ProductInfo'
-
-const ProductCard = () => {
-  return (
-    <div className="product-card">
-      <ProductImage />
-      <ProductInfo />
-    </div>
-  )
+          isVisible: false,
+        },
+        'styles.css': {
+          content: `/* 全体の基本設定 */
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
 }
 
-export default ProductCard`,
-          solutionTargetFile: 'react-app/ProductCard.jsx',
-          label: 'ProductCard.jsx - 完成版',
-        },
-      ] as SolutionCode[],
-      validation: {
-        includes: [
-          'import ProductImage',
-          'import ProductInfo',
-          '<ProductImage />',
-          '<ProductInfo />',
-        ],
-      },
-    },
-    {
-      stepNumber: 5,
-      title: 'コンポーネントの再利用性を確認しよう',
-      instruction: `最後に、作成したコンポーネントの再利用性を確認します。
-App.jsxで複数のProductCardを表示して、コンポーネント分割の効果を体感しましょう。
-
-実装する内容：
-- App.jsxで4つのProductCardを表示
-- 各ProductCardが独立して動作することを確認
-- レイアウトの調整`,
-      copyableCode: [
-        {
-          label: '🔄 複数のProductCardを表示',
-          code: `import ProductCard from './ProductCard'
-
-const App = () => {
-  return (
-    <div className="app-container">
-      <p className="category-path">All › 電化製品 › スマートデバイス</p>
-      <div className="product-grid">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
-    </div>
-  )
+/* app-containerがある場合は通常のレイアウト */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
 }
 
-export default App`,
-        },
-        {
-          label: '🎨 レイアウト用のCSS追加',
-          code: `.app-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1.5rem;
+/* 商品カード */
+.product-card {
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133%; /* 3:4のアスペクト比 */
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-image:hover {
+  opacity: 0.9;
+}
+
+/* 商品情報エリアの共通パディング */
+.product-info {
+  padding: 0 10px 10px 10px;
+}
+
+.brand-name {
+  font-size: 11px;
+  color: #333333;
+  margin: 6px 0 3px 0;
+  font-weight: 400;
+  line-height: 1.3;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card h1 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 6px 0;
+  letter-spacing: 0;
+  line-height: 1.4;
+  height: 34px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-size: 11px;
+  color: #999999;
+  margin: 0;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.discount-price {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: #ff3333;
+  color: white;
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.rating {
+  font-size: 10px;
+  color: #666666;
+  margin: 3px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* レビュー数表示 */
+.review-count {
+  color: #999999;
+  font-size: 10px;
+  margin-left: 1px;
+}
+
+/* アプリ全体のレイアウト */
+.app-container {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .category-path {
@@ -925,95 +1711,36 @@ export default App`,
 
 .product-grid {
   display: flex;
-  gap: 1.5rem;
-  justify-content: center;
+  gap: 16px;
+  justify-content: flex-start;
   align-items: start;
   flex-wrap: wrap;
-  padding: 1.5rem 1rem;
-  max-width: fit-content;
+  padding: 0;
   margin: 0 auto;
-}`,
-        },
-      ],
-      initialStepFiles: {
-        'App.jsx': `import ProductCard from './ProductCard'
-
-const App = () => {
-  return (
-    <div>
-      <ProductCard />
-    </div>
-  )
+  max-width: 416px; /* 200px × 2 + gap 16px = 416px */
 }
 
-export default App`,
-        'ProductCard.jsx': `import './styles.css'
-import ProductImage from './ProductImage'
-import ProductInfo from './ProductInfo'
-
-const ProductCard = () => {
-  return (
-    <div className="product-card">
-      <ProductImage />
-      <ProductInfo />
-    </div>
-  )
-}
-
-export default ProductCard`,
-        'ProductImage.jsx': `const ProductImage = () => {
-  const product = {
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
-    altText: "スマートウォッチの商品画像"
-  };
-
-  return (
-    <div className="product-image-container">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-    </div>
-  );
-}
-
-export default ProductImage`,
-        'ProductInfo.jsx': `const ProductInfo = () => {
-  const getStarRating = (rating) => {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .product-card {
+    width: 160px;
   }
   
-  const product = {
-    name: "スマートウォッチ",
-    brand: "TechGear",
-    price: 12000,
-    discountRate: 0.20,
-    rating: 4,
-    reviewCount: 128
-  };
-
-  const discountPercent = Math.round(product.discountRate * 100);
-  const discountedPrice = product.price - product.price * product.discountRate;
-
-  return (
-    <div className="product-info">
-      <p className="brand-name">{product.brand}</p>
-      <h1>{product.name}</h1>
-      <div className="price-container">
-        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
-        <p className="price">¥{product.price.toLocaleString()}</p>
-        <span className="discount-badge">{discountPercent}%OFF</span>
-      </div>
-      <p className="rating">
-        {getStarRating(product.rating)}
-        <span className="review-count">({product.reviewCount})</span>
-      </p>
-    </div>
-  );
-}
-
-export default ProductInfo`,
+  .product-grid {
+    gap: 12px;
+  }
+  
+  .app-container {
+    padding: 16px;
+  }
+  
+  .app-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}`,
+          isVisible: false,
+        },
       },
       solutionCodes: [
         {

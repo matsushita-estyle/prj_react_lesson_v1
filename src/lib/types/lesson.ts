@@ -28,6 +28,11 @@ export interface AddFileButton {
   initialContent?: string  // ファイル作成時の初期内容（空の場合はundefined）
 }
 
+export interface StepFile {
+  content: string
+  isVisible?: boolean  // ファイルを表示するかどうか（デフォルト: true）
+}
+
 export interface LessonStep {
   stepNumber: number
   title: string
@@ -40,7 +45,7 @@ export interface LessonStep {
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
   addFile?: AddFileButton | AddFileButton[]  // ファイル作成ボタン
   initialFiles?: Record<string, string>  // ステップごとの初期ファイル（後方互換性のため残す）
-  initialStepFiles?: Record<string, string>  // ステップごとの初期ファイル
+  initialStepFiles?: Record<string, string | StepFile>  // ステップごとの初期ファイル（文字列またはStepFile）
   defaultFile?: string  // ステップで最初に表示するファイル
   validation?: {
     includes?: string[]

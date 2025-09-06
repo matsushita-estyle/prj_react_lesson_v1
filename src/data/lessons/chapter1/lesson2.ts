@@ -149,7 +149,23 @@ line-height: 1.6;`,
         },
       ] as SolutionCode[],
       initialStepFiles: {
-        'styles.css': `/* タイトルのスタイル */
+        'App.jsx': {
+          content: `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+    </div>
+  )
+}
+
+export default App`,
+          isVisible: false,
+        },
+        'styles.css': {
+          content: `/* タイトルのスタイル */
 .title {
 /* ここにCSSを書いていきます */
 }
@@ -158,6 +174,8 @@ line-height: 1.6;`,
 .description {
 /* ここにCSSを書いていきます */
 }`,
+          isVisible: true,
+        },
       },
       defaultFile: 'styles.css',
       validation: {
@@ -256,7 +274,23 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
         },
       ] as SolutionCode[],
       initialStepFiles: {
-        'styles.css': `/* タイトルのスタイル */
+        'App.jsx': {
+          content: `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+    </div>
+  )
+}
+
+export default App`,
+          isVisible: false,
+        },
+        'styles.css': {
+          content: `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
   font-weight: 800;
@@ -277,6 +311,8 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
 .container {
 /* ここにCSSを書いていきます */
 }`,
+          isVisible: true,
+        },
       },
       defaultFile: 'styles.css',
       validation: {
@@ -406,7 +442,23 @@ animation: rotate 8s linear infinite;`,
         },
       ] as SolutionCode[],
       initialStepFiles: {
-        'styles.css': `/* タイトルのスタイル */
+        'App.jsx': {
+          content: `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+    </div>
+  )
+}
+
+export default App`,
+          isVisible: false,
+        },
+        'styles.css': {
+          content: `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
   font-weight: 800;
@@ -440,6 +492,8 @@ animation: rotate 8s linear infinite;`,
 .container img {
 /* ここにCSSを書いていきます */
 }`,
+          isVisible: true,
+        },
       },
       defaultFile: 'styles.css',
       validation: {

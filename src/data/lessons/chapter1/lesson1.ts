@@ -179,11 +179,52 @@ Appコンポーネントの中で「こんにちは」というテキストを�
       ],
       tipsTitle: 'タグとは？',
       initialStepFiles: {
-        'App.jsx': `const App = () => {
+        'App.jsx': {
+          content: `const App = () => {
   return <div>{/* ここにコードを書いてください */}</div>
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}`,
+          isVisible: false,
+        },
       },
       copyableCode: [
         {
@@ -212,11 +253,52 @@ export default App`,
       instruction: `次は、h1タグを使って「ようこそReactへ！」という見出しを作りましょう。
 h1タグは大きな見出しを表示するためのタグです。`,
       initialStepFiles: {
-        'App.jsx': `const App = () => {
+        'App.jsx': {
+          content: `const App = () => {
   return <div>こんにちは</div>
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}`,
+          isVisible: false,
+        },
       },
       copyableCode: [
         {
@@ -246,11 +328,52 @@ export default App`,
 これは、JSXでは「1つのコンテナの中に複数の要素を入れる」というルールがあるためです。
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
       initialStepFiles: {
-        'App.jsx': `const App = () => {
+        'App.jsx': {
+          content: `const App = () => {
   return <h1>ようこそReactへ！</h1>
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}`,
+          isVisible: false,
+        },
       },
       copyableCode: [
         {
@@ -305,7 +428,8 @@ export default App`,
       ],
       tipsTitle: 'なぜCSSが適用されるの？',
       initialStepFiles: {
-        'App.jsx': `const App = () => {
+        'App.jsx': {
+          content: `const App = () => {
   return (
     <div>
       <h1>React App</h1>
@@ -315,6 +439,46 @@ export default App`,
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}`,
+          isVisible: false,
+        },
       },
       copyableCode: [
         {
@@ -359,7 +523,8 @@ export default App`,
 imgタグはsrc属性で画像のパスを指定し、JSXでは<img />のように最後に/を付けて閉じます。
 これを「セルフクロージング」と呼び、間にテキストやコンポーネントが入らないタグで使います。`,
       initialStepFiles: {
-        'App.jsx': `import './styles.css'
+        'App.jsx': {
+          content: `import './styles.css'
 
 const App = () => {
   return (
@@ -371,6 +536,46 @@ const App = () => {
 }
 
 export default App`,
+          isVisible: true,
+        },
+        'styles.css': {
+          content: `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}`,
+          isVisible: false,
+        },
       },
       copyableCode: [
         {
