@@ -631,10 +631,6 @@ const ProductCard = () => {
 export default ProductCard`,
           isVisible: true,
         },
-        'ProductImage.jsx': {
-          content: `// ここにProductImageコンポーネントを作成してください`,
-          isVisible: false,
-        },
         'styles.css': {
           content: `/* 全体の基本設定 */
 body {
@@ -1052,10 +1048,6 @@ export default ProductCard`,
 }
 
 export default ProductImage`,
-          isVisible: false,
-        },
-        'ProductInfo.jsx': {
-          content: `// ここにProductInfoコンポーネントを作成してください`,
           isVisible: false,
         },
         'styles.css': {

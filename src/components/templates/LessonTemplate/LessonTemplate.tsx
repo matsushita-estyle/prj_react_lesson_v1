@@ -147,6 +147,25 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     setActiveFile(fullPath)
   }
 
+  const handleApplyStepFiles = (stepFiles: Record<string, string>) => {
+    // react-app配下にファイルパスを調整
+    const adjustedStepFiles: Record<string, string> = {}
+    Object.entries(stepFiles).forEach(([fileName, content]) => {
+      // すでにreact-app/で始まっている場合はそのまま、そうでなければreact-app/を追加
+      const fullPath = fileName.startsWith('react-app/') ? fileName : `react-app/${fileName}`
+      adjustedStepFiles[fullPath] = content
+    })
+
+    // ファイルを完全に置き換える（他のファイルは削除される）
+    setFiles(adjustedStepFiles)
+    
+    // 最初のファイルをアクティブにする
+    const firstFile = Object.keys(adjustedStepFiles)[0]
+    if (firstFile) {
+      setActiveFile(firstFile)
+    }
+  }
+
   const handleReset = () => {
     setFiles(originalFiles)
     setActiveFile(
@@ -175,6 +194,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       steps={lesson.steps}
       onApplyCode={handleApplyCode}
       onAddFile={handleAddFile}
+      onApplyStepFiles={handleApplyStepFiles}
       nextLessonId={lesson.nextLessonId}
     />
   ) : null

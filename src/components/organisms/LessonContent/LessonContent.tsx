@@ -18,6 +18,7 @@ interface LessonContentProps {
   steps: LessonStep[]
   onApplyCode?: (fileName: string, code: string) => void
   onAddFile?: (fileName: string, initialContent?: string) => void
+  onApplyStepFiles?: (stepFiles: Record<string, string>) => void
   nextLessonId?: string
 }
 
@@ -28,6 +29,7 @@ export default function LessonContent({
   steps,
   onApplyCode,
   onAddFile,
+  onApplyStepFiles,
   nextLessonId,
 }: LessonContentProps) {
   const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>({})
@@ -49,6 +51,17 @@ export default function LessonContent({
         })
       }
     })
+  }
+
+  // 指定ステップの初期状態ファイルを適用
+  const applyStepInitialFiles = (step: LessonStep) => {
+    if (!onApplyStepFiles || !step.initialStepFiles) return
+
+    const stepFiles: Record<string, string> = {}
+    Object.entries(step.initialStepFiles).forEach(([fileName, fileContent]) => {
+      stepFiles[fileName] = typeof fileContent === 'string' ? fileContent : fileContent.content
+    })
+    onApplyStepFiles(stepFiles)
   }
 
   return (
@@ -122,11 +135,24 @@ export default function LessonContent({
           >
             {/* ステップヘッダー */}
             <div className="mb-6">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center rounded-lg bg-gradient-to-r from-indigo-500 to-blue-600 px-6 py-1.5 shadow-sm">
-                  <span className="text-base font-semibold text-white">Step {step.stepNumber}</span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center rounded-lg bg-gradient-to-r from-indigo-500 to-blue-600 px-6 py-1.5 shadow-sm">
+                    <span className="text-base font-semibold text-white">Step {step.stepNumber}</span>
+                  </div>
+                  <h2 className="text-xl font-semibold text-gray-800">{step.title}</h2>
                 </div>
-                <h2 className="text-xl font-semibold text-gray-800">{step.title}</h2>
+
+                {/* 初期状態ボタン */}
+                {step.initialStepFiles && onApplyStepFiles && (
+                  <button
+                    onClick={() => applyStepInitialFiles(step)}
+                    className="flex cursor-pointer items-center gap-2 rounded-lg border-2 border-gray-400 bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-600 transition-all hover:bg-gray-100 hover:shadow-md"
+                    title="このステップの初期状態ファイルを適用します"
+                  >
+                    初期状態
+                  </button>
+                )}
               </div>
             </div>
 
