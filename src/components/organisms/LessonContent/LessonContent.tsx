@@ -6,6 +6,10 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import remarkBreaks from 'remark-breaks'
 
 interface LessonContentProps {
   lessonTitle?: string
@@ -127,7 +131,54 @@ export default function LessonContent({
             {/* 課題内容 */}
             <div className="mb-4">
               <div className="rounded-lg border-l-4 border-blue-400 bg-blue-50 p-4">
-                <p className="whitespace-pre-line text-gray-700">{step.instruction}</p>
+                {step.instruction && step.instruction.includes('```') ? (
+                  /* コードブロックがある場合はReactMarkdownを使用 */
+                  <div className="prose prose-sm max-w-none text-gray-700">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkBreaks]}
+                      components={{
+                        code({
+                          className,
+                          children,
+                          ...props
+                        }: {
+                          className?: string
+                          children?: React.ReactNode
+                          inline?: boolean
+                        }) {
+                          const match = /language-(\w+)/.exec(className || '')
+                          const isBlock = match && !props.inline
+                          return isBlock ? (
+                            <SyntaxHighlighter
+                              style={oneDark}
+                              language={match[1]}
+                              PreTag="div"
+                              customStyle={{
+                                fontSize: '14px',
+                                margin: '1rem 2rem 1rem 0',
+                                maxWidth: 'calc(100% - 2rem)',
+                              }}
+                            >
+                              {String(children).replace(/\n$/, '')}
+                            </SyntaxHighlighter>
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          )
+                        },
+                        p({ children }) {
+                          return <p className="mb-4">{children}</p>
+                        }
+                      }}
+                    >
+                      {step.instruction}
+                    </ReactMarkdown>
+                  </div>
+                ) : (
+                  /* コードブロックがない場合は従来通りの表示で改行を保持 */
+                  <p className="whitespace-pre-line text-gray-700">{step.instruction}</p>
+                )}
               </div>
 
               {/* Tips ボタン */}
@@ -303,24 +354,24 @@ export default function LessonContent({
                   </>
                 )}
               </button>
-              
+
               {/* 全てコードに反映ボタン（解答例表示時かつ複数の解答コードがある場合のみ） */}
-              {showSolutions[index] && 
-               step.solutionCodes && 
-               step.solutionCodes.length > 1 && 
-               onApplyCode && (
-                <button
-                  onClick={() => {
-                    step.solutionCodes?.forEach((solution) => {
-                      onApplyCode(solution.solutionTargetFile, solution.code)
-                    })
-                  }}
-                  className="flex cursor-pointer items-center gap-2 rounded bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-600"
-                >
-                  全てコードに反映
-                  <IntegrationInstructionsIcon fontSize="small" />
-                </button>
-              )}
+              {showSolutions[index] &&
+                step.solutionCodes &&
+                step.solutionCodes.length > 1 &&
+                onApplyCode && (
+                  <button
+                    onClick={() => {
+                      step.solutionCodes?.forEach((solution) => {
+                        onApplyCode(solution.solutionTargetFile, solution.code)
+                      })
+                    }}
+                    className="flex cursor-pointer items-center gap-2 rounded bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-600"
+                  >
+                    全てコードに反映
+                    <IntegrationInstructionsIcon fontSize="small" />
+                  </button>
+                )}
             </div>
 
             {/* 解答例表示 */}

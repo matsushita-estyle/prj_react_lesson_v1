@@ -305,21 +305,33 @@ export default App`,
 JSXの波括弧{}には、変数だけでなく計算式や関数呼び出しなど、
 様々なJavaScript式を埋め込むことができます。
 
-1. returnの前で変数を定義
-- price: 12000
-- discountRate: 0.20（20%割引）
-- discountPercent: Math.round(discountRate * 100)で割引率を整数にする
+1. JSXより前に変数を定義
+
+\`\`\`javascript
+const price = 12000;
+const discountRate = 0.20;
+const discountBadge = Math.round(discountRate * 100) + '%OFF';
+\`\`\`
 
 2. JSX内で記述
-- discount-price: 「{(price - price * discountRate).toLocaleString()}」計算式と関数を直接実行
-- price: 「{price.toLocaleString()}」toLocaleString()を直接実行
-- discount-badge: 「{discountPercent}%OFF」事前に定義した変数を直接参照
 
-変数として事前に計算しておくものと、JSX内で直接計算するものの使い分けを意識してみましょう。`,
+\`\`\`javascript
+<div className="price-container">
+  {/* 計算式と関数を直接実行 */}
+  <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
+  {/* toLocaleString()を直接実行 */}
+  <p className="price">¥{price.toLocaleString()}</p>
+  {/* 事前に定義した変数を直接参照 */}
+  <span className="discount-badge">{discountBadge}</span>
+</div>
+\`\`\`
+
+いろんなやり方がありますが、JSXより前に変数定義する方が読みやすく再利用でき、
+コンポーネントが再レンダリングされても無駄な計算を避けられるので効率的です。`,
       tips: [
         '複雑な式も波括弧内に書けます：括弧を使って計算順序を制御',
         'JSXで関数チェーンが可能：数値.toLocaleString().replace(...) のような連続処理',
-        'returnの前での変数定義は再レンダリング時の計算を効率化',
+        'JSXより前での変数定義は再レンダリング時の計算を効率化',
         'JSX内での直接計算は動的な値や一時的な処理に適している',
       ],
       tipsTitle: 'JSXでの計算式と関数の組み合わせ',
@@ -328,14 +340,14 @@ JSXの波括弧{}には、変数だけでなく計算式や関数呼び出しな
           label: '📝 価格と割引率の変数',
           code: `const price = 12000;
 const discountRate = 0.20;
-const discountPercent = Math.round(discountRate * 100);`,
+const discountBadge = Math.round(discountRate * 100) + '%OFF';`,
         },
         {
           label: '📝 価格の表示',
           code: `<div className="price-container">
   <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
   <p className="price">¥{price.toLocaleString()}</p>
-  <span className="discount-badge">{discountPercent}%OFF</span>
+  <span className="discount-badge">{discountBadge}</span>
 </div>`,
         },
       ],
@@ -386,7 +398,7 @@ const App = () => {
   
   const price = 12000;
   const discountRate = 0.20;
-  const discountPercent = Math.round(discountRate * 100);
+  const discountBadge = Math.round(discountRate * 100) + '%OFF';
   
   return (
     <div className="product-card">
@@ -403,7 +415,7 @@ const App = () => {
         <div className="price-container">
           <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
           <p className="price">¥{price.toLocaleString()}</p>
-          <span className="discount-badge">{discountPercent}%OFF</span>
+          <span className="discount-badge">{discountBadge}</span>
         </div>
       </div>
     </div>
@@ -423,8 +435,28 @@ export default App`,
       stepNumber: 4,
       title: '星評価の関数を作ろう',
       instruction: `今度は、商品の評価を星で表示する関数を作ってみましょう。
-「getStarRating」という関数を定義し、塗りつぶし星（★）と空の星（☆）でと5段階評価を表示しましょう。
-そして、評価4つ星とレビュー数を表示してください。`,
+
+関数は、決まった処理を実行して結果を返す仕組みです。
+値を受け取って何らかの処理を行い、結果を返します。
+
+関数は以下の形式で作成します：
+\`\`\`javascript
+const 関数名 = (引数) => {
+  return 関数の中身;
+}
+\`\`\`
+
+では、「getStarRating」という関数を定義し、
+塗りつぶし星（★）と空の星（☆）で5段階評価を表示しましょう。
+
+\`\`\`javascript
+const getStarRating = (rating) => {
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+\`\`\`
+
+この関数は、rating（評価数）を受け取って、その数だけ★を表示し、残りは☆で埋めて5段階評価を作ります。
+では、評価4つ星とレビュー数を表示してください。`,
       copyableCode: [
         {
           label: '📝 星評価を返す関数',
@@ -454,7 +486,7 @@ const App = () => {
   
   const price = 12000;
   const discountRate = 0.20;
-  const discountPercent = Math.round(discountRate * 100);
+  const discountBadge = Math.round(discountRate * 100) + '%OFF';
   
   // ここに星評価を返す関数を作ってください
   
@@ -473,7 +505,7 @@ const App = () => {
         <div className="price-container">
           <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
           <p className="price">¥{price.toLocaleString()}</p>
-          <span className="discount-badge">{discountPercent}%OFF</span>
+          <span className="discount-badge">{discountBadge}</span>
         </div>
         <p className="rating">{/* 星評価関数を呼び出してください */}</p>
       </div>
@@ -496,7 +528,7 @@ const App = () => {
   
   const price = 12000;
   const discountRate = 0.20;
-  const discountPercent = Math.round(discountRate * 100);
+  const discountBadge = Math.round(discountRate * 100) + '%OFF';
   
   const getStarRating = (rating) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
@@ -519,7 +551,7 @@ const App = () => {
         <div className="price-container">
           <p className="discount-price">¥{(price - price * discountRate).toLocaleString()}</p>
           <p className="price">¥{price.toLocaleString()}</p>
-          <span className="discount-badge">{discountPercent}%OFF</span>
+          <span className="discount-badge">{discountBadge}</span>
         </div>
         <p className="rating">
           {getStarRating(4)}
@@ -541,8 +573,23 @@ export default App`,
     },
     {
       stepNumber: 5,
-      title: '商品オブジェクトを完成させよう',
+      title: '商品オブジェクトをまとめよう！',
       instruction: `最後に、すべての商品情報を1つのオブジェクトにまとめてみましょう。
+
+オブジェクトにまとめることで、関連するデータを整理して管理しやすくなり、
+プロパティ名でアクセスするためコードが読みやすく、データの受け渡しも簡単になります。
+
+オブジェクトの使い方：
+\`\`\`javascript
+const product = {
+  name: "商品名",
+  price: 12000
+};
+// ドット記法でアクセス
+console.log(product.name); // "商品名"
+console.log(product.price); // 12000
+\`\`\`
+
 「product」オブジェクトを作成し、name、brand、price、discountRate、rating、reviewCount、imageUrl、altTextプロパティを持たせてください。
 そして、すべてのプロパティを使って商品カードを表示してください。`,
       copyableCode: [
@@ -559,40 +606,53 @@ export default App`,
   altText: "スマートウォッチの商品画像"
 };
 
-const discountPercent = Math.round(product.discountRate * 100);
-const discountedPrice = product.price - product.price * product.discountRate;`,
+const discountBadge = Math.round(product.discountRate * 100) + '%OFF';
+const discountedPrice = product.price - product.price * product.discountRate;
+const getStarRating = (rating) => {
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+`,
         },
         {
           label: '📝 オブジェクトのプロパティを使った表示',
-          code: `<div className="product-image-container">
-  <img 
-    className="product-image"
-    src={product.imageUrl}
-    alt={product.altText}
-  />
-</div>
-<p className="brand-name">{product.brand}</p>
-<h1>{product.name}</h1>
-<div className="price-container">
-  <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
-  <p className="price">¥{product.price.toLocaleString()}</p>
-  <span className="discount-badge">{discountPercent}%OFF</span>
-</div>
-<p className="rating">
-  {getStarRating(product.rating)}
-  <span className="review-count">({product.reviewCount})</span>
-</p>`,
+          code: `return (
+  <div className="product-card">
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
+      <h1>{product.name}</h1>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountBadge}</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
+  </div>
+)`,
         },
       ],
       initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
-  const getStarRating = (rating) => {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  }
   
   // ここにproductオブジェクトを作成してください
+
+  const discountBadge = Math.round(product.discountRate * 100) + '%OFF';
+  const discountedPrice = product.price - product.price * product.discountRate;
+  const getStarRating = (rating) => {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  } 
   
   return (
     <div className="product-card">
@@ -622,9 +682,6 @@ export default App`,
           code: `import './styles.css'
 
 const App = () => {
-  const getStarRating = (rating) => {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  }
   
   const product = {
     name: "スマートウォッチ",
@@ -637,8 +694,11 @@ const App = () => {
     altText: "スマートウォッチの商品画像"
   };
   
-  const discountPercent = Math.round(product.discountRate * 100);
+  const discountBadge = Math.round(product.discountRate * 100) + '%OFF';
   const discountedPrice = product.price - product.price * product.discountRate;
+  const getStarRating = (rating) => {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  }
   
   return (
     <div className="product-card">
@@ -655,7 +715,7 @@ const App = () => {
         <div className="price-container">
           <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
           <p className="price">¥{product.price.toLocaleString()}</p>
-          <span className="discount-badge">{discountPercent}%OFF</span>
+          <span className="discount-badge">{discountBadge}</span>
         </div>
         <p className="rating">
           {getStarRating(product.rating)}
