@@ -1,5 +1,4 @@
 import React from 'react'
-import Modal from '@/components/molecules/Modal'
 import { Lesson } from '@/lib/types/lesson'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -14,14 +13,60 @@ interface LessonMaterialModalProps {
 }
 
 const LessonMaterialModal: React.FC<LessonMaterialModalProps> = ({ isOpen, onClose, lesson }) => {
-  if (!lesson) return null
+  if (!lesson || !isOpen) return null
 
   // lessonのmaterialフィールドから教材を取得、なければデフォルトメッセージ
   const materialContent = lesson.material || '教材コンテンツが設定されていません。'
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`${lesson.title} - 教材`}>
-      <div className="prose prose-sm max-w-none">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* オーバーレイ */}
+      <div 
+        className="absolute inset-0 bg-black bg-opacity-50"
+        onClick={onClose}
+      />
+      
+      {/* モーダルコンテンツ */}
+      <div className="relative z-10 w-full max-w-4xl max-h-[80vh] bg-white rounded-lg shadow-xl">
+        {/* カスタムヘッダー */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className="relative inline-block">
+            <div className="relative flex items-center gap-3 pb-2">
+              {/* Favicon */}
+              <img src="/favicon.svg" alt="React Logo" className="h-8 w-8" />
+              
+              {/* レッスンラベル */}
+              {lesson.lessonNumber && (
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-gray-500">
+                    LESSON {lesson.lessonNumber}
+                  </span>
+                  <span className="text-gray-400">|</span>
+                </div>
+              )}
+
+              {/* タイトル */}
+              <h2 className="text-xl font-bold">
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  {lesson.title}
+                </span>
+              </h2>
+            </div>
+
+            {/* 下線 */}
+            <span className="absolute right-0 bottom-0 left-0 h-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 text-xl font-bold px-3 py-1 rounded hover:bg-gray-100 transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+        
+        {/* コンテンツ */}
+        <div className="p-6 overflow-y-auto max-h-[calc(80vh-120px)]">
+          <div className="prose prose-sm max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkBreaks, remarkGfm]}
           components={{
@@ -103,8 +148,10 @@ const LessonMaterialModal: React.FC<LessonMaterialModalProps> = ({ isOpen, onClo
         >
           {materialContent}
         </ReactMarkdown>
+          </div>
+        </div>
       </div>
-    </Modal>
+    </div>
   )
 }
 
