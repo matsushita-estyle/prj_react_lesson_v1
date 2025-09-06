@@ -15,6 +15,7 @@ interface MonacoCodeEditorProps {
   onRename?: (oldPath: string, newPath: string) => void;
   onDelete?: (path: string) => void;
   onEditorReady?: (editor: import('monaco-editor').editor.IStandaloneCodeEditor) => void;
+  defaultFileTreeOpen?: boolean;
   className?: string;
 }
 
@@ -28,10 +29,11 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   onRename,
   onDelete,
   onEditorReady,
+  defaultFileTreeOpen = false,
   className = '',
 }) => {
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
-  const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false);
+  const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(defaultFileTreeOpen);
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {

@@ -104,22 +104,34 @@ App (親コンポーネント)
 この流れで、保守性が高く再利用可能なコンポーネント設計を学んでいきましょう！`,
 
   taskDescription: `
-前のレッスンで作った商品カードを、再利用可能な小さなコンポーネントに分割していきます。
-段階的に分割作業を進めて、モジュール化されたコンポーネント設計を体験しましょう！
+前のレッスンで作った商品カードを、再利用可能なコンポーネントに分割していきます。
+少しずつ機能を切り分けて、保守しやすいコンポーネント構造を作りましょう！
   `,
 
   // 段階的な課題
   steps: [
     {
       stepNumber: 1,
-      title: 'ProductCardコンポーネントを別ファイルに分割しよう',
-      instruction: `最初のステップとして、商品カード全体を別ファイルに分割します。
-ProductCard.jsxファイルを作成し、App.jsxから商品カードの部分を移動させてください。
+      title: '商品カードコンポーネントを別ファイルに分割しよう！',
+      instruction: `最初のステップとして、商品カードを別ファイルに分割しましょう。
+現在App.jsxに書かれている商品カードのコードを、新しく作るProductCard.jsxファイルに移動させます。
 
-重要なポイント：
-- export defaultでProductCardをエクスポート
-- App.jsxでimportして使用
-- getStarRating関数も一緒に移動`,
+手順：
+1. 下の「ProductCard.jsxを作成」ボタンを押して空のファイルを作成する
+2. App.jsxから商品カードに関連するコードをコピーする
+3. ProductCardコンポーネントとしてexport defaultする
+4. App.jsxでProductCardをimportして使用する
+
+移動するコードの内容：
+- getStarRating関数（星評価を作る関数）
+- productオブジェクト（商品データ）
+- 価格計算のロジック（割引価格など）
+- 商品カード表示のJSX（<div className="product-card">から</div>まで）`,
+      addFile: {
+        fileName: 'ProductCard.jsx',
+        label: '📁 ProductCard.jsxを作成',
+        initialContent: ''
+      },
       copyableCode: [
         {
           label: '📦 ProductCard.jsxの基本構造',
@@ -133,6 +145,53 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
+        },
+        {
+          label: '⚙️ 商品カードの関数・データ',
+          code: `const getStarRating = (rating) => {
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+
+const product = {
+  name: "スマートウォッチ",
+  brand: "TechGear",
+  price: 12000,
+  discountRate: 0.20,
+  rating: 4,
+  reviewCount: 128,
+  imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=533&fit=crop&crop=center",
+  altText: "スマートウォッチの商品画像"
+};
+
+const discountPercent = Math.round(product.discountRate * 100);
+const discountedPrice = product.price - product.price * product.discountRate;`,
+        },
+        {
+          label: '🎨 商品カード表示のJSX',
+          code: `return (
+  <div className="product-card">
+    <div className="product-image-container">
+      <img 
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
+      />
+    </div>
+    <div className="product-info">
+      <p className="brand-name">{product.brand}</p>
+      <h1>{product.name}</h1>
+      <div className="price-container">
+        <p className="discount-price">¥{discountedPrice.toLocaleString()}</p>
+        <p className="price">¥{product.price.toLocaleString()}</p>
+        <span className="discount-badge">{discountPercent}%OFF</span>
+      </div>
+      <p className="rating">
+        {getStarRating(product.rating)}
+        <span className="review-count">({product.reviewCount})</span>
+      </p>
+    </div>
+  </div>
+)`,
         },
         {
           label: '📥 App.jsxでのimport文',
@@ -198,7 +257,6 @@ const App = () => {
 }
 
 export default App`,
-        'ProductCard.jsx': `// ここにProductCardコンポーネントを作成してください`,
       },
       solutionCodes: [
         {
@@ -283,6 +341,11 @@ ProductImage.jsxファイルを作成し、画像表示の責任を持たせま�
 - 商品画像を表示するProductImageコンポーネント
 - ProductCard.jsxから呼び出す
 - 画像関連のスタイルも適用`,
+      addFile: {
+        fileName: 'ProductImage.jsx',
+        label: '📁 ProductImage.jsxを作成',
+        initialContent: ''
+      },
       copyableCode: [
         {
           label: '🖼️ ProductImageコンポーネントの基本構造',
@@ -458,6 +521,11 @@ ProductInfo.jsxファイルを作成し、商品情報表示の責任を持た�
 - 商品名、価格、割引価格、評価を表示
 - getStarRating関数をProductInfo内に移動
 - ProductCard.jsxから呼び出す`,
+      addFile: {
+        fileName: 'ProductInfo.jsx',
+        label: '📁 ProductInfo.jsxを作成',
+        initialContent: ''
+      },
       copyableCode: [
         {
           label: '📋 ProductInfoコンポーネントの基本構造',
@@ -1149,13 +1217,6 @@ export default App`,
         order: 1,
       },
       {
-        path: 'react-app/ProductCard.jsx',
-        content: `// ここにProductCardコンポーネントを作成してください`,
-        language: 'javascript',
-        description: 'ProductCardコンポーネント（作成予定）',
-        order: 2,
-      },
-      {
         path: 'react-app/styles.css',
         content: `/* 全体の基本設定 */
 body {
@@ -1347,7 +1408,7 @@ body {
 }`,
         language: 'css',
         description: 'アプリケーション全体のスタイルシート',
-        order: 3,
+        order: 2,
       },
     ],
     defaultFile: 'react-app/App.jsx',

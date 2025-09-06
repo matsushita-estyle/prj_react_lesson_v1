@@ -136,6 +136,17 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     setActiveFile(fileName)
   }
 
+  const handleAddFile = (fileName: string, initialContent?: string) => {
+    // react-app配下にファイルを作成する
+    const fullPath = `react-app/${fileName}`
+    setFiles((prev) => ({
+      ...prev,
+      [fullPath]: initialContent || '',
+    }))
+    // 作成したファイルをアクティブにする
+    setActiveFile(fullPath)
+  }
+
   const handleReset = () => {
     setFiles(originalFiles)
     setActiveFile(
@@ -163,6 +174,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       taskDescription={lesson.taskDescription}
       steps={lesson.steps}
       onApplyCode={handleApplyCode}
+      onAddFile={handleAddFile}
       nextLessonId={lesson.nextLessonId}
     />
   ) : null
@@ -205,6 +217,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
             onRename={handleRename}
             onDelete={handleDelete}
             onEditorReady={setEditorInstance}
+            defaultFileTreeOpen={lesson?.id === 'chapter1-lesson4'}
             className="h-full"
           />
         }

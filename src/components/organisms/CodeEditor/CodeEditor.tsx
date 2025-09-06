@@ -12,6 +12,7 @@ interface CodeEditorProps {
   onDelete?: (path: string) => void
   onReset?: () => void
   onEditorReady?: (editor: import('monaco-editor').editor.IStandaloneCodeEditor) => void
+  defaultFileTreeOpen?: boolean
   className?: string
 }
 

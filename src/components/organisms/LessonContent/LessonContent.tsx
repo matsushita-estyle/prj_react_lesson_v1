@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { LessonStep } from '@/lib/types/lesson'
+import { LessonStep, AddFileButton } from '@/lib/types/lesson'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions'
 import VisibilityIcon from '@mui/icons-material/Visibility'
@@ -17,6 +17,7 @@ interface LessonContentProps {
   taskDescription?: string
   steps: LessonStep[]
   onApplyCode?: (fileName: string, code: string) => void
+  onAddFile?: (fileName: string, initialContent?: string) => void
   nextLessonId?: string
 }
 
@@ -26,6 +27,7 @@ export default function LessonContent({
   taskDescription,
   steps,
   onApplyCode,
+  onAddFile,
   nextLessonId,
 }: LessonContentProps) {
   const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>({})
@@ -252,6 +254,55 @@ export default function LessonContent({
                       </div>
                     </div>
                   ))}
+
+                {/* ファイル作成ボタン */}
+                {step.addFile && onAddFile && (
+                  <div className="mt-2">
+                    {Array.isArray(step.addFile) ? (
+                      <div className="space-y-1">
+                        {step.addFile.map((fileButton, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => onAddFile(fileButton.fileName, fileButton.initialContent || '')}
+                            className="flex w-full cursor-pointer items-center gap-3 rounded border border-yellow-200 bg-yellow-50 p-3 text-left transition-colors hover:bg-yellow-100"
+                            title={`${fileButton.fileName}を作成します`}
+                          >
+                            <div className="flex-shrink-0">
+                              <svg className="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </div>
+                            <div className="flex-1">
+                              <div className="text-sm font-semibold text-gray-700">{fileButton.label}</div>
+                              <div className="text-xs text-gray-500">{fileButton.fileName}</div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      (() => {
+                        const fileButton = step.addFile as AddFileButton
+                        return (
+                          <button
+                            onClick={() => onAddFile(fileButton.fileName, fileButton.initialContent || '')}
+                            className="flex w-full cursor-pointer items-center gap-3 rounded border border-yellow-200 bg-yellow-50 p-3 text-left transition-colors hover:bg-yellow-100"
+                            title={`${fileButton.fileName}を作成します`}
+                          >
+                            <div className="flex-shrink-0">
+                              <svg className="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </div>
+                            <div className="flex-1">
+                              <div className="text-sm font-semibold text-gray-700">{fileButton.label}</div>
+                              <div className="text-xs text-gray-500">{fileButton.fileName}</div>
+                            </div>
+                          </button>
+                        )
+                      })()
+                    )}
+                  </div>
+                )}
 
                 {/* コピー可能なコードスニペット */}
                 {step.copyableCode && (

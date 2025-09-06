@@ -22,6 +22,12 @@ export interface ProjectStructure {
   }
 }
 
+export interface AddFileButton {
+  fileName: string
+  label: string
+  initialContent?: string  // ファイル作成時の初期内容（空の場合はundefined）
+}
+
 export interface LessonStep {
   stepNumber: number
   title: string
@@ -32,6 +38,7 @@ export interface LessonStep {
   initialCode?: string
   solutionCodes?: SolutionCode[]  // 複数のソリューションコード
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
+  addFile?: AddFileButton | AddFileButton[]  // ファイル作成ボタン
   initialFiles?: Record<string, string>  // ステップごとの初期ファイル（後方互換性のため残す）
   initialStepFiles?: Record<string, string>  // ステップごとの初期ファイル
   defaultFile?: string  // ステップで最初に表示するファイル
