@@ -7,101 +7,218 @@ export const chapter1Lesson4: Lesson = {
   description: 'コンポーネントを小さな部品に分割して、再利用性を高める方法を学びます',
   difficulty: '中級',
 
-  material: `# コンポーネント分割の実践
+  material: `# 🏗️ コンポーネント分割の実践
 
-前のレッスンでは、商品カード全体を1つのコンポーネント内で作成しました。
-今度は、このコンポーネントをより小さな部品に分割して、再利用性を高める方法を学びます。
+前回lesson3では、JavaScript機能を使った動的な商品カードを作りました。
+しかし、すべてを1つのコンポーネントに書いてしまうと...
 
-## なぜコンポーネントを分割するのか？
+## 😰 現在の問題
 
-大きなコンポーネント1つで全てを管理するよりも、小さなコンポーネントに分割することで以下のメリットがあります：
-
-### 1. 再利用性の向上
-一度作った小さなコンポーネントは、別の場所でも簡単に使い回せます。
-
+### 📝 Lesson3で作成した大きなコンポーネント
 \`\`\`jsx
-// 商品画像コンポーネントは色々な場所で使える
-<ProductImage src="image1.jpg" alt="商品1" />
-<ProductImage src="image2.jpg" alt="商品2" />
-\`\`\`
-
-### 2. 保守性の向上
-問題が発生した時に、どの部分を修正すれば良いかが明確になります。
-
-### 3. 理解しやすいコード
-各コンポーネントが1つの役割に集中するため、コードが読みやすくなります。
-
-## React コンポーネント分割の基本ルール
-
-### ルール1: 1ファイル1コンポーネント
-
-\`\`\`jsx
-// ProductCard.jsx
-const ProductCard = () => {
-  return <div className="product-card">...</div>
-}
-
-export default ProductCard
-\`\`\`
-
-### ルール2: import/export でモジュール化
-
-\`\`\`jsx
-// App.jsx
-import ProductCard from './ProductCard'
-
+// 1つのコンポーネントに全部入り...
 const App = () => {
+  const product = {
+    name: "スマートウォッチ Elite",
+    brand: "TechCorp", 
+    price: 48000,
+    discountRate: 0.2,
+    rating: 4.7,
+    imageUrl: "https://example.com/watch.jpg"
+  };
+
+  const getStarRating = (rating) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    return '★'.repeat(fullStars) + (hasHalfStar ? '☆' : '');
+  };
+
   return (
-    <div>
-      <ProductCard />
+    <div className="product-card">
+      {/* 画像部分 */}
+      <img src={product.imageUrl} alt={product.name} />
+      
+      {/* 商品情報部分 */}  
+      <h2>{product.name}</h2>
+      <p className="brand">{product.brand}</p>
+      <div className="price">
+        <span className="discounted">
+          ¥{(product.price * (1 - product.discountRate)).toLocaleString()}
+        </span>
+        <span className="original">¥{product.price.toLocaleString()}</span>
+      </div>
+      <div className="rating">
+        {getStarRating(product.rating)} ({product.rating}/5)
+      </div>
     </div>
   )
 }
 \`\`\`
 
-### ルール3: 役割ごとにコンポーネントを分ける
+**問題点：**
+- 🔄 コードが長くて読みづらい
+- 🚫 部品の再利用ができない
+- 🐛 バグの原因特定が困難
+- 📈 機能追加時にさらに複雑化
 
-商品カードの例：
-- **ProductCard**: 全体のレイアウト
-- **ProductImage**: 商品画像の表示
-- **ProductInfo**: 商品情報の表示
+---
 
-## コンポーネント分割の戦略
+## ✨ コンポーネント分割のメリット
 
-今回は以下のような構造に分割していきます：
+### 1️⃣ **レゴブロック方式で管理**
+
+\`\`\`jsx
+// 🧱 小さな部品に分割
+<ProductCard>
+  <ProductImage />     {/* 画像専用 */}
+  <ProductInfo />      {/* 情報専用 */}
+</ProductCard>
+\`\`\`
+
+### 2️⃣ **再利用性向上**
+
+\`\`\`jsx
+// 同じ部品を色々な場所で使用可能
+<ProductImage src="watch1.jpg" alt="スマートウォッチ1" />
+<ProductImage src="watch2.jpg" alt="スマートウォッチ2" />  
+<ProductImage src="phone.jpg" alt="スマートフォン" />
+\`\`\`
+
+### 3️⃣ **保守性向上**
+
+\`\`\`jsx
+// 画像の問題 → ProductImageコンポーネントだけ修正
+// 価格の問題 → ProductInfoコンポーネントだけ修正
+\`\`\`
+
+---
+
+## 🎯 今回の分割戦略
+
+### 📊 コンポーネント階層図
 
 \`\`\`
-App (親コンポーネント)
-└── ProductCard (商品カード)
-    ├── ProductImage (商品画像)
-    └── ProductInfo (商品情報)
+📱 App (親コンポーネント)
+└── 🏪 ProductCard (商品カード全体)
+    ├── 🖼️ ProductImage (画像専用)
+    └── 📋 ProductInfo (情報専用)
 \`\`\`
 
-各コンポーネントの役割：
+### 🔧 各コンポーネントの責任
 
-### ProductImage
-- 商品画像の表示
-- 画像のスタイリング
-- alt属性の管理
+| コンポーネント | 🎯 責任範囲 | 📝 具体的な仕事 |
+|--------------|-----------|---------------|
+| **App** | 全体管理 | 商品データ管理、ProductCard呼び出し |
+| **ProductCard** | レイアウト統合 | 画像と情報を配置、全体のスタイル |
+| **ProductImage** | 画像表示 | 画像のsrc/alt管理、画像スタイル |
+| **ProductInfo** | 情報表示 | 名前・価格・評価の表示、計算処理 |
 
-### ProductInfo  
-- 商品名、価格、評価の表示
-- 価格計算ロジック
-- 星評価の生成
+---
 
-### ProductCard
-- 全体のレイアウト
-- 他のコンポーネントの組み合わせ
+## 🚀 React モジュール化の3つのルール
 
-## 分割作業の流れ
+### 1️⃣ **1ファイル1コンポーネント**
 
-1. **元の大きなコンポーネントを理解する**
-2. **責任範囲でコンポーネントを分ける**
-3. **各コンポーネントを別ファイルに作成**
-4. **import/export でつなげる**
-5. **動作確認とテスト**
+\`\`\`jsx
+// 📁 ProductCard.jsx
+const ProductCard = ({ product }) => {
+  return (
+    <div className="product-card">
+      <ProductImage imageUrl={product.imageUrl} alt={product.name} />
+      <ProductInfo product={product} />
+    </div>
+  )
+}
 
-この流れで、保守性が高く再利用可能なコンポーネント設計を学んでいきましょう！`,
+export default ProductCard  // ← 他のファイルから使えるように
+\`\`\`
+
+### 2️⃣ **import/export でつなぐ**
+
+\`\`\`jsx
+// 📁 App.jsx
+import ProductCard from './ProductCard'  // ← ファイルを読み込み
+
+const App = () => {
+  return <ProductCard product={productData} />
+}
+\`\`\`
+
+### 3️⃣ **Props でデータを受け渡し**
+
+\`\`\`jsx
+// 親から子へデータを渡す
+<ProductCard product={productData} />    // ← 親が渡す
+                                        
+const ProductCard = ({ product }) => {   // ← 子が受け取る
+  return <div>商品名: {product.name}</div>
+}
+\`\`\`
+
+---
+
+## 📈 分割のステップバイステップ
+
+### Step 1: 大きなコンポーネント → ProductCard分離
+\`\`\`jsx
+// Before: App.jsxに全部
+const App = () => {
+  // 大量のコード...
+}
+
+// After: ProductCardを分離  
+const App = () => <ProductCard product={product} />
+\`\`\`
+
+### Step 2: ProductCard → 画像部分を分離
+\`\`\`jsx
+// Before: ProductCardに画像コードも含む
+const ProductCard = () => {
+  return <div><img ... />...</div>
+}
+
+// After: ProductImageを分離
+const ProductCard = () => {
+  return <div><ProductImage ... />...</div>
+}
+\`\`\`
+
+### Step 3: ProductCard → 情報部分を分離
+\`\`\`jsx
+// Before: ProductCardに情報コードも含む  
+const ProductCard = () => {
+  return <div>...<h2>商品名</h2>...</div>
+}
+
+// After: ProductInfoを分離
+const ProductCard = () => {
+  return <div>...<ProductInfo ... />...</div>
+}
+\`\`\`
+
+### Step 4: 複数商品対応 → 配列処理
+\`\`\`jsx
+// 複数の商品カードを表示
+const App = () => {
+  const products = [product1, product2, product3]
+  
+  return (
+    <div>
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  )
+}
+\`\`\`
+
+---
+
+## 🎯 実際に分割してみましょう！
+
+今回は**4つのステップ**で、モノリスなコンポーネントを美しく分割されたコンポーネント群に変身させます！
+
+各ステップで、コードがどんどんスッキリしていく様子をお楽しみください！✨`,
 
   taskDescription: `
 前のレッスンで作った商品カードを、再利用可能なコンポーネントに分割していきます。

@@ -7,116 +7,210 @@ export const chapter1Lesson3: Lesson = {
   description: 'JSXの中でJavaScriptの式や変数を使う方法を学び、動的なコンテンツの表示を習得します',
   difficulty: '初級',
 
-  material: `# JSXの中にJavaScriptを埋め込む
+  material: `# ⚡ JSXの中にJavaScriptを埋め込む
 
-このレッスンでは、JSXの中にJavaScriptの変数や式を埋め込む方法について学習します。
+前回lesson2では、美しいCSSスタイルを適用しました。
+今度は、そのスタイリッシュなコンポーネントに**動的な機能**を追加してみましょう！
 
-## JSX式の基本
+## 🎯 静的 → 動的への進化
 
-JSXでは、波括弧 \`{}\` を使ってJavaScriptの変数や式を埋め込むことができます。これによって、動的なコンテンツを表示することが可能になります。
-
-## 変数の埋め込み
-
-変数の値をJSXで表示する例を見てみましょう。
-
+### 📋 Before（これまで）
 \`\`\`jsx
-const ProductCard = () => {
-  const productName = "スマートウォッチ";
-  return <h2>{productName}</h2>;
+// 固定のテキストのみ
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+    </div>
+  )
 }
-// 画面には "スマートウォッチ" と表示される
 \`\`\`
 
-この例では、productNameという変数の値が波括弧を使ってJSX内に表示されています。
+### 🚀 After（今回のゴール）
+\`\`\`jsx
+// 動的データを使用した商品カード
+const App = () => {
+  const productName = "スマートウォッチ Pro";
+  const price = 45000;
+  const discountRate = 0.25; // 25%割引
+  const rating = 4.5;
+  
+  return (
+    <div className="product-card">
+      <h2>{productName}</h2>                    {/* 動的な商品名 */}
+      <p>¥{(price * (1 - discountRate)).toLocaleString()}</p> {/* 計算結果 */}
+      <p>{getStarRating(rating)} ({rating}/5)</p>             {/* 関数実行 */}
+    </div>
+  )
+}
+\`\`\`
 
-## 計算式の埋め込み
+---
 
-JSXの中では、変数だけでなく計算式も実行できます。
+## 🔧 JSX式の魔法：波括弧 \`{}\`
+
+JSXの中でJavaScriptを動かすには、**波括弧**を使います：
+
+\`\`\`jsx
+const magic = "JavaScript魔法"
+return <div>{magic}</div>  // ← この {}が魔法の鍵！
+\`\`\`
+
+---
+
+## 📊 4つのJavaScript埋め込みパターン
+
+### 1️⃣ **変数の表示**
+
+\`\`\`jsx
+const ProductDemo = () => {
+  const brand = "TechCorp";
+  const model = "WatchPro X1";
+  
+  return (
+    <div>
+      <h3>{brand}</h3>         {/* TechCorp */}
+      <p>{model}</p>           {/* WatchPro X1 */}
+    </div>
+  )
+}
+\`\`\`
+
+**結果：**
+\`\`\`
+TechCorp
+WatchPro X1
+\`\`\`
+
+### 2️⃣ **計算式の実行**
 
 \`\`\`jsx
 const PriceCalculator = () => {
-  const price = 12000;
-  const discountRate = 0.20;
+  const originalPrice = 50000;
+  const discount = 0.3; // 30%オフ
   
   return (
     <div>
-      <p>定価: {price}円</p>
-      <p>割引価格: {price - price * discountRate}円</p>
+      <p>通常価格: ¥{originalPrice.toLocaleString()}</p>
+      <p>割引価格: ¥{(originalPrice * (1 - discount)).toLocaleString()}</p>
+      <p>お得額: ¥{(originalPrice * discount).toLocaleString()}引き！</p>
     </div>
-  );
+  )
 }
 \`\`\`
 
-## 関数の実行
+**結果：**
+\`\`\`
+通常価格: ¥50,000
+割引価格: ¥35,000  
+お得額: ¥15,000引き！
+\`\`\`
 
-JSXの中で関数を呼び出すこともできます。ただし、関数は画面に表示可能な値（文字列、数値、JSX要素など）を返す必要があります。
+### 3️⃣ **関数の呼び出し**
 
 \`\`\`jsx
+// 星評価を生成する関数
 const getStarRating = (rating) => {
-  return '⭐'.repeat(rating);
-}
-
-const ProductRating = () => {
-  return <p>評価: {getStarRating(4)}</p>;
-}
-\`\`\`
-
-## 属性での変数使用
-
-HTML要素の属性にも変数を使用できます。
-
-\`\`\`jsx
-const ProductImage = () => {
-  const imageUrl = "/images/smartwatch.jpg";
-  const altText = "スマートウォッチの画像";
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
   
-  return <img src={imageUrl} alt={altText} />;
-}
-\`\`\`
+  return '★'.repeat(fullStars) + (hasHalfStar ? '☆' : '');
+};
 
-## 重要な注意点
-
-### 表示できる値の種類
-
-JSXで直接表示できるのは以下の値です：
-- 文字列
-- 数値  
-- boolean値（ただし画面には表示されない）
-- JSX要素
-
-### オブジェクトの扱い
-
-オブジェクトを直接表示しようとするとエラーになります。
-
-\`\`\`jsx
-// ❌ エラーになる例
-const BadExample = () => {
-  const product = { name: "スマートウォッチ", price: 12000 };
-  return <h2>{product}</h2>; // エラー！
-}
-\`\`\`
-
-オブジェクトの値を表示したい場合は、具体的なプロパティにアクセスする必要があります。
-
-\`\`\`jsx
-// ✅ 正しい例
-const GoodExample = () => {
-  const product = { name: "スマートウォッチ", price: 12000 };
+const RatingDisplay = () => {
+  const userRating = 4.5;
+  
   return (
     <div>
-      <h2>商品名: {product.name}</h2>
-      <p>価格: {product.price}円</p>
+      <p>評価: {getStarRating(userRating)} ({userRating}/5)</p>
     </div>
-  );
+  )
 }
 \`\`\`
 
-## まとめ
+**結果：**
+\`\`\`
+評価: ★★★★☆ (4.5/5)
+\`\`\`
 
-- 波括弧 \`{}\` でJavaScriptの式をJSXに埋め込める
-- 変数、計算式、関数の戻り値を表示できる
-- HTML要素の属性にも変数を使用可能
-- オブジェクトは直接表示できないため、プロパティを指定する`,
+### 4️⃣ **属性での変数使用**
+
+\`\`\`jsx
+const DynamicImage = () => {
+  const imageUrl = "https://example.com/watch.jpg";
+  const altText = "スマートウォッチの商品画像";
+  
+  return <img src={imageUrl} alt={altText} />
+}
+\`\`\`
+
+---
+
+## 🗂️ オブジェクトを使ったデータ管理
+
+複数の関連データは、オブジェクトでまとめると管理が楽になります：
+
+\`\`\`jsx
+const ProductCard = () => {
+  // すべての商品情報を1つのオブジェクトに
+  const product = {
+    name: "スマートウォッチ Elite",
+    brand: "TechCorp",
+    price: 48000,
+    discountRate: 0.2,
+    rating: 4.7,
+    imageUrl: "https://example.com/watch-elite.jpg"
+  };
+  
+  return (
+    <div className="product-card">
+      <img src={product.imageUrl} alt={product.name} />
+      <h2>{product.name}</h2>
+      <p className="brand">{product.brand}</p>
+      <div className="price">
+        <span className="discounted">
+          ¥{(product.price * (1 - product.discountRate)).toLocaleString()}
+        </span>
+        <span className="original">¥{product.price.toLocaleString()}</span>
+      </div>
+      <div className="rating">
+        {getStarRating(product.rating)} ({product.rating}/5)
+      </div>
+    </div>
+  )
+}
+\`\`\`
+
+---
+
+## ⚠️ JSXで注意すること
+
+### ❌ オブジェクトを直接表示はできない
+\`\`\`jsx
+const user = { name: "田中", age: 25 };
+return <div>{user}</div>  // ← エラー！
+\`\`\`
+
+### ✅ プロパティを指定して表示
+\`\`\`jsx
+const user = { name: "田中", age: 25 };
+return <div>{user.name}さん ({user.age}歳)</div>  // ← 正しい！
+\`\`\`
+
+---
+
+## 🎯 今回のゴール
+
+このレッスンでは、以下の順序でJavaScript機能を追加していきます：
+
+1. **📝 商品名・ブランドの動的表示**
+2. **🖼️ 画像URLの動的設定**  
+3. **💰 価格計算・割引表示**
+4. **⭐ 星評価システム**
+5. **📦 オブジェクトによるデータ統合**
+
+静的だったコンポーネントが、どんどん動的で実用的になっていく様子をお楽しみください！✨`,
 
   taskDescription: `
 このレッスンでは、JSXにJavaScriptの変数や計算式を埋め込む方法について学習します。

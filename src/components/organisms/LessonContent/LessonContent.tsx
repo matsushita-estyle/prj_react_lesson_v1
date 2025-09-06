@@ -10,6 +10,7 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import remarkBreaks from 'remark-breaks'
+import remarkGfm from 'remark-gfm'
 
 interface LessonContentProps {
   lessonTitle?: string
@@ -163,7 +164,7 @@ export default function LessonContent({
                   /* コードブロックがある場合はReactMarkdownを使用 */
                   <div className="prose prose-sm max-w-none text-gray-700">
                     <ReactMarkdown
-                      remarkPlugins={[remarkBreaks]}
+                      remarkPlugins={[remarkBreaks, remarkGfm]}
                       components={{
                         code({
                           className,

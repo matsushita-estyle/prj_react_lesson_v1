@@ -7,77 +7,168 @@ export const chapter1Lesson2: Lesson = {
   description: 'CSSを使ってReactコンポーネントにスタイルを適用する方法を学びます',
   difficulty: '初級',
 
-  material: `# CSSでスタイルを適用してみよう
+  material: `# 🎨 CSSでスタイルを適用してみよう
 
-前のレッスンでReactの基本構造とJSXの書き方を学びました。
-今度は、CSSを使って見た目を美しくしていきましょう！
-
-## CSSとは？
-
-CSS（Cascading Style Sheets）は、ウェブページの見た目やデザインを指定するための言語です。
-HTMLが「構造」を担当するのに対し、CSSは「装飾」を担当します。
-
-## ReactでCSSを使う方法
-
-ReactでCSSを適用する主な方法は以下の通りです：
-
-### 1. 外部CSSファイルを読み込む
+前回のlesson1では、こんなシンプルなReactコンポーネントを作りました：
 
 \`\`\`jsx
-import './styles.css'
-\`\`\`
-
-### 2. classNameでクラスを指定する
-
-HTMLでは \`class\` 属性を使いますが、ReactのJSXでは \`className\` を使います。
-
-\`\`\`jsx
-<div className="container">
-  <h1 className="title">タイトル</h1>
-</div>
-\`\`\`
-
-## CSSの基本的な書き方
-
-CSSは「セレクタ」と「プロパティ」で構成されます。
-
-\`\`\`css
-.container {  /* セレクタ（クラス名） */
-  background-color: blue;  /* プロパティ: 値; */
-  padding: 20px;
-  margin: 10px;
+// Lesson1で作成したコンポーネント
+const App = () => {
+  return (
+    <div>
+      <h1>React App</h1>
+      <p>Reactの基本構造を学ぶ</p>
+    </div>
+  )
 }
 \`\`\`
 
-## よく使うCSSプロパティ
+**結果：** 文字だけの味気ない表示...😅
 
-### レイアウト関連
-- \`margin\`: 外側の余白
-- \`padding\`: 内側の余白  
-- \`width\`: 幅
-- \`height\`: 高さ
-- \`text-align\`: テキストの配置
+今度は、この基本コンポーネントに**CSS**を使って劇的な変身をさせてみましょう！
 
-### 色とフォント関連
-- \`color\`: 文字色
-- \`background-color\`: 背景色
-- \`font-size\`: フォントサイズ
-- \`font-weight\`: フォントの太さ
+---
 
-### 装飾関連
-- \`border-radius\`: 角丸
-- \`box-shadow\`: 影
-- \`border\`: 枠線
+## 🆚 Before & After で見るCSSの威力
 
-## 段階的にスタイルを適用しよう
+### 📋 Before（Lesson1の状態）
+\`\`\`
+React App                    ← 普通の黒文字
+Reactの基本構造を学ぶ        ← 小さい文字
+\`\`\`
 
-このレッスンでは、以下の順序でスタイルを追加していきます：
+### ✨ After（今回のゴール）
+\`\`\`
+    🌟 React App 🌟          ← 大きく美しいタイトル
+  Reactの基本構造を学ぶ       ← スタイリッシュな説明文
+ ┌─────────────────────┐
+ │   綺麗なグラデーション  │     ← カラフルな背景
+ │      角丸の枠          │     ← プロ仕様のデザイン  
+ └─────────────────────┘
+\`\`\`
 
-1. **タイトルと説明文のスタイリング**: フォントサイズ、太さ、余白、影
-2. **コンテナのレイアウト**: 背景色、グラデーション、角丸、影
-3. **画像のスタイリング**: サイズ調整、角丸、アニメーション
+---
 
-各ステップで見た目がどのように変化するかを確認しながら、CSSの効果を実感してみましょう！`,
+## 🎯 ReactでCSSを使うための2つのステップ
+
+### ステップ1: CSSファイルをインポート
+
+\`\`\`jsx
+// Reactコンポーネントの先頭に追加
+import './styles.css'
+
+const App = () => {
+  return (
+    <div>
+      <h1>React App</h1>
+      <p>Reactの基本構造を学ぶ</p>
+    </div>
+  )
+}
+\`\`\`
+
+### ステップ2: classNameを追加
+
+\`\`\`jsx
+// HTMLの 'class' ではなく、JSXでは 'className' を使用
+const App = () => {
+  return (
+    <div className="container">        {/* ← コンテナ用クラス */}
+      <h1 className="title">React App</h1>    {/* ← タイトル用クラス */}
+      <p className="description">Reactの基本構造を学ぶ</p> {/* ← 説明用クラス */}
+    </div>
+  )
+}
+\`\`\`
+
+---
+
+## 🎨 CSSの基本構造
+
+### 📝 基本の書き方
+
+\`\`\`css
+.セレクタ名 {
+  プロパティ: 値;
+  プロパティ: 値;
+}
+\`\`\`
+
+### 🌟 実践例
+
+\`\`\`css
+.title {
+  font-size: 3rem;        /* フォントサイズを大きく */
+  color: white;           /* 文字色を白に */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 影を追加 */
+}
+\`\`\`
+
+---
+
+## 🚀 段階的スタイリング戦略
+
+このレッスンでは、**3段階**でプロ級のデザインを作ります：
+
+### 🎯 Stage 1: テキストスタイリング
+\`\`\`css
+.title {
+  font-size: 3rem;       /* 大きな見出し */
+  font-weight: 800;      /* 極太フォント */
+  text-shadow: ...;      /* カッコいい影 */
+}
+
+.description {
+  font-size: 1.2rem;     /* 読みやすいサイズ */
+  opacity: 0.9;          /* 少し透明感 */
+}
+\`\`\`
+
+### 🎨 Stage 2: 背景・レイアウト
+\`\`\`css
+.container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* ↑ 美しいグラデーション背景 */
+  
+  border-radius: 20px;   /* 角丸 */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* 浮き上がる影 */
+  padding: 2rem;         /* 内側の余白 */
+}
+\`\`\`
+
+### ✨ Stage 3: アニメーション
+\`\`\`css
+@keyframes rotate360 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rotating-image {
+  animation: rotate360 4s linear infinite; /* 4秒で1回転 */
+}
+\`\`\`
+
+---
+
+## 📊 よく使うCSSプロパティ早見表
+
+| カテゴリ | プロパティ | 効果 | 例 |
+|---------|------------|------|-----|
+| **サイズ** | \`font-size\` | 文字の大きさ | \`3rem\` |
+| | \`padding\` | 内側の余白 | \`2rem\` |
+| | \`margin\` | 外側の余白 | \`0 auto\` |
+| **色** | \`color\` | 文字色 | \`white\` |
+| | \`background\` | 背景 | \`linear-gradient(...)\` |
+| **装飾** | \`border-radius\` | 角丸 | \`20px\` |
+| | \`box-shadow\` | 影 | \`0 20px 40px ...\` |
+| | \`text-shadow\` | 文字影 | \`2px 2px 4px ...\` |
+
+---
+
+## 🎯 実際に作ってみましょう！
+
+それでは、lesson1で作ったシンプルなコンポーネントを、段階的にプロ級デザインに変身させていきます！
+各ステップでどんな魔法が起こるか、お楽しみに！✨`,
 
   taskDescription: `
 このレッスンでは、LESSON1で作ったReactコンポーネントのCSSスタイルを段階的に作っていきます。
