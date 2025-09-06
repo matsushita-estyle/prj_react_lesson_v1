@@ -27,7 +27,7 @@ export const chapter1Lesson4: Lesson = {
   lessonNumber: 4,
 
   // 教材説明（マークダウン）
-  material: `# レッスンタイトル
+  textBook: `# レッスンタイトル
 
   学習内容の詳細説明...
   `,
@@ -46,17 +46,25 @@ export const chapter1Lesson4: Lesson = {
       title: 'ステップタイトル',
       instruction: `詳細な指示...`,
       hint: '学習者へのヒント',
+      tips: ['学習のヒントや補足説明'],
+      tipsTitle: 'ヒントのタイトル',
       copyableCode: [
         {
           label: 'コードの説明',
           code: `サンプルコード`,
         }
       ],
-      initialFiles: {
-        'ファイル名': `初期コード`
+      initialStepFiles: {
+        'ファイル名': {
+          content: `初期コード`,
+          isVisible: true
+        }
       },
-      solutionCode: `解答コード`,
-      solutionTargetFile: 'ファイル名',
+      solutionCodes: [{
+        code: `解答コード`,
+        solutionTargetFile: 'ファイル名',
+        label: '解答の説明'
+      }],
       validation: {
         includes: ['チェック項目'],
       },
@@ -64,16 +72,28 @@ export const chapter1Lesson4: Lesson = {
     // 他のステップ...
   ],
 
-  // 最終的な初期ファイル（後方互換性）
-  initialFiles: {
-    'App.jsx': `初期状態のコード`,
-    'styles.css': `スタイルシート`
-  },
-
-  // 最終的な解答ファイル
-  solutionFiles: {
-    'App.jsx': `完成形のコード`,
-    'styles.css': `完成形のスタイル`
+  // 新しいプロジェクト構造形式
+  projectStructure: {
+    files: [
+      {
+        path: 'react-app/App.jsx',
+        content: `初期状態のコード`,
+        language: 'javascript',
+        description: 'メインのReactコンポーネント',
+        order: 1,
+      },
+      {
+        path: 'react-app/styles.css',
+        content: `スタイルシート`,
+        language: 'css',
+        description: 'アプリのスタイルシート',
+        order: 2,
+      }
+    ],
+    defaultFile: 'react-app/App.jsx',
+    folderConfig: {
+      displayOrder: ['react-app'],
+    },
   },
 
   // ナビゲーション
@@ -108,7 +128,7 @@ export const chapter1Lesson4: Lesson = {
 
 ### 4. 重要なポイント
 
-#### materialセクション
+#### textBookセクション
 
 - Reactの概念説明
 - なぜその技術が必要かの背景
