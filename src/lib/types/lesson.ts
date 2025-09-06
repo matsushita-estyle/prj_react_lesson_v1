@@ -63,7 +63,7 @@ export interface Lesson {
   
   // Content
   taskDescription?: string  // 全体の説明（optional）
-  material?: string  // 教材コンテンツ
+  textBook?: string  // 教材コンテンツ
   
   // Stepped approach - 必須
   steps: LessonStep[]

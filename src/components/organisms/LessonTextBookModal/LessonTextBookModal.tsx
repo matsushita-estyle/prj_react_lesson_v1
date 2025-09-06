@@ -6,17 +6,17 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import remarkBreaks from 'remark-breaks'
 import remarkGfm from 'remark-gfm'
 
-interface LessonMaterialModalProps {
+interface LessonTextBookModalProps {
   isOpen: boolean
   onClose: () => void
   lesson: Lesson | null
 }
 
-const LessonMaterialModal: React.FC<LessonMaterialModalProps> = ({ isOpen, onClose, lesson }) => {
+const LessonTextBookModal: React.FC<LessonTextBookModalProps> = ({ isOpen, onClose, lesson }) => {
   if (!lesson || !isOpen) return null
 
-  // lessonのmaterialフィールドから教材を取得、なければデフォルトメッセージ
-  const materialContent = lesson.material || '教材コンテンツが設定されていません。'
+  // lessonのtextBookフィールドから教材を取得、なければデフォルトメッセージ
+  const textBookContent = lesson.textBook || '教材コンテンツが設定されていません。'
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -71,13 +71,11 @@ const LessonMaterialModal: React.FC<LessonMaterialModalProps> = ({ isOpen, onClo
           remarkPlugins={[remarkBreaks, remarkGfm]}
           components={{
             code({
-              node,
               inline,
               className,
               children,
               ...props
             }: {
-              node?: any
               inline?: boolean
               className?: string
               children?: React.ReactNode
@@ -146,7 +144,7 @@ const LessonMaterialModal: React.FC<LessonMaterialModalProps> = ({ isOpen, onClo
             ),
           }}
         >
-          {materialContent}
+          {textBookContent}
         </ReactMarkdown>
           </div>
         </div>
@@ -155,4 +153,4 @@ const LessonMaterialModal: React.FC<LessonMaterialModalProps> = ({ isOpen, onClo
   )
 }
 
-export default LessonMaterialModal
+export default LessonTextBookModal

@@ -7,7 +7,7 @@ export const chapter1Lesson1: Lesson = {
   description: 'Reactの基本概念を理解し、最初のReactコンポーネントを作成します',
   difficulty: '初級',
 
-  material: `# 🚀 Reactって何だろう？
+  textBook: `# 🚀 Reactって何だろう？
 
 **React**は、ウェブアプリの画面を作るJavaScriptライブラリです。
 Facebook（現Meta）が開発し、Netflix、Airbnb、Instagram など世界中のサービスで使われています。

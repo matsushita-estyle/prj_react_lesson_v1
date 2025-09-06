@@ -6,7 +6,7 @@ import LessonPanel from '@/components/organisms/LessonPanel'
 import CodeEditor from '@/components/organisms/CodeEditor'
 import PreviewPanel from '@/components/organisms/PreviewPanel'
 import Footer from '@/components/organisms/Footer'
-import LessonMaterialModal from '@/components/organisms/LessonMaterialModal'
+import LessonTextBookModal from '@/components/organisms/LessonTextBookModal'
 import LessonContent from '@/components/organisms/LessonContent'
 import ResizablePanel from '@/components/molecules/ResizablePanel'
 import SideMenu from '@/components/molecules/SideMenu'
@@ -41,7 +41,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         : Object.keys(initialFiles)[0] || ''
   )
   const [originalFiles] = useState(initialFiles)
-  const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)
+  const [isTextBookModalOpen, setIsTextBookModalOpen] = useState(false)
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false)
   const [editorInstance, setEditorInstance] = useState<import('monaco-editor').editor.IStandaloneCodeEditor | null>(null)
   const { isOpen: isSideMenuOpen, closeSideMenu } = useSideMenu()
@@ -123,8 +123,8 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   }
 
 
-  const handleCheckMaterials = () => {
-    setIsMaterialModalOpen(true)
+  const handleCheckTextBook = () => {
+    setIsTextBookModalOpen(true)
   }
 
   const handleApplyCode = (fileName: string, code: string) => {
@@ -248,7 +248,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
 
       {/* フッター */}
       <Footer
-        onCheckMaterials={handleCheckMaterials}
+        onCheckTextBook={handleCheckTextBook}
         nextLessonId={lesson?.nextLessonId}
         prevLessonId={lesson?.previousLessonId}
         isNextLessonAvailable={lesson?.nextLessonId ? availableIds.has(lesson.nextLessonId) : true}
@@ -260,9 +260,9 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       <SideMenu isOpen={isSideMenuOpen} onClose={closeSideMenu} lessons={lessons} />
 
       {/* 教材確認モーダル */}
-      <LessonMaterialModal
-        isOpen={isMaterialModalOpen}
-        onClose={() => setIsMaterialModalOpen(false)}
+      <LessonTextBookModal
+        isOpen={isTextBookModalOpen}
+        onClose={() => setIsTextBookModalOpen(false)}
         lesson={lesson || null}
       />
 

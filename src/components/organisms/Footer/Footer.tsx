@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FooterProps {
-  onCheckMaterials?: () => void;
+  onCheckTextBook?: () => void;
   nextLessonId?: string;
   prevLessonId?: string;
   isNextLessonAvailable?: boolean;
@@ -11,7 +11,7 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({
-  onCheckMaterials,
+  onCheckTextBook,
   nextLessonId,
   prevLessonId,
   isNextLessonAvailable = true,
@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({
         </a>
       )}
       <button
-        onClick={onCheckMaterials}
+        onClick={onCheckTextBook}
         className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-gray-300 bg-transparent hover:bg-gray-300 hover:text-black text-gray-300 focus:ring-gray-300 px-4 py-1.5 text-base cursor-pointer w-32"
       >
         Text Book

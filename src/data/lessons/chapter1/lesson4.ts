@@ -7,7 +7,7 @@ export const chapter1Lesson4: Lesson = {
   description: 'コンポーネントを小さな部品に分割して、再利用性を高める方法を学びます',
   difficulty: '中級',
 
-  material: `# 🏗️ コンポーネント分割の実践
+  textBook: `# 🏗️ コンポーネント分割の実践
 
 前回lesson3では、JavaScript機能を使った動的な商品カードを作りました。
 しかし、すべてを1つのコンポーネントに書いてしまうと...
