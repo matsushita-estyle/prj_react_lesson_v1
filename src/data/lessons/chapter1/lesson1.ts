@@ -1,4 +1,6 @@
-import { Lesson, SolutionCode } from '@/lib/types/lesson'
+import React from 'react'
+import { Lesson, SolutionCode, TextBookSection } from '@/lib/types/lesson'
+import AIChatDemo from '@/components/demos/AIChatDemo'
 
 export const chapter1Lesson1: Lesson = {
   id: 'chapter1-lesson1',
@@ -7,55 +9,103 @@ export const chapter1Lesson1: Lesson = {
   description: 'Reactの基本概念を理解し、最初のReactコンポーネントを作成します',
   difficulty: '初級',
 
-  textBook: `# 🚀 Reactって何だろう？
+  textBookSections: [
+    {
+      id: 'intro',
+      title: 'Reactとは',
+      content: `**React**は、ウェブアプリの画面を作るJavaScriptライブラリです。
+Facebook（現Meta）が開発し、Netflix、Airbnb、Instagram など世界中のサービスで使われています。`,
+      visualStyle: 'info',
+      order: 1,
+    },
+    {
+      id: 'ai-era',
+      title: 'AI時代になぜReactを学ぶのか？',
+      content: `**「ChatGPTやCopilotがコードを書いてくれるなら、React学習は不要では？」**
 
-**React**は、ウェブアプリの画面を作るJavaScriptライブラリです。
-Facebook（現Meta）が開発し、Netflix、Airbnb、Instagram など世界中のサービスで使われています。
+この疑問、とても理解できます！
+しかし、実際は**AIを使いこなすためにもReact学習が重要**になります。
 
-## 💡 なぜReactが必要なの？
+実際、このアプリも生成AIに手伝ってもらいながら作りましたが、
+雑に指示しただけでは思うように作ってくれないことが多々ありました・・・
 
-従来のJavaScriptでの開発と、Reactを使った開発を比べてみましょう：
+### AI時代のReact学習の3つの価値
 
-### 📝 従来のJavaScript
-\`\`\`javascript
-// ユーザー情報を表示する処理（従来方式）
-const users = ['田中', '佐藤', '鈴木'];
+---
 
-// 1. HTML要素を取得
-const userListElement = document.getElementById('user-list');
+#### 1. **AIが作ったコードを理解・判断できる**
 
-// 2. HTMLを文字列で作成
-let html = '<ul>';
-users.forEach(user => {
-  html += \`<li>\${user}</li>\`;
-});
-html += '</ul>';
-
-// 3. 要素に挿入
-userListElement.innerHTML = html;
-\`\`\`
-
-### ⚡️ Reactを使った場合
 \`\`\`jsx
-// 同じ処理をReactで書くと...
-const UserList = () => {
-  const users = ['田中', '佐藤', '鈴木'];
+// AIが生成したコード例
+const UserProfile = ({ userId, filterType }) => {
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    setLoading(true);
+    fetchUser(userId).then(userData => {
+      setUser(userData);
+      fetchUserPosts(userData.id, filterType).then(postsData => {
+        setPosts(postsData.filter(post => post.status === 'published'));
+        setLoading(false);
+      });
+    });
+  }, []); // 🚨 依存配列が空！
   
   return (
-    <ul>
-      {users.map(user => <li key={user}>{user}</li>)}
-    </ul>
+    <div>
+      {loading ? '読み込み中...' : (
+        <>
+          <h2>{user?.name}</h2>
+          <p>投稿数: {posts.length}</p>
+        </>
+      )}
+    </div>
   );
 }
 \`\`\`
 
-**Reactの方がシンプル！** HTMLの構造が直感的にわかりますね。
+**→ このコードの問題点が分かりますか？**
+- **依存配列が空**：\`userId\`や\`filterType\`が変わっても古いデータのまま表示される
+- **エラーハンドリング不備**：\`userData.id\`が\`undefined\`の場合、2番目のAPI呼び出しでエラー
+- **loading状態の問題**：ネットワークエラー時に\`loading\`がずっと\`true\`のまま
 
 ---
 
-## 🧱 コンポーネント - Reactの基本単位
+#### 2. **作りたいものを正確にAIに指示できる**
 
-Reactでは、画面を「**コンポーネント**」という部品に分けて作ります。
+**NG例（曖昧な指示）**: 「ユーザー情報を表示する画面を作って」
+
+**OK例（具体的な指示）**: 「UserCardコンポーネントを作成。propsでuserオブジェクト（name、email、avatarUrl）を受け取り、TypeScriptで型定義も作成して。左にアバター画像、右に名前（太字）とメール（グレー）を縦並びで表示するカード形式のレイアウトで」
+
+---
+
+#### 3. **AIでは対応できない細かい調整を自分でできる**
+- デザインの微調整
+- エラーハンドリングの追加
+- パフォーマンスの最適化
+- 既存コードとの統合`,
+      visualStyle: 'highlight',
+      order: 2,
+    },
+    {
+      id: 'why-react',
+      title: 'なぜReactなのか？',
+      content: `Reactを使うと、**ユーザーにとって使いやすいUI**を作ることができます。
+
+例えば生成AIチャットも、Reactなら自分好みにカスタマイズ可能。
+テーマ変更、アニメーション、レイアウトなど、
+ユーザーの使いやすさを考えた独自の体験を提供できます！
+`,
+      visualStyle: 'success',
+      visualDemo: React.createElement(AIChatDemo),
+      order: 3,
+    },
+    {
+      id: 'components',
+      title: 'コンポーネント - Reactの基本単位',
+      content: `Reactでは、画面を「**コンポーネント**」という部品に分けて作ります。
 コンポーネントは、**JavaScript関数**として定義します：
 
 \`\`\`jsx
@@ -65,23 +115,20 @@ const Welcome = () => {
 }
 \`\`\`
 
-### 🎯 レゴブロックのイメージ
-\`\`\`
-🏠 完成したWebページ
-├── 🧱 Header (ヘッダー部品)
-├── 📄 Content (コンテンツ部品)
-└── 🦶 Footer (フッター部品)
-\`\`\`
+### レゴブロックのイメージ
+小さな部品を組み合わせて、完全なWebページを作ります：
+- Header（ヘッダー部品）
+- Content（コンテンツ部品）
+- Footer（フッター部品）`,
+      visualStyle: 'default',
+      order: 4,
+    },
+    {
+      id: 'jsx-intro',
+      title: 'JSX - JavaScriptの中でHTMLを書く技術',
+      content: `JSXは**JavaScript + XML**の略で、JavaScriptの中にHTMLのような記述ができます。
 
-小さな部品を組み合わせて、完全なWebページを作ります。
-
----
-
-## 🎭 JSX - JavaScriptの中でHTMLを書く技術
-
-JSXは**JavaScript + XML**の略で、JavaScriptの中にHTMLのような記述ができます。
-
-### 🆚 JSXと普通のJavaScriptの比較
+### JSXと普通のJavaScriptの比較
 
 #### 従来のJavaScript
 \`\`\`javascript
@@ -101,13 +148,14 @@ const element = (
     <h1>Hello World!</h1>
   </div>
 );
-\`\`\`
-
----
-
-## 📋 JSXの基本ルール
-
-### ⚠️ ルール1：すべてのタグは閉じる
+\`\`\``,
+      visualStyle: 'info',
+      order: 5,
+    },
+    {
+      id: 'jsx-rules',
+      title: 'JSXの基本ルール',
+      content: `### ルール1：すべてのタグは閉じる
 
 \`\`\`jsx
 // ✅ 正しい - セルフクローズタグを使用
@@ -119,7 +167,7 @@ const element = (
 <img src="photo.jpg" alt="写真">
 \`\`\`
 
-### 📦 ルール2：複数要素は1つの親で包む
+### ルール2：複数要素は1つの親で包む
 
 \`\`\`jsx
 // ❌ エラー：複数要素が並んでいる
@@ -141,7 +189,7 @@ const GoodExample = () => {
 }
 \`\`\`
 
-### 🔤 ルール3：JavaScriptの予約語を避ける
+### ルール3：JavaScriptの予約語を避ける
 
 \`\`\`jsx
 // ❌ HTMLの書き方
@@ -151,25 +199,25 @@ const GoodExample = () => {
 <div className="container">内容</div>
 \`\`\`
 
-**理由：** \`class\` はJavaScriptの予約語のため、\`className\` を使います。
-
----
-
-## 🎯 今日のレッスンまとめ
-
-### ✅ 学んだこと
-
-| 概念 | 説明 |
+**理由：** \`class\` はJavaScriptの予約語のため、\`className\` を使います。`,
+      visualStyle: 'warning',
+      order: 6,
+    },
+    {
+      id: 'summary',
+      title: 'レッスンまとめ',
+      content: `| 概念 | 説明 |
 |------|------|
 | **React** | UIを作るJavaScriptライブラリ |
 | **コンポーネント** | JavaScript関数で定義する画面部品 |
 | **JSX** | JavaScript内にHTMLを書く記法 |
 | **JSXルール** | タグを閉じる、親要素で包む、classNameを使う |
 
-### 🚀 実際に作ってみましょう！
-
-それでは、今回学んだReactとJSXの基本を活用して、実際にReactコンポーネントを作ってみましょう！
-段階的にコードを書きながら、Reactの基本構造を体験していきます。`,
+それでは、今回学んだReactとJSXの基本を活用して、実際にReactコンポーネントを作ってみましょう！`,
+      visualStyle: 'success',
+      order: 7,
+    },
+  ] as TextBookSection[],
 
   taskDescription: `
 このレッスンでは、実際にReactコンポーネントを作っていきます。

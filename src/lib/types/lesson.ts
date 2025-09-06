@@ -33,6 +33,18 @@ export interface StepFile {
   isVisible?: boolean  // ファイルを表示するかどうか（デフォルト: true）
 }
 
+import React from 'react'
+
+export interface TextBookSection {
+  id: string
+  title: string
+  content: string  // Markdown形式のテキスト
+  visualStyle?: 'default' | 'highlight' | 'warning' | 'info' | 'success'  // CSS表現用
+  backgroundColor?: string  // カスタム背景色
+  visualDemo?: React.ReactNode  // 視覚的なデモコンポーネント
+  order?: number  // セクションの順序
+}
+
 export interface LessonStep {
   stepNumber: number
   title: string
@@ -63,7 +75,8 @@ export interface Lesson {
   
   // Content
   taskDescription?: string  // 全体の説明（optional）
-  textBook?: string  // 教材コンテンツ
+  textBook?: string  // 教材コンテンツ（後方互換性のため残す）
+  textBookSections?: TextBookSection[]  // 新しい構造化された教材コンテンツ
   
   // Stepped approach - 必須
   steps: LessonStep[]
