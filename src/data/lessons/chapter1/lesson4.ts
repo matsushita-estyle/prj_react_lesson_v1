@@ -118,19 +118,13 @@ App (親コンポーネント)
 
 手順：
 1. 下の「ProductCard.jsxを作成」ボタンを押して空のファイルを作成する
-2. App.jsxから商品カードに関連するコードをコピーする
-3. ProductCardコンポーネントとしてexport defaultする
-4. App.jsxでProductCardをimportして使用する
-
-移動するコードの内容：
-- getStarRating関数（星評価を作る関数）
-- productオブジェクト（商品データ）
-- 価格計算のロジック（割引価格など）
-- 商品カード表示のJSX（<div className="product-card">から</div>まで）`,
+2. ProductCardコンポーネントとしてexport defaultする
+3. App.jsxから商品カードに関連するコードをコピーする
+4. App.jsxでProductCardをimportして使用する`,
       addFile: {
         fileName: 'ProductCard.jsx',
         label: '📁 ProductCard.jsxを作成',
-        initialContent: ''
+        initialContent: '',
       },
       copyableCode: [
         {
@@ -333,9 +327,9 @@ export default ProductCard`,
     },
     {
       stepNumber: 2,
-      title: 'ProductImageコンポーネントを作成しよう',
-      instruction: `次に、商品画像の部分を専用のコンポーネントに分割します。
-ProductImage.jsxファイルを作成し、画像表示の責任を持たせます。
+      title: '画像部分を別コンポーネント化しよう！',
+      instruction: `次に、商品画像部分を別コンポーネントに分割します。
+ProductImage.jsxファイルを作成しましょう。
 
 実装する内容：
 - 商品画像を表示するProductImageコンポーネント
@@ -344,7 +338,7 @@ ProductImage.jsxファイルを作成し、画像表示の責任を持たせま�
       addFile: {
         fileName: 'ProductImage.jsx',
         label: '📁 ProductImage.jsxを作成',
-        initialContent: ''
+        initialContent: '',
       },
       copyableCode: [
         {
@@ -357,7 +351,7 @@ ProductImage.jsxファイルを作成し、画像表示の責任を持たせま�
 
   return (
     <div className="product-image-container">
-      <img 
+      <img
         className="product-image"
         src={product.imageUrl}
         alt={product.altText}
@@ -369,11 +363,12 @@ ProductImage.jsxファイルを作成し、画像表示の責任を持たせま�
 export default ProductImage`,
         },
         {
-          label: '📦 ProductCardでのProductImage使用',
-          code: `import ProductImage from './ProductImage'
-
-// ProductCardコンポーネント内で
-<ProductImage />`,
+          label: '📦 ProductCardでのProductImageインポート',
+          code: `import ProductImage from './ProductImage'`,
+        },
+        {
+          label: '📦 ProductCardでのProductImageの使用',
+          code: `<ProductImage />`,
         },
       ],
       initialStepFiles: {
@@ -513,18 +508,20 @@ export default ProductCard`,
     },
     {
       stepNumber: 3,
-      title: 'ProductInfoコンポーネントを作成しよう',
-      instruction: `商品情報（名前、価格、評価）を表示する専用のコンポーネントを作成します。
-ProductInfo.jsxファイルを作成し、商品情報表示の責任を持たせましょう。
+      title: '商品情報部分を別コンポーネント化しよう！',
+      instruction: `次に、商品情報部分を別コンポーネントに分割します。
+ProductInfo.jsxファイルを作成して、商品情報表示の責任を持たせましょう。
 
-実装する内容：
-- 商品名、価格、割引価格、評価を表示
-- getStarRating関数をProductInfo内に移動
-- ProductCard.jsxから呼び出す`,
+手順：
+1. 下の「ProductInfo.jsxを作成」ボタンを押して空のファイルを作成する
+2. ProductInfoコンポーネントとしてexport defaultする
+3. ProductCard.jsxから商品情報に関連するコードをコピーする
+4. getStarRating関数もProductInfo内に移動する
+5. ProductCard.jsxでProductInfoをimportして使用する`,
       addFile: {
         fileName: 'ProductInfo.jsx',
         label: '📁 ProductInfo.jsxを作成',
-        initialContent: ''
+        initialContent: '',
       },
       copyableCode: [
         {
